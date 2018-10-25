@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>difcreate&#39;s blog</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2018-10-23T15:46:06.112Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>difcreate</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2018/10/24/linux%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%80%E5%A4%A9/"/>
+    <id>http://yoursite.com/2018/10/24/linux基础第一天/</id>
+    <published>2018-10-24T14:19:05.360Z</published>
+    <updated>2018-10-23T15:46:06.112Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Linux基础第一天"><a href="#Linux基础第一天" class="headerlink" title="Linux基础第一天"></a>Linux基础第一天</h1><p>##01. 常见Linux命令的基本使用</p><hr><table><thead><tr><th>序号</th><th style="text-align:center">命令</th><th style="text-align:right">作用</th></tr></thead><tbody><tr><td>01</td><td style="text-align:center">ls</td><td style="text-align:right">查看当前文件夹下的内容</td></tr><tr><td>02</td><td style="text-align:center">pwd</td><td style="text-align:right">查看当前所在文件夹</td></tr><tr><td>03</td><td style="text-align:center">cd[目录名]</td><td style="text-align:right">切换文件夹</td></tr><tr><td>04</td><td style="text-align:center">touch[文件名]</td><td style="text-align:right">若文件夹不存在，新建文件</td></tr><tr><td>05</td><td style="text-align:center">mkdir[目录名]</td><td style="text-align:right">创建目录</td></tr><tr><td>06</td><td style="text-align:center">rm[文件名]</td><td style="text-align:right">删除指定的文件名</td></tr><tr><td>07</td><td style="text-align:center">clear</td><td style="text-align:right">清屏</td></tr></tbody></table><hr><p><em>小技巧</em></p><hr><ul><li>ctrl + shift + =放大终端窗口的字体显示</li><li>ctrl + - 缩小终端窗口的字体显示</li></ul><hr><p>##02. 自动补全</p><hr><ul><li><p>在敲出文件/目录/命令的前几个字母之后，按下tab键</p><ul><li>如果输入的没有歧义，系统会自动补全</li><li>如果还存在其他文件/目录/命令。再按一下tab键，系统会提示可能存在的命令</li></ul><p>##03. 终端命令格式<br>command [-options] [parameter]</p><p><strong>说明：</strong></p><ul><li>command: 命令名，相应功能的英文单词或单词缩写</li><li>[-options]: 选项，可用来对命令进行控制，也可以省略</li><li>parameter: 传统命令的参数，可以是零个，一个或者多个<br>[] 代表可选</li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Linux基础第一天&quot;&gt;&lt;a href=&quot;#Linux基础第一天&quot; class=&quot;headerlink&quot; title=&quot;Linux基础第一天&quot;&gt;&lt;/a&gt;Linux基础第一天&lt;/h1&gt;&lt;p&gt;##01. 常见Linux命令的基本使用&lt;/p&gt;
+&lt;hr&gt;
+&lt;table&gt;
+
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2018/10/23/hello-world/"/>
+    <id>http://yoursite.com/2018/10/23/hello-world/</id>
+    <published>2018-10-23T13:54:02.022Z</published>
+    <updated>2018-10-23T13:54:02.022Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
