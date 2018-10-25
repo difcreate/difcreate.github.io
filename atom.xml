@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-10-23T15:46:06.112Z</updated>
+  <updated>2018-10-25T14:59:58.175Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,26 +17,29 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="http://yoursite.com/2018/10/24/linux%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%80%E5%A4%A9/"/>
-    <id>http://yoursite.com/2018/10/24/linux基础第一天/</id>
-    <published>2018-10-24T14:19:05.360Z</published>
-    <updated>2018-10-23T15:46:06.112Z</updated>
+    <title>linux基础第一天</title>
+    <link href="http://yoursite.com/2018/10/25/linux%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%80%E5%A4%A9/"/>
+    <id>http://yoursite.com/2018/10/25/linux基础第一天/</id>
+    <published>2018-10-25T14:57:52.000Z</published>
+    <updated>2018-10-25T14:59:58.175Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Linux基础第一天"><a href="#Linux基础第一天" class="headerlink" title="Linux基础第一天"></a>Linux基础第一天</h1><p>##01. 常见Linux命令的基本使用</p><hr><table><thead><tr><th>序号</th><th style="text-align:center">命令</th><th style="text-align:right">作用</th></tr></thead><tbody><tr><td>01</td><td style="text-align:center">ls</td><td style="text-align:right">查看当前文件夹下的内容</td></tr><tr><td>02</td><td style="text-align:center">pwd</td><td style="text-align:right">查看当前所在文件夹</td></tr><tr><td>03</td><td style="text-align:center">cd[目录名]</td><td style="text-align:right">切换文件夹</td></tr><tr><td>04</td><td style="text-align:center">touch[文件名]</td><td style="text-align:right">若文件夹不存在，新建文件</td></tr><tr><td>05</td><td style="text-align:center">mkdir[目录名]</td><td style="text-align:right">创建目录</td></tr><tr><td>06</td><td style="text-align:center">rm[文件名]</td><td style="text-align:right">删除指定的文件名</td></tr><tr><td>07</td><td style="text-align:center">clear</td><td style="text-align:right">清屏</td></tr></tbody></table><hr><p><em>小技巧</em></p><hr><ul><li>ctrl + shift + =放大终端窗口的字体显示</li><li>ctrl + - 缩小终端窗口的字体显示</li></ul><hr><p>##02. 自动补全</p><hr><ul><li><p>在敲出文件/目录/命令的前几个字母之后，按下tab键</p><ul><li>如果输入的没有歧义，系统会自动补全</li><li>如果还存在其他文件/目录/命令。再按一下tab键，系统会提示可能存在的命令</li></ul><p>##03. 终端命令格式<br>command [-options] [parameter]</p><p><strong>说明：</strong></p><ul><li>command: 命令名，相应功能的英文单词或单词缩写</li><li>[-options]: 选项，可用来对命令进行控制，也可以省略</li><li>parameter: 传统命令的参数，可以是零个，一个或者多个<br>[] 代表可选</li></ul></li></ul>]]></content>
+    <content type="html"><![CDATA[<h1 id="Linux基础第一天"><a href="#Linux基础第一天" class="headerlink" title="Linux基础第一天"></a>Linux基础第一天</h1><ol><li>常见Linux命令的基本使用</li></ol><hr><table><thead><tr><th>序号</th><th style="text-align:center">命令</th><th style="text-align:right">作用</th></tr></thead><tbody><tr><td>01</td><td style="text-align:center">ls</td><td style="text-align:right">查看当前文件夹下的内容</td></tr><tr><td>02</td><td style="text-align:center">pwd</td><td style="text-align:right">查看当前所在文件夹</td></tr><tr><td>03</td><td style="text-align:center">cd[目录名]</td><td style="text-align:right">切换文件夹</td></tr><tr><td>04</td><td style="text-align:center">touch[文件名]</td><td style="text-align:right">若文件夹不存在，新建文件</td></tr><tr><td>05</td><td style="text-align:center">mkdir[目录名]</td><td style="text-align:right">创建目录</td></tr><tr><td>06</td><td style="text-align:center">rm[文件名]</td><td style="text-align:right">删除指定的文件名</td></tr><tr><td>07</td><td style="text-align:center">clear</td><td style="text-align:right">清屏</td></tr></tbody></table><hr><p><em>小技巧</em></p><hr><ul><li>ctrl + shift + =放大终端窗口的字体显示</li><li>ctrl + - 缩小终端窗口的字体显示</li></ul><hr><ol start="2"><li>自动补全</li></ol><hr><ul><li><p>在敲出文件/目录/命令的前几个字母之后，按下tab键</p><ul><li>如果输入的没有歧义，系统会自动补全</li><li>如果还存在其他文件/目录/命令。再按一下tab键，系统会提示可能存在的命令</li></ul><ol start="3"><li>终端命令格式<br>command [-options] [parameter]</li></ol><p><strong>说明：</strong></p><ul><li>command: 命令名，相应功能的英文单词或单词缩写</li><li>[-options]: 选项，可用来对命令进行控制，也可以省略</li><li>parameter: 传统命令的参数，可以是零个，一个或者多个</li></ul><p>[] 代表可选</p></li></ul>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h1 id=&quot;Linux基础第一天&quot;&gt;&lt;a href=&quot;#Linux基础第一天&quot; class=&quot;headerlink&quot; title=&quot;Linux基础第一天&quot;&gt;&lt;/a&gt;Linux基础第一天&lt;/h1&gt;&lt;p&gt;##01. 常见Linux命令的基本使用&lt;/p&gt;
+        &lt;h1 id=&quot;Linux基础第一天&quot;&gt;&lt;a href=&quot;#Linux基础第一天&quot; class=&quot;headerlink&quot; title=&quot;Linux基础第一天&quot;&gt;&lt;/a&gt;Linux基础第一天&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;常见Linux命令的基本使用&lt;/li&gt;
+&lt;/ol&gt;
 &lt;hr&gt;
-&lt;table&gt;
-
+&lt;
       
     
     </summary>
     
+    
+      <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
     
   </entry>
   
