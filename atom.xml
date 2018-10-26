@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="http://www.xhjiang.tech/"/>
   <updated>2018-10-25T14:59:58.175Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>http://www.xhjiang.tech/</id>
   
   <author>
     <name>difcreate</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>linux基础第一天</title>
-    <link href="http://yoursite.com/2018/10/25/linux%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%80%E5%A4%A9/"/>
-    <id>http://yoursite.com/2018/10/25/linux基础第一天/</id>
+    <link href="http://www.xhjiang.tech/2018/10/25/linux%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%80%E5%A4%A9/"/>
+    <id>http://www.xhjiang.tech/2018/10/25/linux基础第一天/</id>
     <published>2018-10-25T14:57:52.000Z</published>
     <updated>2018-10-25T14:59:58.175Z</updated>
     
@@ -39,14 +39,14 @@
     </summary>
     
     
-      <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
+      <category term="linux" scheme="http://www.xhjiang.tech/tags/linux/"/>
     
   </entry>
   
   <entry>
     <title>Hello World</title>
-    <link href="http://yoursite.com/2018/10/23/hello-world/"/>
-    <id>http://yoursite.com/2018/10/23/hello-world/</id>
+    <link href="http://www.xhjiang.tech/2018/10/23/hello-world/"/>
+    <id>http://www.xhjiang.tech/2018/10/23/hello-world/</id>
     <published>2018-10-23T13:54:02.022Z</published>
     <updated>2018-10-23T13:54:02.022Z</updated>
     
