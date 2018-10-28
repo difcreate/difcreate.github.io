@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="difcreate&#39;s blog">
 <meta property="og:description" content="linux基础第二天由于一些原因，最近几天都没有继续复习linux基础，现在继续回复学习。今天主要是复习一下文件和目录常用命令 01.查看目录内容 1.1 ls 命令说明 ls 是英文单词 list 的简写，其功能为列出目录的内容，是用户最常用的命令之一，类似于 DOS 下的 dir 命令Linux 下文件和目录的特点 Linux文件或者目录名称最长可以有256个字符 以.开头的文件为隐藏文件，需">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-10-28T11:59:23.037Z">
+<meta property="og:updated_time" content="2018-10-28T12:00:47.538Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux基础第二天">
 <meta name="twitter:description" content="linux基础第二天由于一些原因，最近几天都没有继续复习linux基础，现在继续回复学习。今天主要是复习一下文件和目录常用命令 01.查看目录内容 1.1 ls 命令说明 ls 是英文单词 list 的简写，其功能为列出目录的内容，是用户最常用的命令之一，类似于 DOS 下的 dir 命令Linux 下文件和目录的特点 Linux文件或者目录名称最长可以有256个字符 以.开头的文件为隐藏文件，需">
@@ -367,7 +367,7 @@
                 
               
 
-              <time title="创建时间：2018-10-28 18:52:30 / 修改时间：19:59:23" itemprop="dateCreated datePublished" datetime="2018-10-28T18:52:30+08:00">2018-10-28</time>
+              <time title="创建时间：2018-10-28 18:52:30 / 修改时间：20:00:47" itemprop="dateCreated datePublished" datetime="2018-10-28T18:52:30+08:00">2018-10-28</time>
             
 
             
@@ -780,7 +780,24 @@
 <ul>
 <li>常用的两种模式查找</li>
 </ul>
-<p>参数|含义<br>^a|行首，搜寻以<code>a</code>开头的行<br>ke$|行尾，搜寻以<code>ke</code>结束的行</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>^a</td>
+<td>行首，搜寻以<code>a</code>开头的行</td>
+</tr>
+<tr>
+<td>ke$</td>
+<td>行尾，搜寻以<code>ke</code>结束的行</td>
+</tr>
+</tbody>
+</table>
 <hr>
 <h2 id="06-其他"><a href="#06-其他" class="headerlink" title="06. 其他"></a>06. 其他</h2><h3 id="6-1-echo-文字内容"><a href="#6-1-echo-文字内容" class="headerlink" title="6.1 echo 文字内容"></a>6.1 echo 文字内容</h3><ul>
 <li><code>echo</code>会在终端中显示参数指定的文字，通常会和<strong>重定向</strong>联合使用</li>
@@ -798,7 +815,9 @@
 <li>Linux 允许将<strong>一个命令的输出</strong>可以<strong>通过管道</strong>做为<strong>另一个命令的输入</strong></li>
 <li>可以理解现实生活中的管子，管子的一头塞东西进去，另一头取出来，这里 | 的左右分为两端，左端塞东西（写），右端取东西（读）</li>
 </ul>
+<blockquote>
 <p>常用的管道命令有：</p>
+</blockquote>
 <ul>
 <li><code>more</code>：分屏显示内容</li>
 <li><code>grep</code>：在命令执行结果的基础上查询指定的文本</li>
