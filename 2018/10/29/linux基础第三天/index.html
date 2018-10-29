@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="difcreate&#39;s blog">
 <meta property="og:description" content="远程管理常用命令 今天继续学习linux基础,本篇博文主要详细描述了关于linux系统的远程管理常用命令，下面介绍一下今天的主要学习目标： 目标  关机/重启  shutdown   查看或配置网卡信息  ifconfig ping   远程登录和复制文件  ssh scp     01. 关机/重启   序号 命令 对应英文 作用     01 shutdown 选项 时间 shutdown 关">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-10-29T10:07:36.903Z">
+<meta property="og:updated_time" content="2018-10-29T11:58:28.461Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux基础第三天">
 <meta name="twitter:description" content="远程管理常用命令 今天继续学习linux基础,本篇博文主要详细描述了关于linux系统的远程管理常用命令，下面介绍一下今天的主要学习目标： 目标  关机/重启  shutdown   查看或配置网卡信息  ifconfig ping   远程登录和复制文件  ssh scp     01. 关机/重启   序号 命令 对应英文 作用     01 shutdown 选项 时间 shutdown 关">
@@ -363,7 +363,7 @@
                 
               
 
-              <time title="创建时间：2018-10-29 16:13:39 / 修改时间：18:07:36" itemprop="dateCreated datePublished" datetime="2018-10-29T16:13:39+08:00">2018-10-29</time>
+              <time title="创建时间：2018-10-29 16:13:39 / 修改时间：19:58:28" itemprop="dateCreated datePublished" datetime="2018-10-29T16:13:39+08:00">2018-10-29</time>
             
 
             
@@ -433,7 +433,7 @@
       
         <h1 id="远程管理常用命令"><a href="#远程管理常用命令" class="headerlink" title="远程管理常用命令"></a>远程管理常用命令</h1><hr>
 <p>今天继续学习linux基础,本篇博文主要详细描述了关于linux系统的<strong>远程管理常用命令</strong>，下面介绍一下今天的主要学习目标：</p>
-<p><strong>目标</strong></p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><br></h2><p><strong>目标</strong></p>
 <ul>
 <li><p>关机/重启</p>
 <ul>
@@ -500,6 +500,7 @@
 <li>常用命令示例</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 重新启动操作系统，其中 now 表示现在</span><br><span class="line">$ shutdown -r now</span><br><span class="line"></span><br><span class="line"># 立刻关机，其中 now 表示现在</span><br><span class="line">$ shutdown now</span><br><span class="line"></span><br><span class="line"># 系统在今天的 20:25 会关机</span><br><span class="line">$ shutdown 20:25</span><br><span class="line"></span><br><span class="line"># 系统再过十分钟后自动关机</span><br><span class="line">$ shutdown +10</span><br><span class="line"></span><br><span class="line"># 取消之前指定的关机计划</span><br><span class="line">$ shutdown -c</span><br></pre></td></tr></table></figure>
+<hr>
 <h2 id="02-查看或配置网卡信息"><a href="#02-查看或配置网卡信息" class="headerlink" title="02. 查看或配置网卡信息"></a>02. 查看或配置网卡信息</h2><table>
 <thead>
 <tr>
@@ -563,6 +564,7 @@
 <blockquote>
 <p><em>提示：在 Linux 中，想要终止一个终端程序的执行，绝大多数都可以使用 <code>CTRL + C</code></em></p>
 </blockquote>
+<hr>
 <h2 id="03-远程登录和复制文件"><a href="#03-远程登录和复制文件" class="headerlink" title="03. 远程登录和复制文件"></a>03. 远程登录和复制文件</h2><table>
 <thead>
 <tr>
@@ -960,7 +962,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#远程管理常用命令"><span class="nav-number">1.</span> <span class="nav-text">远程管理常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-关机-重启"><span class="nav-number">1.1.</span> <span class="nav-text">01. 关机/重启</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-shutdown"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 shutdown</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-查看或配置网卡信息"><span class="nav-number">1.2.</span> <span class="nav-text">02. 查看或配置网卡信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-网卡-和-IP-地址"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 网卡 和 IP 地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-ifconfig"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 ifconfig</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-ping"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 ping</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#03-远程登录和复制文件"><span class="nav-number">1.3.</span> <span class="nav-text">03. 远程登录和复制文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-ssh-基础（重点）"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 ssh 基础（重点）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-scp（掌握）"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 scp（掌握）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-SSH-高级（知道）"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3 SSH 高级（知道）</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#远程管理常用命令"><span class="nav-number">1.</span> <span class="nav-text">远程管理常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.1.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#01-关机-重启"><span class="nav-number">1.2.</span> <span class="nav-text">01. 关机/重启</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-shutdown"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.1 shutdown</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-查看或配置网卡信息"><span class="nav-number">1.3.</span> <span class="nav-text">02. 查看或配置网卡信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-网卡-和-IP-地址"><span class="nav-number">1.3.1.</span> <span class="nav-text">2.1 网卡 和 IP 地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-ifconfig"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.2 ifconfig</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-ping"><span class="nav-number">1.3.3.</span> <span class="nav-text">2.3 ping</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#03-远程登录和复制文件"><span class="nav-number">1.4.</span> <span class="nav-text">03. 远程登录和复制文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-ssh-基础（重点）"><span class="nav-number">1.4.1.</span> <span class="nav-text">3.1 ssh 基础（重点）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-scp（掌握）"><span class="nav-number">1.4.2.</span> <span class="nav-text">3.2 scp（掌握）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-SSH-高级（知道）"><span class="nav-number">1.4.3.</span> <span class="nav-text">3.3 SSH 高级（知道）</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -1017,7 +1019,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共4.5k字</span>
+  <span class="post-count">博客全站共8.7k字</span>
 </div>
 
         

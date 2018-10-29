@@ -108,17 +108,18 @@
 
 
 
-  <meta name="description" content="学习使我快乐">
+  <meta name="description" content="系统信息相关命令  本节内容主要是为了方便通过远程终端维护服务器时，查看服务器上当前 系统日期和时间 ／ 磁盘空间占用情况 ／ 程序执行情况 本小结学习的终端命令基本都是查询命令，通过这些命令对系统资源的使用情况有个了解   目标  时间和日期  date cal   磁盘和目录空间  df du   进程信息  ps top kill     01. 时间和日期   序号 命令 作用     0">
+<meta name="keywords" content="linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux基础第五天">
 <meta property="og:url" content="http://yoursite.com/2018/10/29/linux基础第五天/index.html">
 <meta property="og:site_name" content="difcreate&#39;s blog">
-<meta property="og:description" content="学习使我快乐">
+<meta property="og:description" content="系统信息相关命令  本节内容主要是为了方便通过远程终端维护服务器时，查看服务器上当前 系统日期和时间 ／ 磁盘空间占用情况 ／ 程序执行情况 本小结学习的终端命令基本都是查询命令，通过这些命令对系统资源的使用情况有个了解   目标  时间和日期  date cal   磁盘和目录空间  df du   进程信息  ps top kill     01. 时间和日期   序号 命令 作用     0">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-10-29T10:13:37.954Z">
+<meta property="og:updated_time" content="2018-10-29T11:59:02.541Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux基础第五天">
-<meta name="twitter:description" content="学习使我快乐">
+<meta name="twitter:description" content="系统信息相关命令  本节内容主要是为了方便通过远程终端维护服务器时，查看服务器上当前 系统日期和时间 ／ 磁盘空间占用情况 ／ 程序执行情况 本小结学习的终端命令基本都是查询命令，通过这些命令对系统资源的使用情况有个了解   目标  时间和日期  date cal   磁盘和目录空间  df du   进程信息  ps top kill     01. 时间和日期   序号 命令 作用     0">
 
 
 
@@ -362,12 +363,34 @@
                 
               
 
-              <time title="创建时间：2018-10-29 18:13:37" itemprop="dateCreated datePublished" datetime="2018-10-29T18:13:37+08:00">2018-10-29</time>
+              <time title="创建时间：2018-10-29 18:13:37 / 修改时间：19:59:02" itemprop="dateCreated datePublished" datetime="2018-10-29T18:13:37+08:00">2018-10-29</time>
             
 
+            
+              
+
+              
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Linux操作系统/" itemprop="url" rel="index"><span itemprop="name">Linux操作系统</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -408,7 +431,158 @@
       
 
       
-        
+        <h1 id="系统信息相关命令"><a href="#系统信息相关命令" class="headerlink" title="系统信息相关命令"></a>系统信息相关命令</h1><hr>
+<ul>
+<li>本节内容主要是为了方便通过远程终端维护服务器时，查看服务器上当前 <strong>系统日期和时间 ／ 磁盘空间占用情况 ／ 程序执行情况</strong><br><br></li>
+<li>本小结学习的终端命令基本都是查询命令，通过这些命令对系统资源的使用情况有个了解<br><br></li>
+</ul>
+<hr>
+<p><strong>目标</strong></p>
+<ul>
+<li><p>时间和日期</p>
+<ul>
+<li><code>date</code></li>
+<li><code>cal</code></li>
+</ul>
+</li>
+<li><p>磁盘和目录空间</p>
+<ul>
+<li><code>df</code></li>
+<li><code>du</code></li>
+</ul>
+</li>
+<li><p>进程信息</p>
+<ul>
+<li><code>ps</code></li>
+<li><code>top</code></li>
+<li><code>kill</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="01-时间和日期"><a href="#01-时间和日期" class="headerlink" title="01. 时间和日期"></a>01. 时间和日期</h2><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>date</td>
+<td>查看系统时间</td>
+</tr>
+<tr>
+<td>02</td>
+<td>cal</td>
+<td>calendar 查看日历，-y 选项可以查看一年的日历</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="02-磁盘信息"><a href="#02-磁盘信息" class="headerlink" title="02. 磁盘信息"></a>02. 磁盘信息</h2><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>df -h</td>
+<td>disk free 显示磁盘剩余空间</td>
+</tr>
+<tr>
+<td>02</td>
+<td>du -h [目录名]</td>
+<td>disk usage 显示目录下的文件大小</td>
+</tr>
+</tbody>
+</table>
+<p><strong>选项说明</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-h</td>
+<td>以人性化的方式显示文件大小</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="03-进程信息"><a href="#03-进程信息" class="headerlink" title="03. 进程信息"></a>03. 进程信息</h2><ul>
+<li>所谓 <strong>进程</strong>，通俗地说就是 <strong>当前正在执行的一个程序</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>ps aux</td>
+<td>process status 查看进程的详细状况</td>
+</tr>
+<tr>
+<td>02</td>
+<td>top</td>
+<td>动态显示运行中的进程并且排序</td>
+</tr>
+<tr>
+<td>03</td>
+<td>kill [-9] 进程代号</td>
+<td>终止指定代号的进程，-9 表示强行终止</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>ps</code> 默认只会显示当前用户通过终端启动的应用程序</p>
+</blockquote>
+<ul>
+<li><code>ps</code> 选项说明功能</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a</td>
+<td>显示终端上的所有进程，包括其他用户的进程</td>
+</tr>
+<tr>
+<td>u</td>
+<td>显示进程的详细状态</td>
+</tr>
+<tr>
+<td>x</td>
+<td>显示没有控制终端的进程</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><em>提示：使用 <code>kill</code> 命令时，最好只终止由当前用户开启的进程，而不要终止 <code>root</code> 身份开启的进程，否则可能导致系统崩溃</em></p>
+<ul>
+<li>要退出 <code>top</code> 可以直接输入 <code>q</code></li>
+</ul>
+</blockquote>
+
       
     </div>
 	
@@ -449,6 +623,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"><i class="fa fa-tag"></i> linux</a>
+          
+        </div>
       
 
       
@@ -516,8 +696,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -612,6 +801,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#系统信息相关命令"><span class="nav-number">1.</span> <span class="nav-text">系统信息相关命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-时间和日期"><span class="nav-number">1.1.</span> <span class="nav-text">01. 时间和日期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-磁盘信息"><span class="nav-number">1.2.</span> <span class="nav-text">02. 磁盘信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#03-进程信息"><span class="nav-number">1.3.</span> <span class="nav-text">03. 进程信息</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -662,7 +867,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共4.5k字</span>
+  <span class="post-count">博客全站共8.7k字</span>
 </div>
 
         
