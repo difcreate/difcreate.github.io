@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>difcreate&#39;s blog</title>
   
-  
+  <subtitle>偷得浮生半日闲</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-10-29T10:07:36.903Z</updated>
+  <updated>2018-10-29T10:13:48.137Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,48 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>linux基础第六天</title>
+    <link href="http://yoursite.com/2018/10/29/linux%E5%9F%BA%E7%A1%80%E7%AC%AC%E5%85%AD%E5%A4%A9/"/>
+    <id>http://yoursite.com/2018/10/29/linux基础第六天/</id>
+    <published>2018-10-29T10:13:48.000Z</published>
+    <updated>2018-10-29T10:13:48.137Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>linux基础第五天</title>
+    <link href="http://yoursite.com/2018/10/29/linux%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%BA%94%E5%A4%A9/"/>
+    <id>http://yoursite.com/2018/10/29/linux基础第五天/</id>
+    <published>2018-10-29T10:13:37.000Z</published>
+    <updated>2018-10-29T10:13:37.954Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>linux基础第四天</title>
+    <link href="http://yoursite.com/2018/10/29/linux%E5%9F%BA%E7%A1%80%E7%AC%AC%E5%9B%9B%E5%A4%A9/"/>
+    <id>http://yoursite.com/2018/10/29/linux基础第四天/</id>
+    <published>2018-10-29T10:13:26.000Z</published>
+    <updated>2018-10-29T10:13:26.299Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>linux基础第三天</title>
