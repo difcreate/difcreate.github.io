@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="远程管理常用命令 今天继续学习linux基础,本篇博文主要详细描述了关于linux系统的远程管理常用命令，下面介绍一下今天的主要学习目标： 目标  关机/重启  shutdown   查看或配置网卡信息  ifconfig ping   远程登录和复制文件  ssh scp     01. 关机/重启   序号 命令 对应英文 作用     01 shutdown 选项 时间 shutdown 关">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux基础第三天">
+<meta property="og:url" content="http://yoursite.com/2018/10/29/linux基础第三天/index.html">
+<meta property="og:site_name" content="difcreate&#39;s blog">
+<meta property="og:description" content="远程管理常用命令 今天继续学习linux基础,本篇博文主要详细描述了关于linux系统的远程管理常用命令，下面介绍一下今天的主要学习目标： 目标  关机/重启  shutdown   查看或配置网卡信息  ifconfig ping   远程登录和复制文件  ssh scp     01. 关机/重启   序号 命令 对应英文 作用     01 shutdown 选项 时间 shutdown 关">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-10-29T09:57:45.182Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux基础第三天">
+<meta name="twitter:description" content="远程管理常用命令 今天继续学习linux基础,本篇博文主要详细描述了关于linux系统的远程管理常用命令，下面介绍一下今天的主要学习目标： 目标  关机/重启  shutdown   查看或配置网卡信息  ifconfig ping   远程登录和复制文件  ssh scp     01. 关机/重启   序号 命令 对应英文 作用     01 shutdown 选项 时间 shutdown 关">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="difcreate's blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/29/linux基础第三天/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>linux基础第三天 | difcreate's blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+	<!--github-start-->
+	<a href="https://github.com/difcreate"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+	<!--github-end-->
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">difcreate's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+    <a href="/schedule/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+    <a href="/sitemap.xml" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/29/linux基础第三天/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="difcreate">
+      <meta itemprop="description" content="学习使我快乐">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="difcreate's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">linux基础第三天
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-29 16:13:39 / 修改时间：17:57:45" itemprop="dateCreated datePublished" datetime="2018-10-29T16:13:39+08:00">2018-10-29</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/10/29/linux基础第三天/" class="leancloud_visitors" data-flag-title="linux基础第三天">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+				 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="远程管理常用命令"><a href="#远程管理常用命令" class="headerlink" title="远程管理常用命令"></a>远程管理常用命令</h1><hr>
+<p>今天继续学习linux基础,本篇博文主要详细描述了关于linux系统的<strong>远程管理常用命令</strong>，下面介绍一下今天的主要学习目标：</p>
+<p><strong>目标</strong></p>
+<ul>
+<li><p>关机/重启</p>
+<ul>
+<li><code>shutdown</code></li>
+</ul>
+</li>
+<li><p>查看或配置网卡信息</p>
+<ul>
+<li><code>ifconfig</code></li>
+<li><code>ping</code></li>
+</ul>
+</li>
+<li><p>远程登录和复制文件</p>
+<ul>
+<li><code>ssh</code></li>
+<li><code>scp</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="01-关机-重启"><a href="#01-关机-重启" class="headerlink" title="01. 关机/重启"></a>01. 关机/重启</h2><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>命令</th>
+<th>对应英文</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>shutdown 选项 时间</td>
+<td>shutdown</td>
+<td>关机／重新启动</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1-1-shutdown"><a href="#1-1-shutdown" class="headerlink" title="1.1 shutdown"></a>1.1 shutdown</h3><ul>
+<li><code>shutdown</code>命令可以<strong>安全 关闭</strong> 或者 <strong>重新启动系统</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-r</td>
+<td>重新启动</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><em>提示:</em></p>
+<ul>
+<li>不指定选项和参数，默认表示 1 分钟之后 关闭电脑</li>
+<li>远程维护服务器时，最好不要关闭系统，而应该重新启动系统</li>
+</ul>
+</blockquote>
+<ul>
+<li>常用命令示例</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 重新启动操作系统，其中 now 表示现在</span><br><span class="line">$ shutdown -r now</span><br><span class="line"></span><br><span class="line"># 立刻关机，其中 now 表示现在</span><br><span class="line">$ shutdown now</span><br><span class="line"></span><br><span class="line"># 系统在今天的 20:25 会关机</span><br><span class="line">$ shutdown 20:25</span><br><span class="line"></span><br><span class="line"># 系统再过十分钟后自动关机</span><br><span class="line">$ shutdown +10</span><br><span class="line"></span><br><span class="line"># 取消之前指定的关机计划</span><br><span class="line">$ shutdown -c</span><br></pre></td></tr></table></figure>
+<h2 id="02-查看或配置网卡信息"><a href="#02-查看或配置网卡信息" class="headerlink" title="02. 查看或配置网卡信息"></a>02. 查看或配置网卡信息</h2><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>命令</th>
+<th>对应英文</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>ifconfig</td>
+<td>configure a network interface</td>
+<td>查看/配置计算机当前的网卡配置信息</td>
+</tr>
+<tr>
+<td>02</td>
+<td>ping ip地址</td>
+<td>ping</td>
+<td>检测到目标 ip地址 的连接是否正常</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-1-网卡-和-IP-地址"><a href="#2-1-网卡-和-IP-地址" class="headerlink" title="2.1 网卡 和 IP 地址"></a>2.1 网卡 和 IP 地址</h3><p><strong>网卡</strong></p>
+<ul>
+<li>网卡是一个专门负责网络通讯的硬件设备</li>
+<li><strong>IP 地址</strong>是设置在网卡上的地址信息<blockquote>
+<p><em>我们可以把 <strong>电脑</strong> 比作 <strong>电话</strong>，<strong>网卡</strong> 相当于 <strong>SIM 卡</strong>，<strong>IP 地址</strong> 相当于 <strong>电话号码</strong></em></p>
+</blockquote>
+</li>
+</ul>
+<p><strong>IP 地址</strong></p>
+<ul>
+<li><strong>每台联网的电脑上</strong>都有 <strong>IP 地址</strong>，<strong>是保证电脑之间正常通讯的重要设置</strong><blockquote>
+<p><em>注意：每台电脑的 IP 地址不能相同，否则会出现 IP 地址冲突，并且没有办法正常通讯</em></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="2-2-ifconfig"><a href="#2-2-ifconfig" class="headerlink" title="2.2 ifconfig"></a>2.2 ifconfig</h3><ul>
+<li><code>ifconfig</code> 可以查看／配置计算机当前的网卡配置信息</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 查看网卡配置信息</span><br><span class="line">$ ifconfig</span><br><span class="line"></span><br><span class="line"># 查看网卡对应的 IP 地址</span><br><span class="line">$ ifconfig | grep inet</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>提示：一台计算机中有可能会有一个 <strong>物理网卡</strong> 和 <strong>多个虚拟网卡</strong>，在 Linux 中物理网卡的名字通常以 <code>ensXX</code> 表示</em></p>
+</blockquote>
+<ul>
+<li><code>127.0.0.1</code> 被称为 <strong>本地回环/环回地址</strong>，一般用来测试本机网卡是否正常</li>
+</ul>
+<h3 id="2-3-ping"><a href="#2-3-ping" class="headerlink" title="2.3 ping"></a>2.3 ping</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 检测到目标主机是否连接正常</span><br><span class="line">$ ping IP地址</span><br><span class="line"></span><br><span class="line"># 检测本地网卡工作正常</span><br><span class="line">$ ping 127.0.0.1</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>ping</code> 一般用于检测当前计算机到目标计算机之间的网络 <strong>是否通畅，数值越大，速度越慢</strong><blockquote>
+<ul>
+<li><code>ping</code> 的工作原理与潜水艇的声纳相似，<code>ping</code> 这个命令就是取自 <strong>声纳的声音</strong></li>
+<li>网络管理员之间也常将 <code>ping</code> 用作动词 —— <strong>ping 一下计算机X，看他是否开着</strong></li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p>原理：网络上的机器都有 <strong>唯一确定的 IP 地址</strong>，我们给<strong>目标 IP 地址</strong>发送一个数据包，对方就要返回一个数据包，根据返回的数据包以及时间，我们可以确定目标主机的存在</p>
+<blockquote>
+<p><em>提示：在 Linux 中，想要终止一个终端程序的执行，绝大多数都可以使用 <code>CTRL + C</code></em></p>
+</blockquote>
+<h2 id="03-远程登录和复制文件"><a href="#03-远程登录和复制文件" class="headerlink" title="03. 远程登录和复制文件"></a>03. 远程登录和复制文件</h2><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>命令</th>
+<th>对应英文</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>ssh 用户名@ip</td>
+<td>secure shell</td>
+<td>关机／重新启动</td>
+</tr>
+<tr>
+<td>02</td>
+<td>scp 用户名@ip:文件名或路径 用户名@ip:文件名或路径</td>
+<td>secure copy</td>
+<td>远程复制文件</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-1-ssh-基础（重点）"><a href="#3-1-ssh-基础（重点）" class="headerlink" title="3.1 ssh 基础（重点）"></a>3.1 ssh 基础（重点）</h3><p>在 Linux 中 SSH 是 <strong>非常常用</strong> 的工具，通过 <strong>SSH 客户端</strong> 我们可以连接到运行了 <strong>SSH 服务器</strong> 的远程机器上</p>
+<ul>
+<li><strong>SSH 客户端</strong>是一种使用 <code>Secure Shell（SSH）</code> 协议连接到远程计算机的软件程序</li>
+<li><code>SSH</code> 是目前较可靠，<strong>专为远程登录会话和其他网络服务</strong> 提供安全性的协议<ul>
+<li>利用 <code>SSH 协议</code> 可以有效<strong>防止远程管理过程中的信息泄露</strong></li>
+<li>通过 <code>SSH 协议</code> 可以对所有传输的数据进行加密，也能够防止 DNS 欺骗和 IP 欺骗</li>
+</ul>
+</li>
+<li><code>SSH</code> 的另一项优点是传输的数据可以是经过压缩的，所以可以加快传输的速度</li>
+</ul>
+<p><strong>1) 域名 和 端口号</strong></p>
+<p><strong>域名</strong></p>
+<ul>
+<li>由一串 <strong>用点分隔</strong> 的名字组成，例如：<code>www.itcast.cn</code></li>
+<li>是 <strong>IP 地址</strong> 的别名，方便用户记忆</li>
+</ul>
+<p><strong>端口号</strong></p>
+<ul>
+<li><strong>IP 地址：</strong>通过 <strong>IP 地址</strong> 找到网络上的 计算机</li>
+<li><p><strong>端口号：</strong>通过 <strong>端口号</strong> 可以找到 <strong>计算机上运行的应用程序</strong></p>
+<ul>
+<li><strong>SSH 服务器</strong> 的默认端口号是 <code>22</code>，如果是默认端口号，在连接的时候，可以省略</li>
+</ul>
+</li>
+<li><p>常见服务端口号列表：</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>服务</th>
+<th>端口号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>SSH 服务器</td>
+<td>22</td>
+</tr>
+<tr>
+<td>02</td>
+<td>Web 服务器</td>
+<td>80</td>
+</tr>
+<tr>
+<td>03</td>
+<td>HTTPS</td>
+<td>443</td>
+</tr>
+<tr>
+<td>04</td>
+<td>FTP 服务器</td>
+<td>21</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2) SSH 客户端的简单使用</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh [-p port] user@remote</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>user</code> 是在远程机器上的用户名，如果不指定的话默认为当前用户</li>
+<li><code>remote</code> 是远程机器的地址，可以是 <strong>IP／域名</strong>，或者是 <strong>后面会提到的别名</strong></li>
+<li><code>port</code> 是 <strong>SSH Server 监听的端口</strong>，如果不指定，就为默认值 <code>22</code><blockquote>
+<p><em>提示：</em></p>
+<ul>
+<li>使用 <code>exit</code> 退出当前用户的登录</li>
+</ul>
+<p><em>注意：</em></p>
+<ul>
+<li><code>ssh</code> 这个终端命令只能在 <code>Linux</code> 或者 <code>UNIX</code> 系统下使用</li>
+<li>如果在 <code>Windows</code> 系统中，可以安装 <code>PuTTY</code> 或者 <code>XShell</code> 客户端软件即可</li>
+</ul>
+<p><em>提示：</em></p>
+<ul>
+<li>在工作中，SSH 服务器的端口号很有可能<strong>不是 22</strong>，如果遇到这种情况就需要使用 <code>-p</code> 选项，指定正确的端口号，否则无法正常连接到服务器</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h3 id="3-2-scp（掌握）"><a href="#3-2-scp（掌握）" class="headerlink" title="3.2 scp（掌握）"></a>3.2 scp（掌握）</h3><ul>
+<li><p>scp 就是 <code>secure copy</code>，是一个在 Linux 下用来进行 <strong>远程拷贝文件</strong> 的命令</p>
+</li>
+<li><p>它的<strong>地址格式与 ssh 基本相同，需要注意的是</strong>，在指定端口时用的是大写的 <code>-P</code> 而不是小写的￼</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 把本地当前目录下的 01.py 文件 复制到 远程 家目录下的 Desktop/01.py</span><br><span class="line"># 注意：`:` 后面的路径如果不是绝对路径，则以用户的家目录作为参照路径</span><br><span class="line">scp -P port 01.py user@remote:Desktop/01.py</span><br><span class="line"></span><br><span class="line"># 把远程 家目录下的 Desktop/01.py 文件 复制到 本地当前目录下的 01.py</span><br><span class="line">scp -P port user@remote:Desktop/01.py 01.py</span><br><span class="line"></span><br><span class="line"># 加上 -r 选项可以传送文件夹</span><br><span class="line"># 把当前目录下的 demo 文件夹 复制到 远程 家目录下的 Desktop</span><br><span class="line">scp -r demo user@remote:Desktop</span><br><span class="line"></span><br><span class="line"># 把远程 家目录下的 Desktop 复制到 当前目录下的 demo 文件夹</span><br><span class="line">scp -r user@remote:Desktop demo</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-r</td>
+<td>若给出的源文件是目录文件，则 scp 将递归复制该目录下的所有子目录和文件，目标文件必须为一个目录名</td>
+</tr>
+<tr>
+<td>-P</td>
+<td>若远程 SSH 服务器的端口不是 22，需要使用大写字母 -P 选项指定端口</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><em>注意：</em></p>
+<ul>
+<li>scp 这个终端命令只能在 <code>Linux</code> 或者 <code>UNIX</code> 系统下使用</li>
+<li>如果在 <code>Windows</code> 系统中，可以安装 <code>PuTTY</code>，使用 <code>pscp</code> 命令行工具或者安装 <code>FileZilla</code> 使用 <code>FTP</code> 进行文件传输</li>
+</ul>
+</blockquote>
+<h3 id="3-3-SSH-高级（知道）"><a href="#3-3-SSH-高级（知道）" class="headerlink" title="3.3 SSH 高级（知道）"></a>3.3 SSH 高级（知道）</h3><ul>
+<li>免密码登录</li>
+<li>配置别名<blockquote>
+<p><em>提示：有关 SSH 配置信息都保存在用户家目录下的 <code>.ssh</code> 目录下</em></p>
+</blockquote>
+</li>
+</ul>
+<p><strong>1）免密码登录</strong></p>
+<p><strong>步骤</strong></p>
+<ul>
+<li><p>配置公钥</p>
+<ul>
+<li>执行 <code>ssh-keygen</code> 即可生成 SSH 钥匙，一路回车即可</li>
+</ul>
+</li>
+<li><p>上传公钥到服务器</p>
+<ul>
+<li>执行 <code>ssh-copy-id -p port user@remote</code>，可以让远程服务器记住我们的公钥</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><em>非对称加密算法</em></p>
+<ul>
+<li>使用 <strong>公钥</strong> 加密的数据，需要使用 <strong>私钥</strong> 解密</li>
+<li>使用 <strong>私钥</strong> 加密的数据，需要使用 <strong>公钥</strong> 解密</li>
+</ul>
+</blockquote>
+<p><strong>2) 配置别名</strong></p>
+<p>每次都输入 <code>ssh -p port user@remote</code>，时间久了会觉得很麻烦，特别是当 <code>user</code>, <code>remote</code> 和 <code>port</code> 都得输入，而且还不好记忆</p>
+<p>而 <strong>配置别名</strong> 可以让我们进一步偷懒，譬如用：<code>ssh mac</code> 来替代上面这么一长串，那么就在 <code>~/.ssh/config</code> 里面追加以下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host mac</span><br><span class="line">    HostName ip地址</span><br><span class="line">    User itheima</span><br><span class="line">    Port 22</span><br></pre></td></tr></table></figure>
+<p><strong>保存之后，即可用</strong> <code>ssh mac</code> <strong>实现远程登录了，</strong><code>scp</code> <strong>同样可以使用</strong></p>
+
+      
+    </div>
+	
+    
+
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+	
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>difcreate</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2018/10/29/linux基础第三天/" title="linux基础第三天">http://yoursite.com/2018/10/29/linux基础第三天/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/28/linux基础第二天/" rel="next" title="linux基础第二天">
+                <i class="fa fa-chevron-left"></i> linux基础第二天
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="difcreate">
+            
+              <p class="site-author-name" itemprop="name">difcreate</p>
+              <p class="site-description motion-element" itemprop="description">学习使我快乐</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/difcreate" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:785925474@qq.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#远程管理常用命令"><span class="nav-number">1.</span> <span class="nav-text">远程管理常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-关机-重启"><span class="nav-number">1.1.</span> <span class="nav-text">01. 关机/重启</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-shutdown"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 shutdown</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-查看或配置网卡信息"><span class="nav-number">1.2.</span> <span class="nav-text">02. 查看或配置网卡信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-网卡-和-IP-地址"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 网卡 和 IP 地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-ifconfig"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 ifconfig</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-ping"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 ping</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#03-远程登录和复制文件"><span class="nav-number">1.3.</span> <span class="nav-text">03. 远程登录和复制文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-ssh-基础（重点）"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 ssh 基础（重点）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-scp（掌握）"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 scp（掌握）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-SSH-高级（知道）"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3 SSH 高级（知道）</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2018-6-24 – <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">difcreate</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+   本站访客数:<span id="busuanzi_value_site_uv"></span>
+  </span>
+  </div>
+  
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共4.5k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "2j4j9wXRA4GoHWMPOTcjrvku-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "2j4j9wXRA4GoHWMPOTcjrvku-gzGzoHsz",
+                'X-LC-Key': "zsg3ig2TydyV6pnxxne1UTGC",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
