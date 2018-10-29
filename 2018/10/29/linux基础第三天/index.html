@@ -26,6 +26,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -108,18 +115,18 @@
 
 
 
-  <meta name="description" content="远程管理常用命令 今天继续学习linux基础,本篇博文主要详细描述了关于linux系统的远程管理常用命令，下面介绍一下今天的主要学习目标： 目标  关机/重启  shutdown   查看或配置网卡信息  ifconfig ping   远程登录和复制文件  ssh scp     01. 关机/重启   序号 命令 对应英文 作用     01 shutdown 选项 时间 shutdown 关">
+  <meta name="description" content="远程管理常用命令 今天继续学习linux基础,本篇博文主要详细描述了关于linux系统的远程管理常用命令，下面介绍一下今天的主要学习目标：  目标  关机/重启  shutdown   查看或配置网卡信息  ifconfig ping   远程登录和复制文件  ssh scp     01. 关机/重启   序号 命令 对应英文 作用     01 shutdown 选项 时间 shutdown">
 <meta name="keywords" content="linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux基础第三天">
-<meta property="og:url" content="http://xhjiang.tech/2018/10/29/linux基础第三天/index.html">
+<meta property="og:url" content="https://xhjiang.tech/2018/10/29/linux基础第三天/index.html">
 <meta property="og:site_name" content="difcreate&#39;s blog">
-<meta property="og:description" content="远程管理常用命令 今天继续学习linux基础,本篇博文主要详细描述了关于linux系统的远程管理常用命令，下面介绍一下今天的主要学习目标： 目标  关机/重启  shutdown   查看或配置网卡信息  ifconfig ping   远程登录和复制文件  ssh scp     01. 关机/重启   序号 命令 对应英文 作用     01 shutdown 选项 时间 shutdown 关">
+<meta property="og:description" content="远程管理常用命令 今天继续学习linux基础,本篇博文主要详细描述了关于linux系统的远程管理常用命令，下面介绍一下今天的主要学习目标：  目标  关机/重启  shutdown   查看或配置网卡信息  ifconfig ping   远程登录和复制文件  ssh scp     01. 关机/重启   序号 命令 对应英文 作用     01 shutdown 选项 时间 shutdown">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-10-29T12:11:04.029Z">
+<meta property="og:updated_time" content="2018-10-29T12:17:08.005Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux基础第三天">
-<meta name="twitter:description" content="远程管理常用命令 今天继续学习linux基础,本篇博文主要详细描述了关于linux系统的远程管理常用命令，下面介绍一下今天的主要学习目标： 目标  关机/重启  shutdown   查看或配置网卡信息  ifconfig ping   远程登录和复制文件  ssh scp     01. 关机/重启   序号 命令 对应英文 作用     01 shutdown 选项 时间 shutdown 关">
+<meta name="twitter:description" content="远程管理常用命令 今天继续学习linux基础,本篇博文主要详细描述了关于linux系统的远程管理常用命令，下面介绍一下今天的主要学习目标：  目标  关机/重启  shutdown   查看或配置网卡信息  ifconfig ping   远程登录和复制文件  ssh scp     01. 关机/重启   序号 命令 对应英文 作用     01 shutdown 选项 时间 shutdown">
 
 
 
@@ -128,7 +135,7 @@
 
 
 
-  <link rel="canonical" href="http://xhjiang.tech/2018/10/29/linux基础第三天/">
+  <link rel="canonical" href="https://xhjiang.tech/2018/10/29/linux基础第三天/">
 
 
 
@@ -321,7 +328,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xhjiang.tech/2018/10/29/linux基础第三天/">
+    <link itemprop="mainEntityOfPage" href="https://xhjiang.tech/2018/10/29/linux基础第三天/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="difcreate">
@@ -363,7 +370,7 @@
                 
               
 
-              <time title="创建时间：2018-10-29 16:13:39 / 修改时间：20:11:04" itemprop="dateCreated datePublished" datetime="2018-10-29T16:13:39+08:00">2018-10-29</time>
+              <time title="创建时间：2018-10-29 16:13:39 / 修改时间：20:17:08" itemprop="dateCreated datePublished" datetime="2018-10-29T16:13:39+08:00">2018-10-29</time>
             
 
             
@@ -399,18 +406,6 @@
 
           
           
-             <span id="/2018/10/29/linux基础第三天/" class="leancloud_visitors" data-flag-title="linux基础第三天">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">热度：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-				 <span>℃</span>
-             </span>
-          
 
           
 
@@ -432,8 +427,9 @@
 
       
         <h1 id="远程管理常用命令"><a href="#远程管理常用命令" class="headerlink" title="远程管理常用命令"></a>远程管理常用命令</h1><hr>
-<p>今天继续学习linux基础,本篇博文主要详细描述了关于linux系统的<strong>远程管理常用命令</strong>，下面介绍一下今天的主要学习目标：<br><br></p>
-<h2 id=""><a href="#" class="headerlink" title=""></a><br></h2><p><strong>目标</strong></p>
+<p>今天继续学习linux基础,本篇博文主要详细描述了关于linux系统的<strong>远程管理常用命令</strong>，下面介绍一下今天的主要学习目标：<br><br><br><br></p>
+<hr>
+<p><strong>目标</strong></p>
 <ul>
 <li><p>关机/重启</p>
 <ul>
@@ -765,7 +761,7 @@
     <strong>本文作者： </strong>difcreate</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://xhjiang.tech/2018/10/29/linux基础第三天/" title="linux基础第三天">http://xhjiang.tech/2018/10/29/linux基础第三天/</a>
+    <a href="https://xhjiang.tech/2018/10/29/linux基础第三天/" title="linux基础第三天">https://xhjiang.tech/2018/10/29/linux基础第三天/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
@@ -824,6 +820,11 @@
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="your uid"></div>
+    </div>
 
   
 
@@ -962,7 +963,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#远程管理常用命令"><span class="nav-number">1.</span> <span class="nav-text">远程管理常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.1.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#01-关机-重启"><span class="nav-number">1.2.</span> <span class="nav-text">01. 关机/重启</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-shutdown"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.1 shutdown</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-查看或配置网卡信息"><span class="nav-number">1.3.</span> <span class="nav-text">02. 查看或配置网卡信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-网卡-和-IP-地址"><span class="nav-number">1.3.1.</span> <span class="nav-text">2.1 网卡 和 IP 地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-ifconfig"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.2 ifconfig</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-ping"><span class="nav-number">1.3.3.</span> <span class="nav-text">2.3 ping</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#03-远程登录和复制文件"><span class="nav-number">1.4.</span> <span class="nav-text">03. 远程登录和复制文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-ssh-基础（重点）"><span class="nav-number">1.4.1.</span> <span class="nav-text">3.1 ssh 基础（重点）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-scp（掌握）"><span class="nav-number">1.4.2.</span> <span class="nav-text">3.2 scp（掌握）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-SSH-高级（知道）"><span class="nav-number">1.4.3.</span> <span class="nav-text">3.3 SSH 高级（知道）</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#远程管理常用命令"><span class="nav-number">1.</span> <span class="nav-text">远程管理常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-关机-重启"><span class="nav-number">1.1.</span> <span class="nav-text">01. 关机/重启</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-shutdown"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 shutdown</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-查看或配置网卡信息"><span class="nav-number">1.2.</span> <span class="nav-text">02. 查看或配置网卡信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-网卡-和-IP-地址"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 网卡 和 IP 地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-ifconfig"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 ifconfig</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-ping"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 ping</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#03-远程登录和复制文件"><span class="nav-number">1.3.</span> <span class="nav-text">03. 远程登录和复制文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-ssh-基础（重点）"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 ssh 基础（重点）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-scp（掌握）"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 scp（掌握）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-SSH-高级（知道）"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3 SSH 高级（知道）</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -983,7 +984,7 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<div class="copyright">&copy; 2018-6-24 – <span itemprop="copyrightYear">2018</span>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -1148,6 +1149,20 @@
 
 
   
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '2018/10/29/linux基础第三天/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
 
 
 
@@ -1165,67 +1180,6 @@
 
 
   
-
-  
-  <script>
-    
-    function addCount(Counter) {
-      var $visitors = $(".leancloud_visitors");
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
-
-      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
-        .done(function ({ results }) {
-          if (results.length > 0) {
-            var counter = results[0];
-            
-            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
-            
-            .done(function () {
-                  var $element = $(document.getElementById(url));
-                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
-            })
-            
-            .fail(function ({ responseJSON }) {
-                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
-            })
-          } else {
-            
-              var $element = $(document.getElementById(url));
-              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
-              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
-            
-          }
-        })
-      .fail(function ({ responseJSON }) {
-        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
-      });
-    }
-    
-
-    $(function() {
-      $.get('https://app-router.leancloud.cn/2/route?appId=' + "2j4j9wXRA4GoHWMPOTcjrvku-gzGzoHsz")
-        .done(function ({ api_server }) {
-          var Counter = function (method, url, data) {
-            return $.ajax({
-              method: method,
-              url: `https://${api_server}/1.1${url}`,
-              headers: {
-                'X-LC-Id': "2j4j9wXRA4GoHWMPOTcjrvku-gzGzoHsz",
-                'X-LC-Key': "zsg3ig2TydyV6pnxxne1UTGC",
-                'Content-Type': 'application/json',
-              },
-              data: data,
-            });
-          };
-          
-          addCount(Counter);
-          
-        })
-    });
-  </script>
-
-
 
   
 
