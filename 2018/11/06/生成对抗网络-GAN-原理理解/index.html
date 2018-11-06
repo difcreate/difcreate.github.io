@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Generative Adversarial Network，就是大家耳熟能详的 GAN，由 Ian Goodfellow 首先提出，在这两年更是深度学习中最热门的东西，仿佛什么东西都能由 GAN 做出来。我最近刚入门 GAN，主要是在哔哩哔哩网站上学习李宏毅教授的GAN课程。现在总结一下思路，做一篇笔记。  1. GAN基础概念GAN全称是Generative Adversarial Nets，">
+<meta name="keywords" content="深度学习，GAN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="生成对抗网络(GAN)原理理解">
+<meta property="og:url" content="https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/index.html">
+<meta property="og:site_name" content="difcreate&#39;s blog">
+<meta property="og:description" content="Generative Adversarial Network，就是大家耳熟能详的 GAN，由 Ian Goodfellow 首先提出，在这两年更是深度学习中最热门的东西，仿佛什么东西都能由 GAN 做出来。我最近刚入门 GAN，主要是在哔哩哔哩网站上学习李宏毅教授的GAN课程。现在总结一下思路，做一篇笔记。  1. GAN基础概念GAN全称是Generative Adversarial Nets，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/image/流程图.jpg">
+<meta property="og:image" content="https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/image/1.jpg">
+<meta property="og:image" content="https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/image/2.jpg">
+<meta property="og:image" content="https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/image/3.jpg">
+<meta property="og:image" content="https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/image/4.jpg">
+<meta property="og:image" content="https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/image/5.jpg">
+<meta property="og:image" content="https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/image/6.jpg">
+<meta property="og:image" content="https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/image/7.jpg">
+<meta property="og:image" content="https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/image/8.jpg">
+<meta property="og:image" content="https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/image/7.jpg">
+<meta property="og:image" content="https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/image/7.jpg">
+<meta property="og:image" content="https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/image/9.jpg">
+<meta property="og:image" content="https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/image/10.jpg">
+<meta property="og:image" content="https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/image/11.jpg">
+<meta property="og:image" content="https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/image/12.jpg">
+<meta property="og:image" content="https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/image/13.jpg">
+<meta property="og:image" content="https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/image/14.jpg">
+<meta property="og:image" content="https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/image/15.jpg">
+<meta property="og:image" content="https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/image/16.jpg">
+<meta property="og:image" content="https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/image/17.jpg">
+<meta property="og:image" content="https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/image/18.jpg">
+<meta property="og:image" content="https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/image/19.jpg">
+<meta property="og:image" content="https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/image/20.jpg">
+<meta property="og:updated_time" content="2018-11-06T14:07:34.952Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="生成对抗网络(GAN)原理理解">
+<meta name="twitter:description" content="Generative Adversarial Network，就是大家耳熟能详的 GAN，由 Ian Goodfellow 首先提出，在这两年更是深度学习中最热门的东西，仿佛什么东西都能由 GAN 做出来。我最近刚入门 GAN，主要是在哔哩哔哩网站上学习李宏毅教授的GAN课程。现在总结一下思路，做一篇笔记。  1. GAN基础概念GAN全称是Generative Adversarial Nets，">
+<meta name="twitter:image" content="https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/image/流程图.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="difcreate's blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>生成对抗网络(GAN)原理理解 | difcreate's blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+	<!--github-start-->
+	<a href="https://github.com/difcreate"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+	<!--github-end-->
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">difcreate's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">偷得浮生半日闲</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="difcreate">
+      <meta itemprop="description" content="学习使我快乐">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="difcreate's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">生成对抗网络(GAN)原理理解
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-06 21:06:16 / 修改时间：22:07:34" itemprop="dateCreated datePublished" datetime="2018-11-06T21:06:16+08:00">2018-11-06</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/深度学习，GAN/" itemprop="url" rel="index"><span itemprop="name">深度学习，GAN</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>Generative Adversarial Network</strong>，就是大家耳熟能详的 <strong>GAN</strong>，由 Ian Goodfellow 首先提出，在这两年更是深度学习中最热门的东西，仿佛什么东西都能由 GAN 做出来。我最近刚入门 <strong>GAN</strong>，主要是在哔哩哔哩网站上学习李宏毅教授的<strong>GAN</strong>课程。现在总结一下思路，做一篇笔记。<br><br></p>
+<hr>
+<h1 id="1-GAN基础概念"><a href="#1-GAN基础概念" class="headerlink" title="1. GAN基础概念"></a>1. GAN基础概念</h1><p><strong>GAN</strong>全称是Generative Adversarial Nets，中文叫做“<strong>生成对抗网络</strong>”。<br>在GAN中有2个网络，一个网络用于生成数据，叫做<strong>generator</strong>也就是“<strong>生成器</strong>”。另一个网络用于判别生成数据是否接近于真实，叫做<strong>discriminator</strong>也就是“<strong>判别器</strong>”。<br><br>流程图如下所示：<div align="center"><img src="image/流程图.jpg" alt="流程图"></div><br><br><br>首先，有一个一代的 generator，它能生成一些很差的图片，然后有一个一代的discriminator，它能准确的把生成的图片，和真实的图片分类，简而言之，这个 discriminator 就是一个二分类器，对生成的图片输出 0，对真实的图片输出 1。</p>
+<p>接着，开始训练出二代的 generator，它能生成稍好一点的图片，能够让一代的 discriminator 认为这些生成的图片是真实的图片。然后会训练出一个二代的 discriminator，它能准确的识别出真实的图片，和二代 generator 生成的图片。以此类推，会有三代，四代。。。n 代的 generator 和 discriminator，最后 discriminator 无法分辨生成的图片和真实图片，这个网络就拟合了。</p>
+<p>这就是 GAN，运行过程就是这么的简单。这就结束了嘛？显然没有，下面还要介绍一下 GAN 的原理。</p>
+<hr>
+<h1 id="2-GAN原理"><a href="#2-GAN原理" class="headerlink" title="2. GAN原理"></a>2. GAN原理</h1><p>首先我们知道真实图片集的分布 Pdata(x)，x 是一个真实图片，可以想象成一个向量，这个向量集合的分布就是 Pdata。我们需要生成一些也在这个分布内的图片，如果直接就是这个分布的话，怕是做不到的。</p>
+<p>我们现在有的 generator 生成的分布可以假设为 PG(x;θ)，这是一个由 θ 控制的分布，θ 是这个分布的参数（如果是高斯混合模型，那么 θ 就是每个高斯分布的平均值和方差）</p>
+<p>假设我们在真实分布中取出一些数据，{x1, x2, … , xm}，我们想要计算一个似然 PG(xi; θ)。</p>
+<p>对于这些数据，在生成模型中的似然就是<div align="center"><img src="image/1.jpg" alt=""></div><br>我们想要最大化这个似然，等价于让 generator 生成那些真实图片的概率最大。这就变成了一个<strong>最大似然估计的问题</strong>了，我们需要找到一个 θ* 来最大化这个似然。<div align="center"><img src="image/2.jpg" alt=""></div></p>
+<p>寻找一个 θ* 来最大化这个似然，等价于最大化 log 似然。因为此时这 m 个数据，是从真实分布中取的，所以也就约等于，真实分布中的所有 x 在 PG 分布中的 log 似然的期望。</p>
+<p>真实分布中的所有 x 的期望，等价于求概率积分，所以可以转化成积分运算，因为减号后面的项和 θ 无关，所以添上之后还是等价的。然后提出共有的项，括号内的反转，max 变 min，就可以转化为 <strong>KL divergence</strong> 的形式了，<strong>KL divergence</strong> 描述的是两个概率分布之间的差异。</p>
+<p>所以最大化似然，让 generator 最大概率的生成真实图片，也就是要找一个 θ 让 PG 更接近于 Pdata。</p>
+<p>那如何来找这个最合理的 θ 呢？我们可以假设 PG(x; θ) 是一个神经网络。</p>
+<p>首先随机一个向量 z，通过 G(z)=x 这个网络，生成图片 x，那么我们如何比较两个分布是否相似呢？只要我们取一组 sample z，这组 z 符合一个分布，那么通过网络就可以生成另一个分布 PG，然后来比较与真实分布 Pdata。</p>
+<p>大家都知道，神经网络只要有非线性激活函数，就可以去拟合任意的函数，那么分布也是一样，所以可以用一直正态分布，或者高斯分布，取样去训练一个神经网络，学习到一个很复杂的分布。<div align="center"><img src="image/3.jpg" alt=""></div></p>
+<p>如何来找到更接近的分布，这就是 GAN 的贡献了。先给出 GAN 的公式：<div align="center"><img src="image/4.jpg" alt=""></div></p>
+<p>这个式子的好处在于，固定 G，max  V(G,D) 就表示 PG 和 Pdata 之间的差异，然后要找一个最好的 G，让这个最大值最小，也就是两个分布之间的差异最小。<div align="center"><img src="image/5.jpg" alt=""></div></p>
+<p>表面上看这个的意思是，D 要让这个式子尽可能的大，也就是对于 x 是真实分布中，D(x) 要接近与 1，对于 x 来自于生成的分布，D(x) 要接近于 0，然后 G 要让式子尽可能的小，让来自于生成分布中的 x，D(x) 尽可能的接近 1。</p>
+<p>现在我们先固定 G，来求解最优的 D：<div align="center"><img src="image/6.jpg" alt=""></div></p>
+<p>对于一个给定的 x，得到最优的 D 如上图，范围在 (0,1) 内，把最优的 D 带入<div align="center"><img src="image/7.jpg" alt=""></div></p>
+<p>可以得到：<div align="center"><img src="image/8.jpg" alt=""></div></p>
+<p>JS divergence 是 KL divergence 的对称平滑版本，表示了两个分布之间的差异，这个推导就表明了上面所说的，固定 G。<div align="center"><img src="image/7.jpg" alt=""></div></p>
+<p>表示两个分布之间的差异，最小值是 -2log2，最大值为 0。</p>
+<p>现在我们需要找个 G，来最小化<div align="center"><img src="image/7.jpg" alt=""></div></p>
+<p>观察上式，当 PG(x)=Pdata(x) 时，G 是最优的。</p>
+<hr>
+<h1 id="3-训练"><a href="#3-训练" class="headerlink" title="3. 训练"></a>3. 训练</h1><p>有了上面推导的基础之后，我们就可以开始训练 GAN 了。结合我们开头说的，两个网络交替训练，我们可以在起初有一个 G0 和 D0，先训练 D0 找到 ：<div align="center"><img src="image/9.jpg" alt=""></div></p>
+<p>然后固定 D0 开始训练 G0， 训练的过程都可以使用 <strong>gradient descent</strong>，以此类推，训练 D1,G1,D2,G2,…</p>
+<p>但是这里有个问题就是，你可能在 D0* 的位置取到了<div align="center"><img src="image/10.jpg" alt=""></div></p>
+<p>然后更新 G0 为 G1，可能<div align="center"><img src="image/11.jpg" alt=""></div></p>
+<p>但是并不保证会出现一个新的点 D1* 使得<div align="center"><img src="image/12.jpg" alt=""></div></p>
+<p>这样更新 G 就没达到它原来应该要的效果，如下图所示：<div align="center"><img src="image/13.jpg" alt=""></div></p>
+<p>避免上述情况的方法就是更新 G 的时候，不要更新 G 太多。</p>
+<p>知道了网络的训练顺序，我们还需要设定两个 loss function，一个是 D 的 loss，一个是 G 的 loss。下面是整个 GAN 的训练具体步骤：<div align="center"><img src="image/14.jpg" alt=""></div></p>
+<p>上述步骤在机器学习和深度学习中也是非常常见，易于理解。</p>
+<hr>
+<h1 id="4-存在的问题"><a href="#4-存在的问题" class="headerlink" title="4. 存在的问题"></a>4. 存在的问题</h1><p>但是上面 G 的 <strong>loss function</strong> 还是有一点小问题，下图是两个函数的图像：<div align="center"><img src="image/15.jpg" alt=""></div></p>
+<p>log(1-D(x)) 是我们计算时 G 的 loss function，但是我们发现，在 D(x) 接近于 0 的时候，这个函数十分平滑，梯度非常的小。这就会导致，在训练的初期，G 想要骗过 D，变化十分的缓慢，而上面的函数，趋势和下面的是一样的，都是递减的。但是它的优势是在 D(x) 接近 0 的时候，梯度很大，有利于训练，在 D(x) 越来越大之后，梯度减小，这也很符合实际，在初期应该训练速度更快，到后期速度减慢。</p>
+<p>所以我们把 G 的 loss function 修改为<div align="center"><img src="image/16.jpg" alt=""></div></p>
+<p>这样可以提高训练的速度。</p>
+<p>还有一个问题，在其他 paper 中提出，就是经过实验发现，经过许多次训练，loss 一直都是平的，也就是<div align="center"><img src="image/17.jpg" alt=""></div></p>
+<p>JS divergence 一直都是 log2，PG 和 Pdata 完全没有交集，但是实际上两个分布是有交集的，造成这个的原因是因为，我们无法真正计算期望和积分，只能使用 sample 的方法，如果训练的过拟合了，D 还是能够完全把两部分的点分开，如下图：<div align="center"><img src="image/18.jpg" alt=""></div></p>
+<p>对于这个问题，我们是否应该让 D 变得弱一点，减弱它的分类能力，但是从理论上讲，为了让它能够有效的区分真假图片，我们又希望它能够 powerful，所以这里就产生了矛盾。</p>
+<p>还有可能的原因是，虽然两个分布都是高维的，但是两个分布都十分的窄，可能交集相当小，这样也会导致 <strong>JS divergence</strong> 算出来 =log2，约等于没有交集。</p>
+<p>解决的一些方法，有添加噪声，让两个分布变得更宽，可能可以增大它们的交集，这样 JS divergence 就可以计算，但是随着时间变化，噪声需要逐渐变小。</p>
+<p>还有一个问题叫 <strong>Mode Collapse</strong>，如下图：<div align="center"><img src="image/19.jpg" alt=""></div></p>
+<p>这个图的意思是，data 的分布是一个双峰的，但是学习到的生成分布却只有单峰，我们可以看到模型学到的数据，但是却不知道它没有学到的分布。</p>
+<p>造成这个情况的原因是，KL divergence 里的两个分布写反了<div align="center"><img src="image/20.jpg" alt=""></div></p>
+<p>这个图很清楚的显示了，如果是第一个 KL divergence 的写法，为了防止出现无穷大，所以有 Pdata 出现的地方都必须要有 PG 覆盖，就不会出现 Mode Collapse。</p>
+<hr>
+<h1 id="5-参考"><a href="#5-参考" class="headerlink" title="5. 参考"></a>5. 参考</h1><p>这是对 GAN 入门学习做的一些笔记和理解，后来太懒了，不想打公式了，主要是参考了李宏毅老师的视频：<a href="https://www.bilibili.com/video/av24011528/?p=1" target="_blank" rel="noopener">https://www.bilibili.com/video/av24011528/?p=1</a></p>
+
+      
+    </div>
+	
+    
+
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+	
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>difcreate</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/" title="生成对抗网络(GAN)原理理解">https://xhjiang.tech/2018/11/06/生成对抗网络-GAN-原理理解/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习，GAN/" rel="tag"><i class="fa fa-tag"></i> 深度学习，GAN</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/29/linux基础第六天/" rel="next" title="linux基础第六天">
+                <i class="fa fa-chevron-left"></i> linux基础第六天
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="your uid"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="difcreate">
+            
+              <p class="site-author-name" itemprop="name">difcreate</p>
+              <p class="site-description motion-element" itemprop="description">学习使我快乐</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/difcreate" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:785925474@qq.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-GAN基础概念"><span class="nav-number">1.</span> <span class="nav-text">1. GAN基础概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-GAN原理"><span class="nav-number">2.</span> <span class="nav-text">2. GAN原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-训练"><span class="nav-number">3.</span> <span class="nav-text">3. 训练</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-存在的问题"><span class="nav-number">4.</span> <span class="nav-text">4. 存在的问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-参考"><span class="nav-number">5.</span> <span class="nav-text">5. 参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">difcreate</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+   本站访客数:<span id="busuanzi_value_site_uv"></span>
+  </span>
+  </div>
+  
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共11.1k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '2018/11/06/生成对抗网络-GAN-原理理解/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
