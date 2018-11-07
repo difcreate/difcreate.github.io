@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xhjiang.tech/"/>
-  <updated>2018-11-07T12:03:58.367Z</updated>
+  <updated>2018-11-07T14:59:00.171Z</updated>
   <id>https://xhjiang.tech/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>AmbientGAN一文总结与摘录</title>
+    <link href="https://xhjiang.tech/2018/11/07/AmbientGAN%E4%B8%80%E6%96%87%E6%80%BB%E7%BB%93%E4%B8%8E%E6%91%98%E5%BD%95/"/>
+    <id>https://xhjiang.tech/2018/11/07/AmbientGAN一文总结与摘录/</id>
+    <published>2018-11-07T14:40:17.000Z</published>
+    <updated>2018-11-07T14:59:00.171Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="AmbientGAN-Generative-models-from-lossy-measurements"><a href="#AmbientGAN-Generative-models-from-lossy-measurements" class="headerlink" title="AmbientGAN:Generative models from lossy measurements"></a>AmbientGAN:Generative models from lossy measurements</h1><hr><h2 id="环境GAN：从有损测度中生成模型"><a href="#环境GAN：从有损测度中生成模型" class="headerlink" title="环境GAN：从有损测度中生成模型"></a>环境GAN：从有损测度中生成模型</h2><p><strong>摘要：</strong><br>生成模型提供了一种对于复杂分布中结构进行建模的方式，并且已经被证明可用于很多实际感兴趣的任务中。但是，现在训练生成模型的技术需要访问完全可观测（fully-observed）的样本。在很多场景中，获取完全可观测的样本是昂贵的甚至不可能的，但是获取部分的有噪声的观测样本是比较实惠的。我们考虑在只给予感兴趣的分布的样本的有损失观测情况下，学习一个隐式的生成模型的任务。我们证明了即使在测度模型的某个类的每个样本信息丢失的情况下，真正隐藏的分布也可以被恢复。基于此，我们提出了一种我们称之为环境GAN（<strong>AmbientGAN</strong>）的新的训练生成对抗网络的方法。在三个基准数据集和对于很多测度模型而言，我们证实了方法实质性的定性和定量的改进。用我们方法训练的生成模型可以获得比基准高2-4倍的初始分数（inception score）。</p><hr><p>本文提出的模型很简单，就是生成器需要去拟合的数据分布并不可直接得到，但是知道经过一些处理后得到的原数据的有损数据，并且知道这个处理的过程，于是采用有损数据，并将处理过程整合到GAN的架构中，获得的就是这篇文章提出的AmbientGAN的架构，其具体架构如图所示：</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;AmbientGAN-Generative-models-from-lossy-measurements&quot;&gt;&lt;a href=&quot;#AmbientGAN-Generative-models-from-lossy-measurements&quot; class=&quot;headerl
+      
+    
+    </summary>
+    
+    
+      <category term="深度学习，GAN" scheme="https://xhjiang.tech/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%8CGAN/"/>
+    
+      <category term="科研" scheme="https://xhjiang.tech/tags/%E7%A7%91%E7%A0%94/"/>
+    
+  </entry>
   
   <entry>
     <title>生成对抗网络(GAN)原理理解</title>
