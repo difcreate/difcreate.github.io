@@ -115,18 +115,18 @@
 
 
 
-  <meta name="description" content="系统信息相关命令  本节内容主要是为了方便通过远程终端维护服务器时，查看服务器上当前 系统日期和时间 ／ 磁盘空间占用情况 ／ 程序执行情况  本小结学习的终端命令基本都是查询命令，通过这些命令对系统资源的使用情况有个了解    目标  时间和日期  date cal   磁盘和目录空间  df du   进程信息  ps top kill     01. 时间和日期   序号 命令 作用">
-<meta name="keywords" content="linux">
+  <meta name="description" content="26. 删除排序数组中的重复项内容： 给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。 示例 1:12345给定数组 nums = [1,1,2], 函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。 你不需要考虑数组中超出新">
+<meta name="keywords" content="C++,leetcode,数组">
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux基础第五天">
-<meta property="og:url" content="https://xhjiang.tech/2018/10/29/linux基础第五天/index.html">
+<meta property="og:title" content="leetcode刷题-Remove Duplicates from Sorted Array">
+<meta property="og:url" content="https://xhjiang.tech/2018/11/12/leetcode刷题-Remove-Duplicates-from-Sorted-Array/index.html">
 <meta property="og:site_name" content="difcreate&#39;s blog">
-<meta property="og:description" content="系统信息相关命令  本节内容主要是为了方便通过远程终端维护服务器时，查看服务器上当前 系统日期和时间 ／ 磁盘空间占用情况 ／ 程序执行情况  本小结学习的终端命令基本都是查询命令，通过这些命令对系统资源的使用情况有个了解    目标  时间和日期  date cal   磁盘和目录空间  df du   进程信息  ps top kill     01. 时间和日期   序号 命令 作用">
+<meta property="og:description" content="26. 删除排序数组中的重复项内容： 给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。 示例 1:12345给定数组 nums = [1,1,2], 函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。 你不需要考虑数组中超出新">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-10-29T12:16:14.392Z">
+<meta property="og:updated_time" content="2018-11-12T08:27:36.192Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="linux基础第五天">
-<meta name="twitter:description" content="系统信息相关命令  本节内容主要是为了方便通过远程终端维护服务器时，查看服务器上当前 系统日期和时间 ／ 磁盘空间占用情况 ／ 程序执行情况  本小结学习的终端命令基本都是查询命令，通过这些命令对系统资源的使用情况有个了解    目标  时间和日期  date cal   磁盘和目录空间  df du   进程信息  ps top kill     01. 时间和日期   序号 命令 作用">
+<meta name="twitter:title" content="leetcode刷题-Remove Duplicates from Sorted Array">
+<meta name="twitter:description" content="26. 删除排序数组中的重复项内容： 给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。 示例 1:12345给定数组 nums = [1,1,2], 函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。 你不需要考虑数组中超出新">
 
 
 
@@ -135,7 +135,7 @@
 
 
 
-  <link rel="canonical" href="https://xhjiang.tech/2018/10/29/linux基础第五天/">
+  <link rel="canonical" href="https://xhjiang.tech/2018/11/12/leetcode刷题-Remove-Duplicates-from-Sorted-Array/">
 
 
 
@@ -145,7 +145,7 @@
   };
 </script>
 
-  <title>linux基础第五天 | difcreate's blog</title>
+  <title>leetcode刷题-Remove Duplicates from Sorted Array | difcreate's blog</title>
   
 
 
@@ -320,7 +320,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xhjiang.tech/2018/10/29/linux基础第五天/">
+    <link itemprop="mainEntityOfPage" href="https://xhjiang.tech/2018/11/12/leetcode刷题-Remove-Duplicates-from-Sorted-Array/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="difcreate">
@@ -337,7 +337,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">linux基础第五天
+          <h1 class="post-title" itemprop="name headline">leetcode刷题-Remove Duplicates from Sorted Array
               
             
           </h1>
@@ -362,7 +362,7 @@
                 
               
 
-              <time title="创建时间：2018-10-29 18:13:37 / 修改时间：20:16:14" itemprop="dateCreated datePublished" datetime="2018-10-29T18:13:37+08:00">2018-10-29</time>
+              <time title="创建时间：2018-11-12 16:18:08 / 修改时间：16:27:36" itemprop="dateCreated datePublished" datetime="2018-11-12T16:18:08+08:00">2018-11-12</time>
             
 
             
@@ -384,7 +384,21 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Linux操作系统/" itemprop="url" rel="index"><span itemprop="name">Linux操作系统</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/leetcode/数组/" itemprop="url" rel="index"><span itemprop="name">数组</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/leetcode/数组/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
 
                 
                 
@@ -418,159 +432,27 @@
       
 
       
-        <h1 id="系统信息相关命令"><a href="#系统信息相关命令" class="headerlink" title="系统信息相关命令"></a>系统信息相关命令</h1><hr>
-<ul>
-<li><p>本节内容主要是为了方便通过远程终端维护服务器时，查看服务器上当前 <strong>系统日期和时间 ／ 磁盘空间占用情况 ／ 程序执行情况</strong></p>
-</li>
-<li><p>本小结学习的终端命令基本都是查询命令，通过这些命令对系统资源的使用情况有个了解<br><br></p>
-</li>
-</ul>
-<hr>
-<p><strong>目标</strong></p>
-<ul>
-<li><p>时间和日期</p>
-<ul>
-<li><code>date</code></li>
-<li><code>cal</code></li>
-</ul>
-</li>
-<li><p>磁盘和目录空间</p>
-<ul>
-<li><code>df</code></li>
-<li><code>du</code></li>
-</ul>
-</li>
-<li><p>进程信息</p>
-<ul>
-<li><code>ps</code></li>
-<li><code>top</code></li>
-<li><code>kill</code></li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="01-时间和日期"><a href="#01-时间和日期" class="headerlink" title="01. 时间和日期"></a>01. 时间和日期</h2><table>
-<thead>
-<tr>
-<th>序号</th>
-<th>命令</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>01</td>
-<td>date</td>
-<td>查看系统时间</td>
-</tr>
-<tr>
-<td>02</td>
-<td>cal</td>
-<td>calendar 查看日历，-y 选项可以查看一年的日历</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="02-磁盘信息"><a href="#02-磁盘信息" class="headerlink" title="02. 磁盘信息"></a>02. 磁盘信息</h2><table>
-<thead>
-<tr>
-<th>序号</th>
-<th>命令</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>01</td>
-<td>df -h</td>
-<td>disk free 显示磁盘剩余空间</td>
-</tr>
-<tr>
-<td>02</td>
-<td>du -h [目录名]</td>
-<td>disk usage 显示目录下的文件大小</td>
-</tr>
-</tbody>
-</table>
-<p><strong>选项说明</strong></p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>-h</td>
-<td>以人性化的方式显示文件大小</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="03-进程信息"><a href="#03-进程信息" class="headerlink" title="03. 进程信息"></a>03. 进程信息</h2><ul>
-<li>所谓 <strong>进程</strong>，通俗地说就是 <strong>当前正在执行的一个程序</strong></li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>序号</th>
-<th>命令</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>01</td>
-<td>ps aux</td>
-<td>process status 查看进程的详细状况</td>
-</tr>
-<tr>
-<td>02</td>
-<td>top</td>
-<td>动态显示运行中的进程并且排序</td>
-</tr>
-<tr>
-<td>03</td>
-<td>kill [-9] 进程代号</td>
-<td>终止指定代号的进程，-9 表示强行终止</td>
-</tr>
-</tbody>
-</table>
+        <h1 id="26-删除排序数组中的重复项"><a href="#26-删除排序数组中的重复项" class="headerlink" title="26. 删除排序数组中的重复项"></a>26. 删除排序数组中的重复项</h1><p><strong>内容：</strong> 给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。</p>
+<p>不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。</p>
+<p>示例 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">给定数组 nums = [1,1,2], </span><br><span class="line"></span><br><span class="line">函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。 </span><br><span class="line"></span><br><span class="line">你不需要考虑数组中超出新长度后面的元素。</span><br></pre></td></tr></table></figure></p>
+<p>示例 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">给定 nums = [0,0,1,1,1,2,2,3,3,4],</span><br><span class="line"></span><br><span class="line">函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。</span><br><span class="line"></span><br><span class="line">你不需要考虑数组中超出新长度后面的元素。</span><br></pre></td></tr></table></figure></p>
+<p>说明:</p>
+<p>为什么返回数值是整数，但输出的答案是数组呢?</p>
+<p>请注意，输入数组是以“引用”方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。</p>
+<p>你可以想象内部操作如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// nums 是以“引用”方式传递的。也就是说，不对实参做任何拷贝</span><br><span class="line">int len = removeDuplicates(nums);</span><br><span class="line"></span><br><span class="line">// 在函数里修改输入数组对于调用者是可见的。</span><br><span class="line">// 根据你的函数返回的长度, 它会打印出数组中该长度范围内的所有元素。</span><br><span class="line">for (int i = 0; i &lt; len; i++) &#123;</span><br><span class="line">    print(nums[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <blockquote>
-<p><code>ps</code> 默认只会显示当前用户通过终端启动的应用程序</p>
+<p><em>Tips：</em><br>这道题开始还是没有做出来，暴力破解法的思路错误了，不能一直试图用for循环来解决，应该着重于数组本身的变化以及要在STL上面寻求更好的解题思路</p>
 </blockquote>
 <ul>
-<li><code>ps</code> 选项说明功能</li>
+<li><p>解法一：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// LeetCode, Remove Duplicates from Sorted Array</span></span><br><span class="line"><span class="comment">// 时间复杂度 O(n)，空间复杂度 O(1)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">removeDuplicates</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line"><span class="keyword">if</span> (nums.empty()) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.size(); i++) &#123;</span><br><span class="line"><span class="keyword">if</span> (nums[index] != nums[i])</span><br><span class="line">nums[++index] = nums[i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> index + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解法二：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// LeetCode, Remove Duplicates from Sorted Array</span></span><br><span class="line"><span class="comment">// 时间复杂度 O(n)，空间复杂度 O(1)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">removeDuplicates</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line"><span class="keyword">return</span> distance(nums.begin(), unique(nums.begin(), nums.end()));</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解法三：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// LeetCode, Remove Duplicates from Sorted Array</span></span><br><span class="line"><span class="comment">// 时间复杂度 O(n)，空间复杂度 O(1)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">removeDuplicates</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line"><span class="keyword">return</span> distance(nums.begin(), removeDuplicates(nums.begin(), nums.end(), nums.begin()));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> InIt, <span class="keyword">typename</span> OutIt&gt;</span><br><span class="line"><span class="function">OutIt <span class="title">removeDuplicates</span><span class="params">(InIt first, InIt last, OutIt output)</span> </span>&#123;</span><br><span class="line"><span class="keyword">while</span> (first != last) &#123;</span><br><span class="line">*output++ = *first;</span><br><span class="line">first = upper_bound(first, last, *first);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> output;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<table>
-<thead>
-<tr>
-<th>选项</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>a</td>
-<td>显示终端上的所有进程，包括其他用户的进程</td>
-</tr>
-<tr>
-<td>u</td>
-<td>显示进程的详细状态</td>
-</tr>
-<tr>
-<td>x</td>
-<td>显示没有控制终端的进程</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p><em>提示：使用 <code>kill</code> 命令时，最好只终止由当前用户开启的进程，而不要终止 <code>root</code> 身份开启的进程，否则可能导致系统崩溃</em></p>
-<ul>
-<li>要退出 <code>top</code> 可以直接输入 <code>q</code></li>
-</ul>
-</blockquote>
 
       
     </div>
@@ -602,7 +484,7 @@
     <strong>本文作者： </strong>difcreate</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://xhjiang.tech/2018/10/29/linux基础第五天/" title="linux基础第五天">https://xhjiang.tech/2018/10/29/linux基础第五天/</a>
+    <a href="https://xhjiang.tech/2018/11/12/leetcode刷题-Remove-Duplicates-from-Sorted-Array/" title="leetcode刷题-Remove Duplicates from Sorted Array">https://xhjiang.tech/2018/11/12/leetcode刷题-Remove-Duplicates-from-Sorted-Array/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
@@ -615,7 +497,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/linux/" rel="tag"><i class="fa fa-tag"></i> linux</a>
+            <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
+          
+            <a href="/tags/leetcode/" rel="tag"><i class="fa fa-tag"></i> leetcode</a>
+          
+            <a href="/tags/数组/" rel="tag"><i class="fa fa-tag"></i> 数组</a>
           
         </div>
       
@@ -628,8 +514,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/29/linux基础第四天/" rel="next" title="linux基础第四天">
-                <i class="fa fa-chevron-left"></i> linux基础第四天
+              <a href="/2018/11/12/C-中的STL中map用法详解/" rel="next" title="C++中的STL中map用法详解">
+                <i class="fa fa-chevron-left"></i> C++中的STL中map用法详解
               </a>
             
           </div>
@@ -637,10 +523,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/10/29/linux基础第六天/" rel="prev" title="linux基础第六天">
-                linux基础第六天 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -842,7 +724,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#系统信息相关命令"><span class="nav-number">1.</span> <span class="nav-text">系统信息相关命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-时间和日期"><span class="nav-number">1.1.</span> <span class="nav-text">01. 时间和日期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-磁盘信息"><span class="nav-number">1.2.</span> <span class="nav-text">02. 磁盘信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#03-进程信息"><span class="nav-number">1.3.</span> <span class="nav-text">03. 进程信息</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#26-删除排序数组中的重复项"><span class="nav-number">1.</span> <span class="nav-text">26. 删除排序数组中的重复项</span></a></li></ol></div>
             
 
           </div>
@@ -1030,7 +912,7 @@
   
     <script type="text/javascript">
       window.livereOptions = {
-        refer: '2018/10/29/linux基础第五天/'
+        refer: '2018/11/12/leetcode刷题-Remove-Duplicates-from-Sorted-Array/'
       };
       (function(d, s) {
         var j, e = d.getElementsByTagName(s)[0];
