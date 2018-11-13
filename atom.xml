@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xhjiang.tech/"/>
-  <updated>2018-11-13T08:21:55.038Z</updated>
+  <updated>2018-11-13T08:55:52.338Z</updated>
   <id>https://xhjiang.tech/</id>
   
   <author>
@@ -17,13 +17,50 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>leetcode刷题-Reverse Integer</title>
+    <link href="https://xhjiang.tech/2018/11/13/leetcode%E5%88%B7%E9%A2%98-Reverse-Integer/"/>
+    <id>https://xhjiang.tech/2018/11/13/leetcode刷题-Reverse-Integer/</id>
+    <published>2018-11-13T08:38:32.000Z</published>
+    <updated>2018-11-13T08:55:52.338Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="7-Reverse-Integer-反转整数"><a href="#7-Reverse-Integer-反转整数" class="headerlink" title="7.Reverse Integer-反转整数"></a>7.Reverse Integer-反转整数</h1><hr><p>给定一个 32 位有符号整数，将整数中的数字进行反转。</p><p>示例 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: 123</span><br><span class="line">输出: 321</span><br></pre></td></tr></table></figure></p><p>示例 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: -123</span><br><span class="line">输出: -321</span><br></pre></td></tr></table></figure></p><p>示例 3:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: 120</span><br><span class="line">输出: 21</span><br></pre></td></tr></table></figure></p><p>注意:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">假设我们的环境只能存储 32 位有符号整数，其数值范围是 [−2^31,  2^31 − 1]。根据这个假设，如果反转后的整数溢出，则返回 0。</span><br></pre></td></tr></table></figure></p><hr><h1 id="方法：弹出和推入数字-amp-溢出前进行检查"><a href="#方法：弹出和推入数字-amp-溢出前进行检查" class="headerlink" title="方法：弹出和推入数字 &amp; 溢出前进行检查"></a>方法：弹出和推入数字 &amp; 溢出前进行检查</h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>我们可以一次构建反转整数的一位数字。在这样做的时候，我们可以预先检查向原整数附加另一位数字是否会导致溢出。</p><h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>反转整数的方法可以与反转字符串进行类比。</p><p>我们想重复“弹出” xx 的最后一位数字，并将它“推入”到 <strong>rev</strong> 的后面。最后，<strong>rev</strong> 将与 xx 相反。</p><p>要在没有辅助堆栈 / 数组的帮助下 “弹出” 和 “推入” 数字，我们可以使用数学方法。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//pop operation:</span></span><br><span class="line">pop = x % <span class="number">10</span>;</span><br><span class="line">x /= <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//push operation:</span></span><br><span class="line">temp = rev * <span class="number">10</span> + pop;</span><br><span class="line">rev = temp;</span><br></pre></td></tr></table></figure></p><p>但是，这种方法很危险，因为当 <strong>temp=rev⋅10+pop</strong> 时会导致溢出。</p><p>幸运的是，事先检查这个语句是否会导致溢出很容易。</p><p>为了便于解释，我们假设 <strong>rev</strong> 是正数。</p><ol><li>如果 <strong>temp = rev ⋅ 10 + pop</strong> 导致溢出，那么一定有 <strong>rev ≥ INTMAX / 10</strong>。</li><li>如果 <strong>rev &gt; INTMAX / 10</strong>，那么 <strong>temp = rev ⋅ 10 + pop</strong> 一定会溢出。</li><li>如果 <strong>rev== INTMAX / 10</strong>，那么只要 <strong>pop &gt; 7</strong>, <strong>temp = rev ⋅ 10 + pop</strong> 就会溢出。<br>当 <strong>rev</strong> 为负时可以应用类似的逻辑。</li></ol><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">reverse</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> rev = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (x != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> pop = x % <span class="number">10</span>;</span><br><span class="line">            x /= <span class="number">10</span>;</span><br><span class="line">            <span class="keyword">if</span> (rev &gt; INT_MAX/<span class="number">10</span> || (rev == INT_MAX / <span class="number">10</span> &amp;&amp; pop &gt; <span class="number">7</span>)) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span> (rev &lt; INT_MIN/<span class="number">10</span> || (rev == INT_MIN / <span class="number">10</span> &amp;&amp; pop &lt; <span class="number">-8</span>)) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            rev = rev * <span class="number">10</span> + pop;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> rev;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><hr><blockquote><p><strong>复杂度分析:</strong></p><p>时间复杂度：O(log(x))，x 中大约有 log10(x) 位数字。<br>空间复杂度：O(1)。</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;7-Reverse-Integer-反转整数&quot;&gt;&lt;a href=&quot;#7-Reverse-Integer-反转整数&quot; class=&quot;headerlink&quot; title=&quot;7.Reverse Integer-反转整数&quot;&gt;&lt;/a&gt;7.Reverse Integer-反转
+      
+    
+    </summary>
+    
+      <category term="leetcode" scheme="https://xhjiang.tech/categories/leetcode/"/>
+    
+      <category term="数学" scheme="https://xhjiang.tech/categories/leetcode/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="C++" scheme="https://xhjiang.tech/categories/leetcode/%E6%95%B0%E5%AD%A6/C/"/>
+    
+      <category term="Python" scheme="https://xhjiang.tech/categories/leetcode/%E6%95%B0%E5%AD%A6/C/Python/"/>
+    
+    
+      <category term="leetcode" scheme="https://xhjiang.tech/tags/leetcode/"/>
+    
+      <category term="C++" scheme="https://xhjiang.tech/tags/C/"/>
+    
+      <category term="数学" scheme="https://xhjiang.tech/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="Python" scheme="https://xhjiang.tech/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
     <title>leetcode刷题-Transpose Matrix</title>
     <link href="https://xhjiang.tech/2018/11/13/leetcode%E5%88%B7%E9%A2%98-Transpose-Matrix/"/>
     <id>https://xhjiang.tech/2018/11/13/leetcode刷题-Transpose-Matrix/</id>
     <published>2018-11-13T08:00:30.000Z</published>
-    <updated>2018-11-13T08:21:55.038Z</updated>
+    <updated>2018-11-13T08:55:59.930Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="867-Transpose-Matrix-转置矩阵"><a href="#867-Transpose-Matrix-转置矩阵" class="headerlink" title="867.Transpose Matrix-转置矩阵"></a>867.Transpose Matrix-转置矩阵</h1><hr><p>给定一个矩阵 A， 返回 A 的转置矩阵。</p><p>矩阵的转置是指将矩阵的主对角线翻转，交换矩阵的行索引与列索引。</p><p>示例 1：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：[[1,2,3],[4,5,6],[7,8,9]]</span><br><span class="line">输出：[[1,4,7],[2,5,8],[3,6,9]]</span><br></pre></td></tr></table></figure></p><p>示例 2：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：[[1,2,3],[4,5,6]]</span><br><span class="line">输出：[[1,4],[2,5],[3,6]]</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">*提示：*</span><br></pre></td></tr></table></figure></p><p>1 &lt;= A.length &lt;= 1000<br>1 &lt;= A[0].length &lt;= 1000<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line"></span><br><span class="line">**解题思路：**</span><br><span class="line"></span><br><span class="line">矩阵的行列互换，简单的二重循环就可以了,不过很可惜，可能是太久没实战编码了，虽然知道该怎么做，但还是没写出来正确可以运行的代码......</span><br><span class="line"></span><br><span class="line">- C++版代码：</span><br><span class="line"></span><br><span class="line">```c++</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; transpose(vector&lt;vector&lt;int&gt;&gt;&amp; A) &#123;</span><br><span class="line">        int m=A.size();</span><br><span class="line">        int n=A[0].size();</span><br><span class="line">        vector&lt;int&gt; B(m,0);</span><br><span class="line">        vector&lt;vector&lt;int&gt;&gt; C(n,B);</span><br><span class="line">        for(int i=0;i&lt;m;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            for(int j=0;j&lt;n;j++)</span><br><span class="line">                C[j][i]=A[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">        return C;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p><ul><li>Python版代码：</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">transpose</span><span class="params">(self, A)</span>:</span></span><br><span class="line">        R, C = len(A), len(A[<span class="number">0</span>])</span><br><span class="line">        ans = [[<span class="keyword">None</span>] * R <span class="keyword">for</span> _ <span class="keyword">in</span> xrange(C)]</span><br><span class="line">        <span class="keyword">for</span> r, row <span class="keyword">in</span> enumerate(A):</span><br><span class="line">            <span class="keyword">for</span> c, val <span class="keyword">in</span> enumerate(row):</span><br><span class="line">                ans[c][r] = val</span><br><span class="line">        <span class="keyword">return</span> ans</span><br><span class="line"></span><br><span class="line">        <span class="comment">#Alternative Solution:</span></span><br><span class="line">        <span class="comment">#return zip(*A)</span></span><br></pre></td></tr></table></figure><blockquote><p>复杂度分析</p><p>时间复杂度：O(R * C)，其中 R 和 C 是给定矩阵 A 的行数和列数。</p><p>空间复杂度：O(R * C)，也就是答案所使用的空间。</p></blockquote>]]></content>
+    <content type="html"><![CDATA[<h1 id="867-Transpose-Matrix-转置矩阵"><a href="#867-Transpose-Matrix-转置矩阵" class="headerlink" title="867.Transpose Matrix-转置矩阵"></a>867.Transpose Matrix-转置矩阵</h1><hr><p>给定一个矩阵 A， 返回 A 的转置矩阵。</p><p>矩阵的转置是指将矩阵的主对角线翻转，交换矩阵的行索引与列索引。</p><p>示例 1：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：[[1,2,3],[4,5,6],[7,8,9]]</span><br><span class="line">输出：[[1,4,7],[2,5,8],[3,6,9]]</span><br></pre></td></tr></table></figure></p><p>示例 2：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：[[1,2,3],[4,5,6]]</span><br><span class="line">输出：[[1,4],[2,5],[3,6]]</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">*提示：*</span><br></pre></td></tr></table></figure></p><p>1 &lt;= A.length &lt;= 1000<br>1 &lt;= A[0].length &lt;= 1000<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line"></span><br><span class="line">**解题思路：**</span><br><span class="line"></span><br><span class="line">矩阵的行列互换，简单的二重循环就可以了,不过很可惜，可能是太久没实战编码了，虽然知道该怎么做，但还是没写出来正确可以运行的代码......</span><br><span class="line"></span><br><span class="line">- C++版代码：</span><br><span class="line"></span><br><span class="line">```c++</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; transpose(vector&lt;vector&lt;int&gt;&gt;&amp; A) &#123;</span><br><span class="line">        int m=A.size();</span><br><span class="line">        int n=A[0].size();</span><br><span class="line">        vector&lt;int&gt; B(m,0);</span><br><span class="line">        vector&lt;vector&lt;int&gt;&gt; C(n,B);</span><br><span class="line">        for(int i=0;i&lt;m;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            for(int j=0;j&lt;n;j++)</span><br><span class="line">                C[j][i]=A[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">        return C;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p><ul><li>Python版代码：</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">transpose</span><span class="params">(self, A)</span>:</span></span><br><span class="line">        R, C = len(A), len(A[<span class="number">0</span>])</span><br><span class="line">        ans = [[<span class="keyword">None</span>] * R <span class="keyword">for</span> _ <span class="keyword">in</span> xrange(C)]</span><br><span class="line">        <span class="keyword">for</span> r, row <span class="keyword">in</span> enumerate(A):</span><br><span class="line">            <span class="keyword">for</span> c, val <span class="keyword">in</span> enumerate(row):</span><br><span class="line">                ans[c][r] = val</span><br><span class="line">        <span class="keyword">return</span> ans</span><br><span class="line"></span><br><span class="line">        <span class="comment">#Alternative Solution:</span></span><br><span class="line">        <span class="comment">#return zip(*A)</span></span><br></pre></td></tr></table></figure><blockquote><p><strong>复杂度分析:</strong></p><p>时间复杂度：O(R * C)，其中 R 和 C 是给定矩阵 A 的行数和列数。</p><p>空间复杂度：O(R * C)，也就是答案所使用的空间。</p></blockquote>]]></content>
     
     <summary type="html">
     
@@ -43,11 +80,11 @@
       <category term="Python" scheme="https://xhjiang.tech/categories/leetcode/%E6%95%B0%E7%BB%84/C/Python/"/>
     
     
-      <category term="C++" scheme="https://xhjiang.tech/tags/C/"/>
-    
       <category term="leetcode" scheme="https://xhjiang.tech/tags/leetcode/"/>
     
       <category term="数组" scheme="https://xhjiang.tech/tags/%E6%95%B0%E7%BB%84/"/>
+    
+      <category term="C++" scheme="https://xhjiang.tech/tags/C/"/>
     
       <category term="Python" scheme="https://xhjiang.tech/tags/Python/"/>
     
@@ -78,11 +115,11 @@
       <category term="C++" scheme="https://xhjiang.tech/categories/leetcode/%E6%95%B0%E7%BB%84/C/"/>
     
     
-      <category term="C++" scheme="https://xhjiang.tech/tags/C/"/>
-    
       <category term="leetcode" scheme="https://xhjiang.tech/tags/leetcode/"/>
     
       <category term="数组" scheme="https://xhjiang.tech/tags/%E6%95%B0%E7%BB%84/"/>
+    
+      <category term="C++" scheme="https://xhjiang.tech/tags/C/"/>
     
   </entry>
   
@@ -111,11 +148,11 @@
       <category term="C++" scheme="https://xhjiang.tech/categories/leetcode/%E6%95%B0%E7%BB%84/C/"/>
     
     
-      <category term="C++" scheme="https://xhjiang.tech/tags/C/"/>
-    
       <category term="leetcode" scheme="https://xhjiang.tech/tags/leetcode/"/>
     
       <category term="数组" scheme="https://xhjiang.tech/tags/%E6%95%B0%E7%BB%84/"/>
+    
+      <category term="C++" scheme="https://xhjiang.tech/tags/C/"/>
     
   </entry>
   
@@ -180,11 +217,11 @@
       <category term="Java" scheme="https://xhjiang.tech/categories/leetcode/%E6%95%B0%E7%BB%84/C/Java/"/>
     
     
-      <category term="C++" scheme="https://xhjiang.tech/tags/C/"/>
-    
       <category term="leetcode" scheme="https://xhjiang.tech/tags/leetcode/"/>
     
       <category term="数组" scheme="https://xhjiang.tech/tags/%E6%95%B0%E7%BB%84/"/>
+    
+      <category term="C++" scheme="https://xhjiang.tech/tags/C/"/>
     
       <category term="Java" scheme="https://xhjiang.tech/tags/Java/"/>
     
