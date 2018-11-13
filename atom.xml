@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xhjiang.tech/"/>
-  <updated>2018-11-13T08:55:52.338Z</updated>
+  <updated>2018-11-13T11:48:43.437Z</updated>
   <id>https://xhjiang.tech/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>剑指offer-替换空格</title>
+    <link href="https://xhjiang.tech/2018/11/13/%E5%89%91%E6%8C%87offer-%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC/"/>
+    <id>https://xhjiang.tech/2018/11/13/剑指offer-替换空格/</id>
+    <published>2018-11-13T11:35:12.000Z</published>
+    <updated>2018-11-13T11:48:43.437Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="替换空格"><a href="#替换空格" class="headerlink" title="替换空格"></a>替换空格</h1><hr><p><strong>题目描述</strong></p><p>请实现一个函数，将一个字符串中的每个空格替换成“<strong>%20</strong>”。例如，当字符串为<strong>We Are Happy</strong>.则经过替换之后的字符串为<strong>We%20Are%20Happy</strong>.</p><hr><p><strong>C++解题思路</strong></p><ol><li><p>可以新建一个string对象，从前向后遍历源字符串，遇到空格即替换成%20，不是空格直接拷贝，最后把string对象转换成C字符串拷贝给源字符串。</p></li><li><p>先遍历源字符串得到空格的个数，得到替换后字符串的长度，使用两个指针，一个指向源串的最后，一个指向新字符串的最后，从后向前拷贝，遇到空格开始替换，同时后面的指针继续向前，直到两个指针相等，说明替换完成。注意不要在函数内新建一个数组来做，直接在源串上进行改动。这里给出第二种解题思路的代码：</p></li></ol><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">replaceSpace</span><span class="params">(<span class="keyword">char</span> *str,<span class="keyword">int</span> length)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">char</span>* pstr = str; </span><br><span class="line">    <span class="keyword">while</span>(*pstr != <span class="string">'\0'</span>)     <span class="comment">//得到空格的个数</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(*pstr == <span class="string">' '</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            count++;    </span><br><span class="line">        &#125;</span><br><span class="line">        pstr++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> newsize = length + <span class="number">2</span>*count;    <span class="comment">//替换后的字符串长度</span></span><br><span class="line">    str[newsize] = <span class="string">'\0'</span>;           <span class="comment">//给新字符串末尾设置结束标志，不能省略。</span></span><br><span class="line">    <span class="keyword">char</span>* end = str + length - <span class="number">1</span>;     <span class="comment">//源串的最后一个位置</span></span><br><span class="line">    <span class="keyword">char</span>* finish = str + newsize - <span class="number">1</span>;   <span class="comment">//新串的最后一个位置</span></span><br><span class="line">    <span class="keyword">while</span>(end != finish)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(*end != <span class="string">' '</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            *finish-- = *end--;    </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;                  <span class="comment">//遇见空格开始替换。</span></span><br><span class="line">            *finish-- = <span class="string">'0'</span>;</span><br><span class="line">            *finish-- = <span class="string">'2'</span>;</span><br><span class="line">            *finish-- = <span class="string">'%'</span>;</span><br><span class="line">            end--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr><p><strong>Python解题思路</strong></p><p><strong>Python</strong>中的<strong>replace()</strong> 方法把字符串中的 old（旧字符串） 替换成 new(新字符串)，如果指定第三个参数max，则替换不超过 max 次。所以只需要在循环中判断字符是否是空格字符，如果是的话就替换成‘<strong>%20</strong>’就行了。</p><blockquote><p><em>用法：</em> str.replace(old, new[, max])</p></blockquote><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="comment"># s 源字符串</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">replaceSpace</span><span class="params">(self, s)</span>:</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        <span class="comment">#s1 = dict(s)</span></span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> x == <span class="string">' '</span>:</span><br><span class="line">                s = s.replace(<span class="string">' '</span>, <span class="string">'%20'</span>)</span><br><span class="line">        <span class="keyword">return</span> s</span><br></pre></td></tr></table></figure><blockquote><p>Tips:<br>此解法是本菜鸡自己想出来的，所以可以得出并不是本菜鸡变厉害了，而是python相对于c++来说确实很好用。python真香~</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;替换空格&quot;&gt;&lt;a href=&quot;#替换空格&quot; class=&quot;headerlink&quot; title=&quot;替换空格&quot;&gt;&lt;/a&gt;替换空格&lt;/h1&gt;&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;请实现一个函数，将一个字符串中的每个空格替换成“&lt;str
+      
+    
+    </summary>
+    
+      <category term="剑指offer" scheme="https://xhjiang.tech/categories/%E5%89%91%E6%8C%87offer/"/>
+    
+      <category term="C++" scheme="https://xhjiang.tech/categories/%E5%89%91%E6%8C%87offer/C/"/>
+    
+    
+      <category term="C++" scheme="https://xhjiang.tech/tags/C/"/>
+    
+      <category term="剑指offer" scheme="https://xhjiang.tech/tags/%E5%89%91%E6%8C%87offer/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode刷题-Reverse Integer</title>
