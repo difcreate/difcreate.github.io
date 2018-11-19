@@ -123,7 +123,7 @@
 <meta property="og:site_name" content="difcreate&#39;s blog">
 <meta property="og:description" content="136. Single Number-只出现过一次的数字 描述：给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。  说明：你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？  示例 1:12输入: [2,2,1]输出: 1 示例 2:12输入: [4,1,2,1,2]输出: 4  思路： 题中要求，线性时间复杂度，而且不使用额外空">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-19T06:45:59.583Z">
+<meta property="og:updated_time" content="2018-11-19T06:48:46.989Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leetcode刷题-Single Number">
 <meta name="twitter:description" content="136. Single Number-只出现过一次的数字 描述：给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。  说明：你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？  示例 1:12输入: [2,2,1]输出: 1 示例 2:12输入: [4,1,2,1,2]输出: 4  思路： 题中要求，线性时间复杂度，而且不使用额外空">
@@ -362,7 +362,7 @@
                 
               
 
-              <time title="创建时间：2018-11-19 14:33:55 / 修改时间：14:45:59" itemprop="dateCreated datePublished" datetime="2018-11-19T14:33:55+08:00">2018-11-19</time>
+              <time title="创建时间：2018-11-19 14:33:55 / 修改时间：14:48:46" itemprop="dateCreated datePublished" datetime="2018-11-19T14:33:55+08:00">2018-11-19</time>
             
 
             
@@ -438,7 +438,7 @@
 <p>我们可以考虑 异或运算 ，它是满足交换律和结合的，也就是说 a ^ b  ^c = a ^ c ^ b，这样当我们遍历数组，顺次进行异或运算，那么最终的结果就是唯一的不重复数字。</p>
 <p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[4,1,2,1,2]，</span><br><span class="line">4^1^2^1^2 = 1^1^2^2^4 = 0^0^4=4</span><br></pre></td></tr></table></figure></p>
 <p><strong>代码一：</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间复杂度O(n),空间复杂度O(1)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">singleNumber</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> x = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//顺次异或，每当某个数字重复出现偶次都会被消除为0</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i : nums) &#123;</span><br><span class="line">            x ^= i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间复杂度O(n),空间复杂度O(1)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">singleNumber</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> x = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//顺次异或，每当某个数字重复出现偶次都会被消除为0</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i : nums) &#123;</span><br><span class="line">            x ^= i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// class Solution &#123;</span></span><br><span class="line"><span class="comment">// public:</span></span><br><span class="line"><span class="comment">//     int singleNumber(int A[], int n) &#123;</span></span><br><span class="line"><span class="comment">//         int result = 0;</span></span><br><span class="line"><span class="comment">//         for(int i = 0;i &lt; n;i++)&#123;</span></span><br><span class="line"><span class="comment">//             result = result ^ A[i];</span></span><br><span class="line"><span class="comment">//         &#125;</span></span><br><span class="line"><span class="comment">//         return result;</span></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line"><span class="comment">// &#125;;</span></span><br></pre></td></tr></table></figure>
 <p><strong>代码二：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间复杂度O(n),空间复杂度O(1)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">singleNumber</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//accumulate()函数用来求和，初始值为0，范围从begin到end的所有向量以位异或的方式求和</span></span><br><span class="line">        <span class="keyword">return</span> accumulate(nums.begin(), nums.end(), <span class="number">0</span>, bit_xor&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
       
@@ -508,6 +508,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/19/leetcode刷题-Minimum-Depth-of-Binary-Tree/" rel="prev" title="leetcode刷题-Minimum Depth of Binary Tree">
+                leetcode刷题-Minimum Depth of Binary Tree <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -584,7 +588,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-count">28</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -816,7 +820,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共25.2k字</span>
+  <span class="post-count">博客全站共25.4k字</span>
 </div>
 
         
