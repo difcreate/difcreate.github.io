@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="机器学习-决策树原理及实战(一) 决策树决策树是什么？决策树(decision tree)是一种基本的分类与回归方法。举个通俗易懂的例子，如下图所示的流程图就是一个决策树，长方形代表判断模块(decision block)，椭圆形成代表终止模块(terminating block)，表示已经得出结论，可以终止运行。从判断模块引出的左右箭头称作为分支(branch)，它可以达到另一个判断模块或者终止">
+<meta name="keywords" content="机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习-决策树原理及实战(一)">
+<meta property="og:url" content="https://xhjiang.tech/2018/11/19/机器学习-决策树原理及实战/index.html">
+<meta property="og:site_name" content="difcreate&#39;s blog">
+<meta property="og:description" content="机器学习-决策树原理及实战(一) 决策树决策树是什么？决策树(decision tree)是一种基本的分类与回归方法。举个通俗易懂的例子，如下图所示的流程图就是一个决策树，长方形代表判断模块(decision block)，椭圆形成代表终止模块(terminating block)，表示已经得出结论，可以终止运行。从判断模块引出的左右箭头称作为分支(branch)，它可以达到另一个判断模块或者终止">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://xhjiang-1256231208.cos.ap-chengdu.myqcloud.com/hexo-%E5%86%B3%E7%AD%96%E6%A0%91/m_2_1.jpg?q-sign-algorithm=sha1&q-ak=AKIDo0bmLPfbfgzegr1ie8G5q8r2MOI6n9nU&q-sign-time=1542615956;1542617756&q-key-time=1542615956;1542617756&q-header-list=&q-url-param-list=&q-signature=332b7d6eefee6b6b7e6452cc1399a1ede9fbc4fe&x-cos-security-token=5a09803f8532adcdcaf3e993afe6031a505ccfe510001">
+<meta property="og:image" content="https://xhjiang-1256231208.cos.ap-chengdu.myqcloud.com/hexo-%E5%86%B3%E7%AD%96%E6%A0%91/m_2_2.jpg?q-sign-algorithm=sha1&q-ak=AKIDcUidFOx6g1skcSVTRv9rLw2Yc5mVWxLK&q-sign-time=1542616252;1542618052&q-key-time=1542616252;1542618052&q-header-list=&q-url-param-list=&q-signature=905b0b542300a4058c836d61d61c3ac20c863d57&x-cos-security-token=03747c4a3672eba87137fa78e3f603e693f2084c10001">
+<meta property="og:image" content="https://xhjiang-1256231208.cos.ap-chengdu.myqcloud.com/hexo-%E5%86%B3%E7%AD%96%E6%A0%91/m_2_3.jpg?q-sign-algorithm=sha1&q-ak=AKID7LoSNbZ3PaXBMUDmiyHD5b80PtM7mLge&q-sign-time=1542616298;1542618098&q-key-time=1542616298;1542618098&q-header-list=&q-url-param-list=&q-signature=571430898b051ee3d211c06be3e5243329c1c61a&x-cos-security-token=ec57b9d67f7a3fe8e41d393f82e1337fbb4d871510001">
+<meta property="og:image" content="https://xhjiang-1256231208.cos.ap-chengdu.myqcloud.com/hexo-%E5%86%B3%E7%AD%96%E6%A0%91/m_2_8.jpg?q-sign-algorithm=sha1&q-ak=AKID7xfLaZY0Sf90r7bU4ZIQQPFld0ShPaLj&q-sign-time=1542618680;1542620480&q-key-time=1542618680;1542620480&q-header-list=&q-url-param-list=&q-signature=796c7027aa9403cc50084ae1b420bef12fcefca8&x-cos-security-token=c71fa4695aae6d64d7ba3551fe73072e003d9af210001">
+<meta property="og:image" content="https://xhjiang-1256231208.cos.ap-chengdu.myqcloud.com/hexo-%E5%86%B3%E7%AD%96%E6%A0%91/m_2_13.jpg?q-sign-algorithm=sha1&q-ak=AKIDdNqb8A6wqNlwt72O0cx4OIBpRKBDy6Z8&q-sign-time=1542619737;1542621537&q-key-time=1542619737;1542621537&q-header-list=&q-url-param-list=&q-signature=d5bf3b836adeb09ab318fd15052dbe8bc07e534a&x-cos-security-token=bfa078927345c660cac46791c51c6ec6410cacff10001">
+<meta property="og:image" content="https://xhjiang-1256231208.cos.ap-chengdu.myqcloud.com/hexo-%E5%86%B3%E7%AD%96%E6%A0%91/m_2_14_m.jpg?q-sign-algorithm=sha1&q-ak=AKIDSl7ywpwES4SEZ18ilCEH0T3bgKFszgXz&q-sign-time=1542619793;1542621593&q-key-time=1542619793;1542621593&q-header-list=&q-url-param-list=&q-signature=9c306ce1b2af835bef3aa8cd67e1eb8e67a73ad3&x-cos-security-token=7f741e6a28643d82f9a0cd1483c9474d1efe97c310001">
+<meta property="og:image" content="https://xhjiang-1256231208.cos.ap-chengdu.myqcloud.com/hexo-%E5%86%B3%E7%AD%96%E6%A0%91/m_2_17.jpg?q-sign-algorithm=sha1&q-ak=AKIDXFJonnnEnE77YzSjHGXnVgA71i3hSz7C&q-sign-time=1542620152;1542621952&q-key-time=1542620152;1542621952&q-header-list=&q-url-param-list=&q-signature=72e63ad8f9caf9c1aaded1fc2c462ac8a7d5c4b5&x-cos-security-token=08d3672a0cc604a03b6686b7b2ebd4dc9c6dca9c10001">
+<meta property="og:updated_time" content="2018-11-19T09:40:14.509Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习-决策树原理及实战(一)">
+<meta name="twitter:description" content="机器学习-决策树原理及实战(一) 决策树决策树是什么？决策树(decision tree)是一种基本的分类与回归方法。举个通俗易懂的例子，如下图所示的流程图就是一个决策树，长方形代表判断模块(decision block)，椭圆形成代表终止模块(terminating block)，表示已经得出结论，可以终止运行。从判断模块引出的左右箭头称作为分支(branch)，它可以达到另一个判断模块或者终止">
+<meta name="twitter:image" content="https://xhjiang-1256231208.cos.ap-chengdu.myqcloud.com/hexo-%E5%86%B3%E7%AD%96%E6%A0%91/m_2_1.jpg?q-sign-algorithm=sha1&q-ak=AKIDo0bmLPfbfgzegr1ie8G5q8r2MOI6n9nU&q-sign-time=1542615956;1542617756&q-key-time=1542615956;1542617756&q-header-list=&q-url-param-list=&q-signature=332b7d6eefee6b6b7e6452cc1399a1ede9fbc4fe&x-cos-security-token=5a09803f8532adcdcaf3e993afe6031a505ccfe510001">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="difcreate's blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://xhjiang.tech/2018/11/19/机器学习-决策树原理及实战/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>机器学习-决策树原理及实战(一) | difcreate's blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+	<!--github-start-->
+	<a href="https://github.com/difcreate"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+	<!--github-end-->
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">difcreate's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">偷得浮生半日闲</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xhjiang.tech/2018/11/19/机器学习-决策树原理及实战/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="difcreate">
+      <meta itemprop="description" content="学习使我快乐">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="difcreate's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习-决策树原理及实战(一)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-19 16:18:30 / 修改时间：17:40:14" itemprop="dateCreated datePublished" datetime="2018-11-19T16:18:30+08:00">2018-11-19</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="机器学习-决策树原理及实战-一"><a href="#机器学习-决策树原理及实战-一" class="headerlink" title="机器学习-决策树原理及实战(一)"></a>机器学习-决策树原理及实战(一)</h1><hr>
+<h2 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h2><p>决策树是什么？决策树(decision tree)是一种基本的分类与回归方法。举个通俗易懂的例子，如下图所示的流程图就是一个决策树，长方形代表判断模块(decision block)，椭圆形成代表终止模块(terminating block)，表示已经得出结论，可以终止运行。从判断模块引出的左右箭头称作为分支(branch)，它可以达到另一个判断模块或者终止模块。我们还可以这样理解，分类决策树模型是一种描述对实例进行分类的树形结构。决策树由结点(node)和有向边(directed edge)组成。结点有两种类型：内部结点(internal node)和叶结点(leaf node)。内部结点表示一个特征或属性，叶结点表示一个类。蒙圈没？？如下图所示的决策树，长方形和椭圆形都是结点。长方形的结点属于内部结点，椭圆形的结点属于叶结点，从结点引出的左右箭头就是有向边。而最上面的结点就是决策树的根结点(root node)。这样，结点说法就与模块说法对应上了，理解就好。<div align="center"><img src="https://xhjiang-1256231208.cos.ap-chengdu.myqcloud.com/hexo-%E5%86%B3%E7%AD%96%E6%A0%91/m_2_1.jpg?q-sign-algorithm=sha1&amp;q-ak=AKIDo0bmLPfbfgzegr1ie8G5q8r2MOI6n9nU&amp;q-sign-time=1542615956;1542617756&amp;q-key-time=1542615956;1542617756&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=332b7d6eefee6b6b7e6452cc1399a1ede9fbc4fe&amp;x-cos-security-token=5a09803f8532adcdcaf3e993afe6031a505ccfe510001" alt=""></div></p>
+<p>我们回到这个流程图，对，你没看错，这就是一个假想的相亲对象分类系统。它首先检测相亲对方是否有房。如果有房，则对于这个相亲对象可以考虑进一步接触。如果没有房，则观察相亲对象是否有上进心，如果没有，直接Say Goodbye，此时可以说：”你人很好，但是我们不合适。”如果有，则可以把这个相亲对象列入候选名单，好听点叫候选名单，有点瑕疵地讲，那就是备胎。</p>
+<p>不过这只是个简单的相亲对象分类系统，只是做了简单的分类。真实情况可能要复杂得多，考虑因素也可以是五花八门。脾气好吗？会做饭吗？愿意做家务吗？家里几个孩子？父母是干什么的？天啊，我不想再说下去了，想想都可怕。</p>
+<p>我们可以把决策树看成一个if-then规则的集合，将决策树转换成if-then规则的过程是这样的：由决策树的根结点(root node)到叶结点(leaf node)的每一条路径构建一条规则；路径上内部结点的特征对应着规则的条件，而叶结点的类对应着规则的结论。决策树的路径或其对应的if-then规则集合具有一个重要的性质：互斥并且完备。这就是说，每一个实例都被一条路径或一条规则所覆盖，而且只被一条路径或一条规则所覆盖。这里所覆盖是指实例的特征与路径上的特征一致或实例满足规则的条件。</p>
+<p><strong>使用决策树做预测需要以下过程：</strong></p>
+<ul>
+<li><p>收集数据：可以使用任何方法。比如想构建一个相亲系统，我们可以从媒婆那里，或者通过采访相亲对象获取数据。根据他们考虑的因素和最终的选择结果，就可以得到一些供我们利用的数据了。</p>
+</li>
+<li><p>准备数据：收集完的数据，我们要进行整理，将这些所有收集的信息按照一定规则整理出来，并排版，方便我们进行后续处理。</p>
+</li>
+<li><p>分析数据：可以使用任何方法，决策树构造完成之后，我们可以检查决策树图形是否符合预期。</p>
+</li>
+<li><p>训练算法：这个过程也就是构造决策树，同样也可以说是决策树学习，就是构造一个决策树的数据结构。</p>
+</li>
+<li><p>测试算法：使用经验树计算错误率。当错误率达到了可接收范围，这个决策树就可以投放使用了。</p>
+</li>
+<li><p>使用算法：此步骤可以使用适用于任何监督学习算法，而使用决策树可以更好地理解数据的内在含义。</p>
+</li>
+</ul>
+<hr>
+<h2 id="2-决策树的构建的准备工作"><a href="#2-决策树的构建的准备工作" class="headerlink" title="2.决策树的构建的准备工作"></a>2.决策树的构建的准备工作</h2><p>使用决策树做预测的每一步骤都很重要，数据收集不到位，将会导致没有足够的特征让我们构建错误率低的决策树。数据特征充足，但是不知道用哪些特征好，将会导致无法构建出分类效果好的决策树模型。从算法方面看，决策树的构建是我们的核心内容。</p>
+<p>决策树要如何构建呢？通常，这一过程可以概括为3个步骤：特征选择、决策树的生成和决策树的修剪。</p>
+<h3 id="2-1-特征选择"><a href="#2-1-特征选择" class="headerlink" title="2.1 特征选择"></a>2.1 特征选择</h3><p>特征选择在于选取对训练数据具有分类能力的特征。这样可以提高决策树学习的效率，如果利用一个特征进行分类的结果与随机分类的结果没有很大差别，则称这个特征是没有分类能力的。经验上扔掉这样的特征对决策树学习的精度影响不大。通常特征选择的标准是信息增益(information gain)或信息增益比，为了简单，本文使用信息增益作为选择特征的标准。那么，什么是信息增益？在讲解信息增益之前，让我们看一组实例，贷款申请样本数据表。<div align="center"><img src="https://xhjiang-1256231208.cos.ap-chengdu.myqcloud.com/hexo-%E5%86%B3%E7%AD%96%E6%A0%91/m_2_2.jpg?q-sign-algorithm=sha1&amp;q-ak=AKIDcUidFOx6g1skcSVTRv9rLw2Yc5mVWxLK&amp;q-sign-time=1542616252;1542618052&amp;q-key-time=1542616252;1542618052&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=905b0b542300a4058c836d61d61c3ac20c863d57&amp;x-cos-security-token=03747c4a3672eba87137fa78e3f603e693f2084c10001" alt=""></div></p>
+<p>希望通过所给的训练数据学习一个贷款申请的决策树，用于对未来的贷款申请进行分类，即当新的客户提出贷款申请时，根据申请人的特征利用决策树决定是否批准贷款申请。</p>
+<p>特征选择就是决定用哪个特征来划分特征空间。比如，我们通过上述数据表得到两个可能的决策树，分别由两个不同特征的根结点构成。<div align="center"><img src="https://xhjiang-1256231208.cos.ap-chengdu.myqcloud.com/hexo-%E5%86%B3%E7%AD%96%E6%A0%91/m_2_3.jpg?q-sign-algorithm=sha1&amp;q-ak=AKID7LoSNbZ3PaXBMUDmiyHD5b80PtM7mLge&amp;q-sign-time=1542616298;1542618098&amp;q-key-time=1542616298;1542618098&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=571430898b051ee3d211c06be3e5243329c1c61a&amp;x-cos-security-token=ec57b9d67f7a3fe8e41d393f82e1337fbb4d871510001" alt=""></div></p>
+<p>图(a)所示的根结点的特征是年龄，有3个取值，对应于不同的取值有不同的子结点。图(b)所示的根节点的特征是工作，有2个取值，对应于不同的取值有不同的子结点。两个决策树都可以从此延续下去。问题是：究竟选择哪个特征更好些？这就要求确定选择特征的准则。直观上，如果一个特征具有更好的分类能力，或者说，按照这一特征将训练数据集分割成子集，使得各个子集在当前条件下有最好的分类，那么就更应该选择这个特征。信息增益就能够很好地表示这一直观的准则。</p>
+<blockquote>
+<p>什么是<strong>信息增益</strong>呢？在划分数据集之后信息发生的变化称为信息增益，知道如何计算信息增益，我们就可以计算每个特征值划分数据集获得的信息增益，获得信息增益最高的特征就是最好的选择。</p>
+</blockquote>
+<p><strong>1)香农熵</strong></p>
+<p>在可以评测哪个数据划分方式是最好的数据划分之前，我们必须学习如何计算信息增益。集合信息的度量方式称为香农熵或者简称为熵(entropy)，这个名字来源于信息论之父克劳德·香农。</p>
+<p>如果看不明白什么是信息增益和熵，请不要着急，因为他们自诞生的那一天起，就注定会令世人十分费解。克劳德·香农写完信息论之后，约翰·冯·诺依曼建议使用”熵”这个术语，因为大家都不知道它是什么意思。</p>
+<p>熵定义为信息的期望值。在信息论与概率统计中，熵是表示随机变量不确定性的度量。如果待分类的事物可能划分在多个分类之中，则符号xi的信息定义为 ：<br>$$l(x_i) = -\log_2 p(x_i)$$</p>
+<p>其中p(xi)是选择该分类的概率。有人可能会问，信息为啥这样定义啊？答曰：前辈得出的结论。这就跟1+1等于2一样，记住并且会用即可。上述式中的对数以2为底，也可以e为底(自然对数)。</p>
+<p>通过上式，我们可以得到所有类别的信息。为了计算熵，我们需要计算所有类别所有可能值包含的信息期望值(数学期望)，通过下面的公式得到：<br>$$H = -\sum_{i=1}^{n}p(x_i)\log_2 p(x_i) \qquad$$</p>
+<p>期中n是分类的数目。熵越大，随机变量的不确定性就越大。</p>
+<p>当熵中的概率由数据估计(特别是最大似然估计)得到时，所对应的熵称为经验熵(empirical entropy)。什么叫由数据估计？比如有10个数据，一共有两个类别，A类和B类。其中有7个数据属于A类，则该A类的概率即为十分之七。其中有3个数据属于B类，则该B类的概率即为十分之三。浅显的解释就是，这概率是我们根据数据数出来的。我们定义贷款申请样本数据表中的数据为训练数据集D，则训练数据集D的经验熵为H(D)，|D|表示其样本容量，及样本个数。设有K个类Ck, = 1,2,3,…,K,|Ck|为属于类Ck的样本个数，因此经验熵公式就可以写为 ：<br>$$H(D) = -\sum_{k=1}^{K} \frac {|C_k|}{|D|} \log_2 \frac {|C_k|}{|D|} \qquad$$</p>
+<p>根据此公式计算经验熵H(D)，分析贷款申请样本数据表中的数据。最终分类结果只有两类，即放贷和不放贷。根据表中的数据统计可知，在15个数据中，9个数据的结果为放贷，6个数据的结果为不放贷。所以数据集D的经验熵H(D)为：<br>$$H(D) = -\frac{9}{15} \log_2\frac{9}{15}-\frac{6}{15} \log_2\frac{6}{15} = 0.971 \qquad$$</p>
+<p>经过计算可知，数据集D的经验熵H(D)的值为0.971。</p>
+<p><strong>2)编写代码计算经验熵</strong></p>
+<p>在编写代码之前，我们先对数据集进行属性标注。</p>
+<ul>
+<li>年龄：0代表青年，1代表中年，2代表老年；</li>
+<li>有工作：0代表否，1代表是；</li>
+<li>有自己的房子：0代表否，1代表是；</li>
+<li>信贷情况：0代表一般，1代表好，2代表非常好；</li>
+<li>类别(是否给贷款)：no代表否，yes代表是。</li>
+</ul>
+<p>确定这些之后，我们就可以创建数据集，并计算经验熵了，代码编写如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> log</span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">函数说明:创建测试数据集</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Parameters:</span></span><br><span class="line"><span class="string">    无</span></span><br><span class="line"><span class="string">Returns:</span></span><br><span class="line"><span class="string">    dataSet - 数据集</span></span><br><span class="line"><span class="string">    labels - 分类属性</span></span><br><span class="line"><span class="string">Author:</span></span><br><span class="line"><span class="string">    xhjiang</span></span><br><span class="line"><span class="string">Modify:</span></span><br><span class="line"><span class="string">    2018-11-19</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">createDataSet</span><span class="params">()</span>:</span></span><br><span class="line">    dataSet = [[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="string">'no'</span>],  <span class="comment"># 数据集</span></span><br><span class="line">               [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="string">'no'</span>],</span><br><span class="line">               [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="string">'yes'</span>],</span><br><span class="line">               [<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="string">'yes'</span>],</span><br><span class="line">               [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="string">'no'</span>],</span><br><span class="line">               [<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="string">'no'</span>],</span><br><span class="line">               [<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="string">'no'</span>],</span><br><span class="line">               [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="string">'yes'</span>],</span><br><span class="line">               [<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="string">'yes'</span>],</span><br><span class="line">               [<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="string">'yes'</span>],</span><br><span class="line">               [<span class="number">2</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="string">'yes'</span>],</span><br><span class="line">               [<span class="number">2</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="string">'yes'</span>],</span><br><span class="line">               [<span class="number">2</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="string">'yes'</span>],</span><br><span class="line">               [<span class="number">2</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="string">'yes'</span>],</span><br><span class="line">               [<span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="string">'no'</span>]]</span><br><span class="line">    labels = [<span class="string">'不放贷'</span>, <span class="string">'放贷'</span>]  <span class="comment"># 分类属性</span></span><br><span class="line">    <span class="keyword">return</span> dataSet, labels  <span class="comment"># 返回数据集和分类属性</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">函数说明:计算给定数据集的经验熵(香农熵)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Parameters:</span></span><br><span class="line"><span class="string">    dataSet - 数据集</span></span><br><span class="line"><span class="string">Returns:</span></span><br><span class="line"><span class="string">    shannonEnt - 经验熵(香农熵)</span></span><br><span class="line"><span class="string">Author:</span></span><br><span class="line"><span class="string">    xhjiang</span></span><br><span class="line"><span class="string">Modify:</span></span><br><span class="line"><span class="string">    2018-11-19</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calcShannonEnt</span><span class="params">(dataSet)</span>:</span></span><br><span class="line">    numEntires = len(dataSet)  <span class="comment"># 返回数据集的行数</span></span><br><span class="line">    labelCounts = &#123;&#125;  <span class="comment"># 保存每个标签(Label)出现次数的字典</span></span><br><span class="line">    <span class="keyword">for</span> featVec <span class="keyword">in</span> dataSet:  <span class="comment"># 对每组特征向量进行统计</span></span><br><span class="line">        currentLabel = featVec[<span class="number">-1</span>]  <span class="comment"># 提取标签(Label)信息</span></span><br><span class="line">        <span class="keyword">if</span> currentLabel <span class="keyword">not</span> <span class="keyword">in</span> labelCounts.keys():  <span class="comment"># 如果标签(Label)没有放入统计次数的字典,添加进去</span></span><br><span class="line">            labelCounts[currentLabel] = <span class="number">0</span></span><br><span class="line">        labelCounts[currentLabel] += <span class="number">1</span>  <span class="comment"># Label计数</span></span><br><span class="line">    shannonEnt = <span class="number">0.0</span>  <span class="comment"># 经验熵(香农熵)</span></span><br><span class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> labelCounts:  <span class="comment"># 计算香农熵</span></span><br><span class="line">        prob = float(labelCounts[key]) / numEntires  <span class="comment"># 选择该标签(Label)的概率</span></span><br><span class="line">        shannonEnt -= prob * log(prob, <span class="number">2</span>)  <span class="comment"># 利用公式计算</span></span><br><span class="line">    <span class="keyword">return</span> shannonEnt  <span class="comment"># 返回经验熵(香农熵)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    dataSet, features = createDataSet()</span><br><span class="line">    print(dataSet)</span><br><span class="line">    print(calcShannonEnt(dataSet))</span><br></pre></td></tr></table></figure>
+<p>代码运行结果如下图所示，代码是先打印训练数据集，然后打印计算的经验熵H(D)，程序计算的结果与我们统计计算的结果是一致的，程序没有问题。<div align="center"><img src="https://xhjiang-1256231208.cos.ap-chengdu.myqcloud.com/hexo-%E5%86%B3%E7%AD%96%E6%A0%91/m_2_8.jpg?q-sign-algorithm=sha1&amp;q-ak=AKID7xfLaZY0Sf90r7bU4ZIQQPFld0ShPaLj&amp;q-sign-time=1542618680;1542620480&amp;q-key-time=1542618680;1542620480&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=796c7027aa9403cc50084ae1b420bef12fcefca8&amp;x-cos-security-token=c71fa4695aae6d64d7ba3551fe73072e003d9af210001" alt=""></div></p>
+<p><strong>3)信息增益</strong></p>
+<p>在上面，我们已经说过，如何选择特征，需要看信息增益。也就是说，信息增益是相对于特征而言的，信息增益越大，特征对最终的分类结果影响也就越大，我们就应该选择对最终分类结果影响最大的那个特征作为我们的分类特征。</p>
+<p>在讲解信息增益定义之前，我们还需要明确一个概念，条件熵。</p>
+<p>熵我们知道是什么，条件熵又是个什么鬼？条件熵H(Y|X)表示在已知随机变量X的条件下随机变量Y的不确定性，随机变量X给定的条件下随机变量Y的条件熵(conditional entropy)H(Y|X)，定义为X给定条件下Y的条件概率分布的熵对X的数学期望：<br>$$H(Y|X) = -\sum_{i=1}^{n} p_i H(Y|X=x_i) \qquad$$</p>
+<p>这里，<br>$$p_i = P(X = x_i),i = 1, 2,…,n$$</p>
+<p>同理，当条件熵中的概率由数据估计(特别是极大似然估计)得到时，所对应的条件熵称为条件经验熵(empirical conditional entropy)。</p>
+<p>明确了条件熵和经验条件熵的概念。接下来，让我们说说信息增益。前面也提到了，信息增益是相对于特征而言的。所以，特征A对训练数据集D的信息增益g(D,A)，定义为集合D的经验熵H(D)与特征A给定条件下D的经验条件熵H(D|A)之差，即：<br>$$g (D,A) = H(D) - H(D|A)$$</p>
+<p>一般地，熵H(D)与条件熵H(D|A)之差称为互信息(mutual information)。决策树学习中的信息增益等价于训练数据集中类与特征的互信息。</p>
+<p>设特征A有n个不同的取值{a1,a2,···,an}，根据特征A的取值将D划分为n个子集{D1,D2，···,Dn}，|Di|为Di的样本个数。记子集Di中属于Ck的样本的集合为Dik，即Dik = Di ∩ Ck，|Dik|为Dik的样本个数。于是经验条件熵的公式可以些为：<br>$$H(D|A) = \sum_{i=1}^{n} \frac {|D_i|}{|D|}H(D_i) = -\sum_{i=1}^{n} \frac {|D_i|}{|D|}\sum_{k=1}^{K} \frac {|D_{ik}|}{|D_i|} \log_2 \frac {|D_{ik}|}{|D_i|}$$</p>
+<p>说了这么多概念性的东西，没有听懂也没有关系，举几个例子，再回来看一下概念，就懂了。</p>
+<p>以贷款申请样本数据表为例进行说明。看下年龄这一列的数据，也就是特征A1，一共有三个类别，分别是：青年、中年和老年。我们只看年龄是青年的数据，年龄是青年的数据一共有5个，所以年龄是青年的数据在训练数据集出现的概率是十五分之五，也就是三分之一。同理，年龄是中年和老年的数据在训练数据集出现的概率也都是三分之一。现在我们只看年龄是青年的数据的最终得到贷款的概率为五分之二，因为在五个数据中，只有两个数据显示拿到了最终的贷款，同理，年龄是中年和老年的数据最终得到贷款的概率分别为五分之三、五分之四。所以计算年龄的信息增益，过程如下：<div align="center"><img src="https://xhjiang-1256231208.cos.ap-chengdu.myqcloud.com/hexo-%E5%86%B3%E7%AD%96%E6%A0%91/m_2_13.jpg?q-sign-algorithm=sha1&amp;q-ak=AKIDdNqb8A6wqNlwt72O0cx4OIBpRKBDy6Z8&amp;q-sign-time=1542619737;1542621537&amp;q-key-time=1542619737;1542621537&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=d5bf3b836adeb09ab318fd15052dbe8bc07e534a&amp;x-cos-security-token=bfa078927345c660cac46791c51c6ec6410cacff10001" alt=""></div></p>
+<p>同理，计算其余特征的信息增益g(D,A2)、g(D,A3)和g(D,A4)。分别为：<div align="center"><img src="https://xhjiang-1256231208.cos.ap-chengdu.myqcloud.com/hexo-%E5%86%B3%E7%AD%96%E6%A0%91/m_2_14_m.jpg?q-sign-algorithm=sha1&amp;q-ak=AKIDSl7ywpwES4SEZ18ilCEH0T3bgKFszgXz&amp;q-sign-time=1542619793;1542621593&amp;q-key-time=1542619793;1542621593&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=9c306ce1b2af835bef3aa8cd67e1eb8e67a73ad3&amp;x-cos-security-token=7f741e6a28643d82f9a0cd1483c9474d1efe97c310001" alt=""></div></p>
+<p>最后，比较特征的信息增益，由于特征A3(有自己的房子)的信息增益值最大，所以选择A3作为最优特征。</p>
+<p><strong>4) 编写代码计算信息增益</strong></p>
+<p>我们已经学会了通过公式计算信息增益，接下来编写代码，计算信息增益。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> log</span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">函数说明:计算给定数据集的经验熵(香农熵)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Parameters:</span></span><br><span class="line"><span class="string">    dataSet - 数据集</span></span><br><span class="line"><span class="string">Returns:</span></span><br><span class="line"><span class="string">    shannonEnt - 经验熵(香农熵)</span></span><br><span class="line"><span class="string">Author:</span></span><br><span class="line"><span class="string">    xhjiang</span></span><br><span class="line"><span class="string">Modify:</span></span><br><span class="line"><span class="string">    2018-11-19</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calcShannonEnt</span><span class="params">(dataSet)</span>:</span></span><br><span class="line">    numEntires = len(dataSet)  <span class="comment"># 返回数据集的行数</span></span><br><span class="line">    labelCounts = &#123;&#125;  <span class="comment"># 保存每个标签(Label)出现次数的字典</span></span><br><span class="line">    <span class="keyword">for</span> featVec <span class="keyword">in</span> dataSet:  <span class="comment"># 对每组特征向量进行统计</span></span><br><span class="line">        currentLabel = featVec[<span class="number">-1</span>]  <span class="comment"># 提取标签(Label)信息</span></span><br><span class="line">        <span class="keyword">if</span> currentLabel <span class="keyword">not</span> <span class="keyword">in</span> labelCounts.keys():  <span class="comment"># 如果标签(Label)没有放入统计次数的字典,添加进去</span></span><br><span class="line">            labelCounts[currentLabel] = <span class="number">0</span></span><br><span class="line">        labelCounts[currentLabel] += <span class="number">1</span>  <span class="comment"># Label计数</span></span><br><span class="line">    shannonEnt = <span class="number">0.0</span>  <span class="comment"># 经验熵(香农熵)</span></span><br><span class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> labelCounts:  <span class="comment"># 计算香农熵</span></span><br><span class="line">        prob = float(labelCounts[key]) / numEntires  <span class="comment"># 选择该标签(Label)的概率</span></span><br><span class="line">        shannonEnt -= prob * log(prob, <span class="number">2</span>)  <span class="comment"># 利用公式计算</span></span><br><span class="line">    <span class="keyword">return</span> shannonEnt  <span class="comment"># 返回经验熵(香农熵)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">函数说明:创建测试数据集</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Parameters:</span></span><br><span class="line"><span class="string">    无</span></span><br><span class="line"><span class="string">Returns:</span></span><br><span class="line"><span class="string">    dataSet - 数据集</span></span><br><span class="line"><span class="string">    labels - 分类属性</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">createDataSet</span><span class="params">()</span>:</span></span><br><span class="line">    dataSet = [[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="string">'no'</span>],  <span class="comment"># 数据集</span></span><br><span class="line">               [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="string">'no'</span>],</span><br><span class="line">               [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="string">'yes'</span>],</span><br><span class="line">               [<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="string">'yes'</span>],</span><br><span class="line">               [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="string">'no'</span>],</span><br><span class="line">               [<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="string">'no'</span>],</span><br><span class="line">               [<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="string">'no'</span>],</span><br><span class="line">               [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="string">'yes'</span>],</span><br><span class="line">               [<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="string">'yes'</span>],</span><br><span class="line">               [<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="string">'yes'</span>],</span><br><span class="line">               [<span class="number">2</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="string">'yes'</span>],</span><br><span class="line">               [<span class="number">2</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="string">'yes'</span>],</span><br><span class="line">               [<span class="number">2</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="string">'yes'</span>],</span><br><span class="line">               [<span class="number">2</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="string">'yes'</span>],</span><br><span class="line">               [<span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="string">'no'</span>]]</span><br><span class="line">    labels = [<span class="string">'不放贷'</span>, <span class="string">'放贷'</span>]  <span class="comment"># 分类属性</span></span><br><span class="line">    <span class="keyword">return</span> dataSet, labels  <span class="comment"># 返回数据集和分类属性</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">函数说明:按照给定特征划分数据集</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Parameters:</span></span><br><span class="line"><span class="string">    dataSet - 待划分的数据集</span></span><br><span class="line"><span class="string">    axis - 划分数据集的特征</span></span><br><span class="line"><span class="string">    value - 需要返回的特征的值</span></span><br><span class="line"><span class="string">Returns:</span></span><br><span class="line"><span class="string">    无</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">splitDataSet</span><span class="params">(dataSet, axis, value)</span>:</span></span><br><span class="line">    retDataSet = []  <span class="comment"># 创建返回的数据集列表</span></span><br><span class="line">    <span class="keyword">for</span> featVec <span class="keyword">in</span> dataSet:  <span class="comment"># 遍历数据集</span></span><br><span class="line">        <span class="keyword">if</span> featVec[axis] == value:</span><br><span class="line">            reducedFeatVec = featVec[:axis]  <span class="comment"># 去掉axis特征</span></span><br><span class="line">            reducedFeatVec.extend(featVec[axis + <span class="number">1</span>:])  <span class="comment"># 将符合条件的添加到返回的数据集</span></span><br><span class="line">            retDataSet.append(reducedFeatVec)</span><br><span class="line">    <span class="keyword">return</span> retDataSet  <span class="comment"># 返回划分后的数据集</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">函数说明:选择最优特征</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Parameters:</span></span><br><span class="line"><span class="string">    dataSet - 数据集</span></span><br><span class="line"><span class="string">Returns:</span></span><br><span class="line"><span class="string">    bestFeature - 信息增益最大的(最优)特征的索引值</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">chooseBestFeatureToSplit</span><span class="params">(dataSet)</span>:</span></span><br><span class="line">    numFeatures = len(dataSet[<span class="number">0</span>]) - <span class="number">1</span>  <span class="comment"># 特征数量</span></span><br><span class="line">    baseEntropy = calcShannonEnt(dataSet)  <span class="comment"># 计算数据集的香农熵</span></span><br><span class="line">    bestInfoGain = <span class="number">0.0</span>  <span class="comment"># 信息增益</span></span><br><span class="line">    bestFeature = <span class="number">-1</span>  <span class="comment"># 最优特征的索引值</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(numFeatures):  <span class="comment"># 遍历所有特征</span></span><br><span class="line">        <span class="comment"># 获取dataSet的第i个所有特征</span></span><br><span class="line">        featList = [example[i] <span class="keyword">for</span> example <span class="keyword">in</span> dataSet]</span><br><span class="line">        uniqueVals = set(featList)  <span class="comment"># 创建set集合&#123;&#125;,元素不可重复</span></span><br><span class="line">        newEntropy = <span class="number">0.0</span>  <span class="comment"># 经验条件熵</span></span><br><span class="line">        <span class="keyword">for</span> value <span class="keyword">in</span> uniqueVals:  <span class="comment"># 计算信息增益</span></span><br><span class="line">            subDataSet = splitDataSet(dataSet, i, value)  <span class="comment"># subDataSet划分后的子集</span></span><br><span class="line">            prob = len(subDataSet) / float(len(dataSet))  <span class="comment"># 计算子集的概率</span></span><br><span class="line">            newEntropy += prob * calcShannonEnt(subDataSet)  <span class="comment"># 根据公式计算经验条件熵</span></span><br><span class="line">        infoGain = baseEntropy - newEntropy  <span class="comment"># 信息增益</span></span><br><span class="line">        print(<span class="string">"第%d个特征的增益为%.3f"</span> % (i, infoGain))  <span class="comment"># 打印每个特征的信息增益</span></span><br><span class="line">        <span class="keyword">if</span> (infoGain &gt; bestInfoGain):  <span class="comment"># 计算信息增益</span></span><br><span class="line">            bestInfoGain = infoGain  <span class="comment"># 更新信息增益，找到最大的信息增益</span></span><br><span class="line">            bestFeature = i  <span class="comment"># 记录信息增益最大的特征的索引值</span></span><br><span class="line">    <span class="keyword">return</span> bestFeature  <span class="comment"># 返回信息增益最大的特征的索引值</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    dataSet, features = createDataSet()</span><br><span class="line">    print(<span class="string">"最优特征索引值:"</span> + str(chooseBestFeatureToSplit(dataSet)))</span><br></pre></td></tr></table></figure>
+<p>splitDataSet函数是用来选择各个特征的子集的，比如选择年龄(第0个特征)的青年(用0代表)的自己，我们可以调用splitDataSet(dataSet,0,0)这样返回的子集就是年龄为青年的5个数据集。chooseBestFeatureToSplit是选择选择最优特征的函数。运行代码结果如下：<div align="center"><img src="https://xhjiang-1256231208.cos.ap-chengdu.myqcloud.com/hexo-%E5%86%B3%E7%AD%96%E6%A0%91/m_2_17.jpg?q-sign-algorithm=sha1&amp;q-ak=AKIDXFJonnnEnE77YzSjHGXnVgA71i3hSz7C&amp;q-sign-time=1542620152;1542621952&amp;q-key-time=1542620152;1542621952&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=72e63ad8f9caf9c1aaded1fc2c462ac8a7d5c4b5&amp;x-cos-security-token=08d3672a0cc604a03b6686b7b2ebd4dc9c6dca9c10001" alt=""></div></p>
+<p>对比我们自己计算的结果，发现结果完全正确！最优特征的索引值为2，也就是特征A3(有自己的房子)。</p>
+<h2 id="决策树生成和修剪"><a href="#决策树生成和修剪" class="headerlink" title="决策树生成和修剪"></a>决策树生成和修剪</h2><p>我们已经学习了从数据集构造决策树算法所需要的子功能模块，包括经验熵的计算和最优特征的选择，其工作原理如下：得到原始数据集，然后基于最好的属性值划分数据集，由于特征值可能多于两个，因此可能存在大于两个分支的数据集划分。第一次划分之后，数据集被向下传递到树的分支的下一个结点。在这个结点上，我们可以再次划分数据。因此我们可以采用递归的原则处理数据集。</p>
+<p>构建决策树的算法有很多，比如<strong>C4.5、ID3和CART</strong>，这些算法在运行时并不总是在每次划分数据分组时都会消耗特征。由于特征数目并不是每次划分数据分组时都减少，因此这些算法在实际使用时可能引起一定的问题。目前我们并不需要考虑这个问题，只需要在算法开始运行前计算列的数目，查看算法是否使用了所有属性即可。</p>
+<p>决策树生成算法递归地产生决策树，直到不能继续下去未为止。这样产生的树往往对训练数据的分类很准确，但对未知的测试数据的分类却没有那么准确，即出现过拟合现象。过拟合的原因在于学习时过多地考虑如何提高对训练数据的正确分类，从而构建出过于复杂的决策树。解决这个问题的办法是考虑决策树的复杂度，对已生成的决策树进行简化。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本篇文章讲解了如何计算数据集的经验熵和如何选择最优特征作为分类特征。决策树如何生成、修剪、可视化，以及整体实例练习，会在后续的文章中进行讲解。</p>
+
+      
+    </div>
+	
+    
+
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+	
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>difcreate</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://xhjiang.tech/2018/11/19/机器学习-决策树原理及实战/" title="机器学习-决策树原理及实战(一)">https://xhjiang.tech/2018/11/19/机器学习-决策树原理及实战/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"><i class="fa fa-tag"></i> 机器学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/19/leetcode刷题-Minimum-Depth-of-Binary-Tree/" rel="next" title="leetcode刷题-Minimum Depth of Binary Tree">
+                <i class="fa fa-chevron-left"></i> leetcode刷题-Minimum Depth of Binary Tree
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="your uid"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="difcreate">
+            
+              <p class="site-author-name" itemprop="name">difcreate</p>
+              <p class="site-description motion-element" itemprop="description">学习使我快乐</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/difcreate" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:785925474@qq.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#机器学习-决策树原理及实战-一"><span class="nav-number">1.</span> <span class="nav-text">机器学习-决策树原理及实战(一)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#决策树"><span class="nav-number">1.1.</span> <span class="nav-text">决策树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-决策树的构建的准备工作"><span class="nav-number">1.2.</span> <span class="nav-text">2.决策树的构建的准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-特征选择"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 特征选择</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#决策树生成和修剪"><span class="nav-number">1.3.</span> <span class="nav-text">决策树生成和修剪</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">difcreate</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+   本站访客数:<span id="busuanzi_value_site_uv"></span>
+  </span>
+  </div>
+  
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共30.8k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '2018/11/19/机器学习-决策树原理及实战/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
