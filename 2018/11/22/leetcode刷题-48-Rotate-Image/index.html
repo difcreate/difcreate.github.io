@@ -115,21 +115,18 @@
 
 
 
-  <meta name="description" content="AmbientGAN:Generative models from lossy measurements 环境GAN：从有损测度中生成模型摘要：生成模型提供了一种对于复杂分布中结构进行建模的方式，并且已经被证明可用于很多实际感兴趣的任务中。但是，现在训练生成模型的技术需要访问完全可观测（fully-observed）的样本。在很多场景中，获取完全可观测的样本是昂贵的甚至不可能的，但是获取部分的有噪">
-<meta name="keywords" content="深度学习,GAN,科研">
+  <meta name="description" content="48. Rotate Image-旋转图像 描述：给定一个 n × n 的二维矩阵表示一个图像。 将图像顺时针旋转 90 度。 说明： 你必须在原地旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要使用另一个矩阵来旋转图像。 示例 1:123456789101112131415给定 matrix = [  [1,2,3],  [4,5,6],  [7,8,9]],原地旋转输入矩阵，使其变为:[">
+<meta name="keywords" content="leetcode,数组">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AmbientGAN一文总结与摘录">
-<meta property="og:url" content="https://xhjiang.tech/2018/11/07/AmbientGAN一文总结与摘录/index.html">
+<meta property="og:title" content="leetcode刷题-48. Rotate Image">
+<meta property="og:url" content="https://xhjiang.tech/2018/11/22/leetcode刷题-48-Rotate-Image/index.html">
 <meta property="og:site_name" content="difcreate&#39;s blog">
-<meta property="og:description" content="AmbientGAN:Generative models from lossy measurements 环境GAN：从有损测度中生成模型摘要：生成模型提供了一种对于复杂分布中结构进行建模的方式，并且已经被证明可用于很多实际感兴趣的任务中。但是，现在训练生成模型的技术需要访问完全可观测（fully-observed）的样本。在很多场景中，获取完全可观测的样本是昂贵的甚至不可能的，但是获取部分的有噪">
+<meta property="og:description" content="48. Rotate Image-旋转图像 描述：给定一个 n × n 的二维矩阵表示一个图像。 将图像顺时针旋转 90 度。 说明： 你必须在原地旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要使用另一个矩阵来旋转图像。 示例 1:123456789101112131415给定 matrix = [  [1,2,3],  [4,5,6],  [7,8,9]],原地旋转输入矩阵，使其变为:[">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://xhjiang.tech/2018/11/07/AmbientGAN一文总结与摘录/img/ambient_p1.png">
-<meta property="og:image" content="https://xhjiang.tech/2018/11/07/AmbientGAN一文总结与摘录/img/ambient_p2.png">
-<meta property="og:updated_time" content="2018-11-12T07:24:11.187Z">
+<meta property="og:updated_time" content="2018-11-22T13:35:52.877Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AmbientGAN一文总结与摘录">
-<meta name="twitter:description" content="AmbientGAN:Generative models from lossy measurements 环境GAN：从有损测度中生成模型摘要：生成模型提供了一种对于复杂分布中结构进行建模的方式，并且已经被证明可用于很多实际感兴趣的任务中。但是，现在训练生成模型的技术需要访问完全可观测（fully-observed）的样本。在很多场景中，获取完全可观测的样本是昂贵的甚至不可能的，但是获取部分的有噪">
-<meta name="twitter:image" content="https://xhjiang.tech/2018/11/07/AmbientGAN一文总结与摘录/img/ambient_p1.png">
+<meta name="twitter:title" content="leetcode刷题-48. Rotate Image">
+<meta name="twitter:description" content="48. Rotate Image-旋转图像 描述：给定一个 n × n 的二维矩阵表示一个图像。 将图像顺时针旋转 90 度。 说明： 你必须在原地旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要使用另一个矩阵来旋转图像。 示例 1:123456789101112131415给定 matrix = [  [1,2,3],  [4,5,6],  [7,8,9]],原地旋转输入矩阵，使其变为:[">
 
 
 
@@ -138,7 +135,7 @@
 
 
 
-  <link rel="canonical" href="https://xhjiang.tech/2018/11/07/AmbientGAN一文总结与摘录/">
+  <link rel="canonical" href="https://xhjiang.tech/2018/11/22/leetcode刷题-48-Rotate-Image/">
 
 
 
@@ -148,7 +145,7 @@
   };
 </script>
 
-  <title>AmbientGAN一文总结与摘录 | difcreate's blog</title>
+  <title>leetcode刷题-48. Rotate Image | difcreate's blog</title>
   
 
 
@@ -323,7 +320,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xhjiang.tech/2018/11/07/AmbientGAN一文总结与摘录/">
+    <link itemprop="mainEntityOfPage" href="https://xhjiang.tech/2018/11/22/leetcode刷题-48-Rotate-Image/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="difcreate">
@@ -340,7 +337,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">AmbientGAN一文总结与摘录
+          <h1 class="post-title" itemprop="name headline">leetcode刷题-48. Rotate Image
               
             
           </h1>
@@ -365,24 +362,12 @@
                 
               
 
-              <time title="创建时间：2018-11-07 22:40:17" itemprop="dateCreated datePublished" datetime="2018-11-07T22:40:17+08:00">2018-11-07</time>
+              <time title="创建时间：2018-11-22 21:27:41 / 修改时间：21:35:52" itemprop="dateCreated datePublished" datetime="2018-11-22T21:27:41+08:00">2018-11-22</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-11-12 15:24:11" itemprop="dateModified" datetime="2018-11-12T15:24:11+08:00">2018-11-12</time>
               
             
           </span>
@@ -399,21 +384,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a></span>
 
                 
                 
                   ，
                 
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/深度学习/GAN/" itemprop="url" rel="index"><span itemprop="name">GAN</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/深度学习/GAN/科研/" itemprop="url" rel="index"><span itemprop="name">科研</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/leetcode/数组/" itemprop="url" rel="index"><span itemprop="name">数组</span></a></span>
 
                 
                 
@@ -447,19 +425,16 @@
       
 
       
-        <h1 id="AmbientGAN-Generative-models-from-lossy-measurements"><a href="#AmbientGAN-Generative-models-from-lossy-measurements" class="headerlink" title="AmbientGAN:Generative models from lossy measurements"></a>AmbientGAN:Generative models from lossy measurements</h1><hr>
-<h2 id="环境GAN：从有损测度中生成模型"><a href="#环境GAN：从有损测度中生成模型" class="headerlink" title="环境GAN：从有损测度中生成模型"></a>环境GAN：从有损测度中生成模型</h2><p><strong>摘要：</strong><br>生成模型提供了一种对于复杂分布中结构进行建模的方式，并且已经被证明可用于很多实际感兴趣的任务中。但是，现在训练生成模型的技术需要访问完全可观测（fully-observed）的样本。在很多场景中，获取完全可观测的样本是昂贵的甚至不可能的，但是获取部分的有噪声的观测样本是比较实惠的。我们考虑在只给予感兴趣的分布的样本的有损失观测情况下，学习一个隐式的生成模型的任务。我们证明了即使在测度模型的某个类的每个样本信息丢失的情况下，真正隐藏的分布也可以被恢复。基于此，我们提出了一种我们称之为环境GAN（<strong>AmbientGAN</strong>）的新的训练生成对抗网络的方法。在三个基准数据集和对于很多测度模型而言，我们证实了方法实质性的定性和定量的改进。用我们方法训练的生成模型可以获得比基准高2-4倍的初始分数（inception score）。</p>
+        <h1 id="48-Rotate-Image-旋转图像"><a href="#48-Rotate-Image-旋转图像" class="headerlink" title="48. Rotate Image-旋转图像"></a>48. Rotate Image-旋转图像</h1><hr>
+<h2 id="描述："><a href="#描述：" class="headerlink" title="描述："></a>描述：</h2><p>给定一个 n × n 的二维矩阵表示一个图像。</p>
+<p>将图像顺时针旋转 90 度。</p>
+<p><strong>说明：</strong></p>
+<p>你必须在原地旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要使用另一个矩阵来旋转图像。</p>
+<p>示例 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">给定 matrix = </span><br><span class="line"></span><br><span class="line">[</span><br><span class="line">  [1,2,3],</span><br><span class="line">  [4,5,6],</span><br><span class="line">  [7,8,9]</span><br><span class="line">],</span><br><span class="line"></span><br><span class="line">原地旋转输入矩阵，使其变为:</span><br><span class="line"></span><br><span class="line">[</span><br><span class="line">  [7,4,1],</span><br><span class="line">  [8,5,2],</span><br><span class="line">  [9,6,3]</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>示例 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">给定 matrix =</span><br><span class="line">[</span><br><span class="line">  [ 5, 1, 9,11],</span><br><span class="line">  [ 2, 4, 8,10],</span><br><span class="line">  [13, 3, 6, 7],</span><br><span class="line">  [15,14,12,16]</span><br><span class="line">], </span><br><span class="line"></span><br><span class="line">原地旋转输入矩阵，使其变为:</span><br><span class="line"></span><br><span class="line">[</span><br><span class="line">  [15,13, 2, 5],</span><br><span class="line">  [14, 3, 4, 1],</span><br><span class="line">  [12, 6, 8, 9],</span><br><span class="line">  [16, 7,10,11]</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
 <hr>
-<p>#原理</p>
-<p>本文提出的模型很简单，就是生成器需要去拟合的数据分布并不可直接得到，但是知道经过一些处理后得到的原数据的有损数据，并且知道这个处理的过程，于是采用有损数据，并将处理过程整合到GAN的架构中，获得的就是这篇文章提出的AmbientGAN的架构，其具体架构如图所示：<div align="center"><img src="img/ambient_p1.png" alt=""></div><br>其中Y是原始数据有损处理以后的结果数据，而黄色的fθ函数就是有损处理的映射函数，因而这个AmbientGAN与GAN之间的区别就在于分辨器D需要分辨输入的有损数据来自于真实的有损数据Yr，还是生成的数据Xg经过f函数映射后得到的Yg。因此，对应的AmbientGAN的loss修改为如下形式：<div align="center"><img src="img/ambient_p2.png" alt=""></div></p>
-<p>其中，q(x)表示的是质量函数（按照理解，就是loss函数，在原始的GAN中，这个函数就是q(x)=log(x)）。而fθ函数，就是模拟的测度函数，就是图中黄色部分。在论文中，这个函数要求对所有的输入，该函数可导。</p>
-<hr>
-<p>#实验</p>
-<p>然后实验部分用了下面几种测量模型：<br>Block-Pixels：模糊图片，对于0像素，使用其周围的像素来填充，文中采用的是total variation inpainting的方法。<br>Convolve+Noise：Wiener deconvolution的方法处理图片作为近似。<br>Block-Patch：Navier Stokes based inpainting的方法来填充0像素。还有诸如Keep-patch，Pad-Rotate-Project和Pad-Rotate-Project-θ等等模型。没有其他的方法进行近似估计逆值，因而在试验中，作者只提供了AmbientGAN的结果。最后训练效果除了一个降维测度模型中，AmbientGAN没有产生较好的实验结果，其他的实验结果都是比baseline在观感上要好的。</p>
-<hr>
-<p>#总结</p>
-<p>这篇文章的网络架构很简单，有损的样本，得到有损样本的处理过程，在这种情况下，将得到有损样本的处理过程整合到GAN中，以此得到AmbientGAN，来在只能得到有损样本和有损样本的处理过程的情况下，学习从不完整数据中，生成完整数据的一个生成模型。虽然整体的约束条件比较苛刻，但是有论文的审核者提出，这或许是为去噪模型提供了一种思路，这样的模型可能可以用来去噪或者还原图片。</p>
-
+<p>代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间复杂度O(n),空间复杂度O(1)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; matrix)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> <span class="keyword">int</span> n = matrix.size();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) <span class="comment">// 沿着副对角线反转</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n - i; ++j)</span><br><span class="line">                swap(matrix[i][j], matrix[n - <span class="number">1</span> - j][n - <span class="number">1</span> - i]);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n / <span class="number">2</span>; ++i) <span class="comment">// 沿着水平中线反转</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; ++j)</span><br><span class="line">                swap(matrix[i][j], matrix[n - <span class="number">1</span> - i][j]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
       
     </div>
 	
@@ -490,7 +465,7 @@
     <strong>本文作者： </strong>difcreate</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://xhjiang.tech/2018/11/07/AmbientGAN一文总结与摘录/" title="AmbientGAN一文总结与摘录">https://xhjiang.tech/2018/11/07/AmbientGAN一文总结与摘录/</a>
+    <a href="https://xhjiang.tech/2018/11/22/leetcode刷题-48-Rotate-Image/" title="leetcode刷题-48. Rotate Image">https://xhjiang.tech/2018/11/22/leetcode刷题-48-Rotate-Image/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
@@ -503,11 +478,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/深度学习/" rel="tag"><i class="fa fa-tag"></i> 深度学习</a>
+            <a href="/tags/leetcode/" rel="tag"><i class="fa fa-tag"></i> leetcode</a>
           
-            <a href="/tags/GAN/" rel="tag"><i class="fa fa-tag"></i> GAN</a>
-          
-            <a href="/tags/科研/" rel="tag"><i class="fa fa-tag"></i> 科研</a>
+            <a href="/tags/数组/" rel="tag"><i class="fa fa-tag"></i> 数组</a>
           
         </div>
       
@@ -520,8 +493,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/06/生成对抗网络-GAN-原理理解/" rel="next" title="生成对抗网络(GAN)原理理解">
-                <i class="fa fa-chevron-left"></i> 生成对抗网络(GAN)原理理解
+              <a href="/2018/11/22/leetcode刷题-12-Integer-to-Roman/" rel="next" title="leetcode刷题-12. Integer to Roman">
+                <i class="fa fa-chevron-left"></i> leetcode刷题-12. Integer to Roman
               </a>
             
           </div>
@@ -530,8 +503,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/11/12/leetcode刷题-Two-Sum/" rel="prev" title="leetcode刷题-1.Two Sum">
-                leetcode刷题-1.Two Sum <i class="fa fa-chevron-right"></i>
+              <a href="/2018/11/22/leetcode刷题-121-Best-Time-to-Buy-and-Sell-Stock/" rel="prev" title="leetcode刷题-121. Best Time to Buy and Sell Stock">
+                leetcode刷题-121. Best Time to Buy and Sell Stock <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -778,7 +751,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AmbientGAN-Generative-models-from-lossy-measurements"><span class="nav-number">1.</span> <span class="nav-text">AmbientGAN:Generative models from lossy measurements</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境GAN：从有损测度中生成模型"><span class="nav-number">1.1.</span> <span class="nav-text">环境GAN：从有损测度中生成模型</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#48-Rotate-Image-旋转图像"><span class="nav-number">1.</span> <span class="nav-text">48. Rotate Image-旋转图像</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#描述："><span class="nav-number">1.1.</span> <span class="nav-text">描述：</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -966,7 +939,7 @@
   
     <script type="text/javascript">
       window.livereOptions = {
-        refer: '2018/11/07/AmbientGAN一文总结与摘录/'
+        refer: '2018/11/22/leetcode刷题-48-Rotate-Image/'
       };
       (function(d, s) {
         var j, e = d.getElementsByTagName(s)[0];
