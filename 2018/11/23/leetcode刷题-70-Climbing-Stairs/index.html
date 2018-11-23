@@ -115,17 +115,18 @@
 
 
 
-  <meta name="description" content="关于我 我，一个正在学习深度学习算法的小菜鸟，总是相信有好运会眷顾我；很喜欢一句话“偷得浮生半日闲”，希望自己以后能在码代码的时候还能偶尔偷闲享受下生活。 研究方向：无监督学习下的超分辨图像去躁   教育经历2017-至今 西安交通大学 软件工程2013-2017 江西财经大学 软件工程  联系方式Email： 785925474@qq.comGiuhub: https://github.com/">
-<meta property="og:type" content="website">
-<meta property="og:title" content="About">
-<meta property="og:url" content="https://xhjiang.tech/about/index.html">
+  <meta name="description" content="70. Climbing Stairs-爬楼梯 描述：假设你正在爬楼梯。需要 n 阶你才能到达楼顶。 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？ 注意：给定 n 是一个正整数。 示例 1：12345输入： 2输出： 2解释： 有两种方法可以爬到楼顶。1.  1 阶 + 1 阶2.  2 阶 示例 2：123456输入： 3输出： 3解释： 有三种方法可以爬到楼顶。1.">
+<meta name="keywords" content="leetcode,动态规划">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leetcode刷题-70. Climbing Stairs">
+<meta property="og:url" content="https://xhjiang.tech/2018/11/23/leetcode刷题-70-Climbing-Stairs/index.html">
 <meta property="og:site_name" content="difcreate&#39;s blog">
-<meta property="og:description" content="关于我 我，一个正在学习深度学习算法的小菜鸟，总是相信有好运会眷顾我；很喜欢一句话“偷得浮生半日闲”，希望自己以后能在码代码的时候还能偶尔偷闲享受下生活。 研究方向：无监督学习下的超分辨图像去躁   教育经历2017-至今 西安交通大学 软件工程2013-2017 江西财经大学 软件工程  联系方式Email： 785925474@qq.comGiuhub: https://github.com/">
+<meta property="og:description" content="70. Climbing Stairs-爬楼梯 描述：假设你正在爬楼梯。需要 n 阶你才能到达楼顶。 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？ 注意：给定 n 是一个正整数。 示例 1：12345输入： 2输出： 2解释： 有两种方法可以爬到楼顶。1.  1 阶 + 1 阶2.  2 阶 示例 2：123456输入： 3输出： 3解释： 有三种方法可以爬到楼顶。1.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-07T14:59:02.980Z">
+<meta property="og:updated_time" content="2018-11-23T13:52:11.267Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="About">
-<meta name="twitter:description" content="关于我 我，一个正在学习深度学习算法的小菜鸟，总是相信有好运会眷顾我；很喜欢一句话“偷得浮生半日闲”，希望自己以后能在码代码的时候还能偶尔偷闲享受下生活。 研究方向：无监督学习下的超分辨图像去躁   教育经历2017-至今 西安交通大学 软件工程2013-2017 江西财经大学 软件工程  联系方式Email： 785925474@qq.comGiuhub: https://github.com/">
+<meta name="twitter:title" content="leetcode刷题-70. Climbing Stairs">
+<meta name="twitter:description" content="70. Climbing Stairs-爬楼梯 描述：假设你正在爬楼梯。需要 n 阶你才能到达楼顶。 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？ 注意：给定 n 是一个正整数。 示例 1：12345输入： 2输出： 2解释： 有两种方法可以爬到楼顶。1.  1 阶 + 1 阶2.  2 阶 示例 2：123456输入： 3输出： 3解释： 有三种方法可以爬到楼顶。1.">
 
 
 
@@ -134,7 +135,7 @@
 
 
 
-  <link rel="canonical" href="https://xhjiang.tech/about/">
+  <link rel="canonical" href="https://xhjiang.tech/2018/11/23/leetcode刷题-70-Climbing-Stairs/">
 
 
 
@@ -144,7 +145,7 @@
   };
 </script>
 
-  <title>About | difcreate's blog</title>
+  <title>leetcode刷题-70. Climbing Stairs | difcreate's blog</title>
   
 
 
@@ -266,7 +267,7 @@
         
         
           
-          <li class="menu-item menu-item-about menu-item-active">
+          <li class="menu-item menu-item-about">
     <a href="/about/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
   </li>
@@ -299,79 +300,230 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xhjiang.tech/2018/11/23/leetcode刷题-70-Climbing-Stairs/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="difcreate">
+      <meta itemprop="description" content="学习使我快乐">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="difcreate's blog">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">About</h1>
-
-<div class="post-meta">
-  
-  
-
-
-
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <h1 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h1><blockquote>
-<p>我，一个正在学习深度学习算法的小菜鸟，总是相信有好运会眷顾我；<br><br>很喜欢一句话“偷得浮生半日闲”，希望自己以后能在码代码的时候还能偶尔偷闲享受下生活。</p>
-<p>研究方向：无监督学习下的超分辨图像去躁</p>
+          <h1 class="post-title" itemprop="name headline">leetcode刷题-70. Climbing Stairs
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-23 21:41:29 / 修改时间：21:52:11" itemprop="dateCreated datePublished" datetime="2018-11-23T21:41:29+08:00">2018-11-23</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/leetcode/动态规划/" itemprop="url" rel="index"><span itemprop="name">动态规划</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="70-Climbing-Stairs-爬楼梯"><a href="#70-Climbing-Stairs-爬楼梯" class="headerlink" title="70. Climbing Stairs-爬楼梯"></a>70. Climbing Stairs-爬楼梯</h1><hr>
+<h2 id="描述："><a href="#描述：" class="headerlink" title="描述："></a>描述：</h2><p>假设你正在爬楼梯。需要 n 阶你才能到达楼顶。</p>
+<p>每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p>
+<p>注意：给定 n 是一个正整数。</p>
+<p>示例 1：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入： 2</span><br><span class="line">输出： 2</span><br><span class="line">解释： 有两种方法可以爬到楼顶。</span><br><span class="line">1.  1 阶 + 1 阶</span><br><span class="line">2.  2 阶</span><br></pre></td></tr></table></figure></p>
+<p>示例 2：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入： 3</span><br><span class="line">输出： 3</span><br><span class="line">解释： 有三种方法可以爬到楼顶。</span><br><span class="line">1.  1 阶 + 1 阶 + 1 阶</span><br><span class="line">2.  1 阶 + 2 阶</span><br><span class="line">3.  2 阶 + 1 阶</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p><strong>思路：</strong></p>
+<p>这道题目实际上跟<strong>斐波那契数列</strong>非常相似，假设梯子有n层，那么如何爬到第n层呢，因为每次只能爬1或2步，那么爬到第n层的方法要么是从第n-1层一步上来的，要不就是从n-2层2步上来的，所以递推公式非常容易的就得出了：<strong>dp[n] = dp[n-1] + dp[n-2]</strong>。 由于斐波那契额数列的求解可以用递归，所以最先尝试了递归，拿到OJ上运行，显示Time Limit Exceeded，就是说运行时间超了，因为递归计算了很多分支，效率很低，这里需要用动态规划 (Dynamic Programming) 来提高效率，代码如下：</p>
+<p>代码一：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">climbStairs</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(n);</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>; dp[<span class="number">1</span>] = <span class="number">2</span>;</span><br><span class="line">        <span class="comment">//类似于斐波那契数列</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            dp[i] = dp[i - <span class="number">1</span>] + dp[i - <span class="number">2</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp.back();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>另外：</strong></p>
+<blockquote>
+<p>我们可以对空间进行进一步优化，我们只用两个整型变量a和b来存储过程值，首先将a+b的值赋给b，然后a赋值为原来的b，所以应该赋值为b-a即可。这样就模拟了上面累加的过程，而不用存储所有的值。</p>
 </blockquote>
-<hr>
-<h1 id="教育经历"><a href="#教育经历" class="headerlink" title="教育经历"></a>教育经历</h1><p><strong>2017-至今 西安交通大学 软件工程</strong><br><br><strong>2013-2017 江西财经大学 软件工程</strong></p>
-<hr>
-<h1 id="联系方式"><a href="#联系方式" class="headerlink" title="联系方式"></a>联系方式</h1><p><em>Email：</em> <a href="mailto:785925474@qq.com" target="_blank" rel="noopener">785925474@qq.com</a><br><br><em>Giuhub:</em> <a href="https://github.com/difcreate" target="_blank" rel="noopener">https://github.com/difcreate</a> </p>
-
-        
-      </div>
-      
-      
+<p>代码二：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">climbStairs</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">1</span>, b = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (n--) &#123;</span><br><span class="line">            b += a;</span><br><span class="line">            a = b - a;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
       
     </div>
+	
     
 
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+	
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>difcreate</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://xhjiang.tech/2018/11/23/leetcode刷题-70-Climbing-Stairs/" title="leetcode刷题-70. Climbing Stairs">https://xhjiang.tech/2018/11/23/leetcode刷题-70-Climbing-Stairs/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/leetcode/" rel="tag"><i class="fa fa-tag"></i> leetcode</a>
+          
+            <a href="/tags/动态规划/" rel="tag"><i class="fa fa-tag"></i> 动态规划</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/23/leetcode刷题-9-Palindrome-Number/" rel="next" title="leetcode刷题-9. Palindrome Number">
+                <i class="fa fa-chevron-left"></i> leetcode刷题-9. Palindrome Number
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
 
 
-    
-    
-    
   </div>
 
 
@@ -602,7 +754,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关于我"><span class="nav-number">1.</span> <span class="nav-text">关于我</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#教育经历"><span class="nav-number">2.</span> <span class="nav-text">教育经历</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#联系方式"><span class="nav-number">3.</span> <span class="nav-text">联系方式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#70-Climbing-Stairs-爬楼梯"><span class="nav-number">1.</span> <span class="nav-text">70. Climbing Stairs-爬楼梯</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#描述："><span class="nav-number">1.1.</span> <span class="nav-text">描述：</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -790,7 +942,7 @@
   
     <script type="text/javascript">
       window.livereOptions = {
-        refer: 'about/index.html'
+        refer: '2018/11/23/leetcode刷题-70-Climbing-Stairs/'
       };
       (function(d, s) {
         var j, e = d.getElementsByTagName(s)[0];
