@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xhjiang.tech/"/>
-  <updated>2018-11-27T14:00:00.433Z</updated>
+  <updated>2018-11-28T15:01:41.408Z</updated>
   <id>https://xhjiang.tech/</id>
   
   <author>
@@ -15,6 +15,64 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode刷题-11. Container With Most Water</title>
+    <link href="https://xhjiang.tech/2018/11/28/leetcode%E5%88%B7%E9%A2%98-11-Container-With-Most-Water/"/>
+    <id>https://xhjiang.tech/2018/11/28/leetcode刷题-11-Container-With-Most-Water/</id>
+    <published>2018-11-28T14:53:05.000Z</published>
+    <updated>2018-11-28T15:01:41.408Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="11-Container-With-Most-Water-盛最多水的容器"><a href="#11-Container-With-Most-Water-盛最多水的容器" class="headerlink" title="11. Container With Most Water-盛最多水的容器"></a>11. Container With Most Water-盛最多水的容器</h1><hr><h2 id="描述："><a href="#描述：" class="headerlink" title="描述："></a>描述：</h2><p>给定 n 个非负整数 a1，a2，…，an，每个数代表坐标中的一个点 (i, ai) 。在坐标内画 n 条垂直线，垂直线 i 的两个端点分别为 (i, ai) 和 (i, 0)。找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。</p><p><strong>说明：</strong> 你不能倾斜容器，且 n 的值至少为 2。<div align="center"><br><img src="https://xhjiang-1256231208.cos.ap-chengdu.myqcloud.com/leetcode/question_11.jpg?q-sign-algorithm=sha1&amp;q-ak=AKIDAo1tspwphcTrXVj2W29WzZffzFfpa5c3&amp;q-sign-time=1543417200;1543419000&amp;q-key-time=1543417200;1543419000&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=88a6e762f29499510c18505700752a1f18c91853&amp;x-cos-security-token=2bc82588c9883bce6d8e820373aa29a8543eb06010001" alt="图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。"></div></p><p>图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。</p><p>示例:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [1,8,6,2,5,4,8,3,7]</span><br><span class="line">输出: 49</span><br></pre></td></tr></table></figure></p><p><strong>思路：</strong></p><p>考虑用<strong>双指针</strong>法解题。维护两个指针f、l分别指向数组左右两端，则f和l构成的容器盛水体积计算公式为<strong>min(height[f],height[l])*(l-f)</strong>。可以看出盛水体积取决于容器边中较小的数字和容器底长度。若移动较大的数字，则容器底长度会变小，而盛水的最大高度不变，所以盛水体积不会变更大。因此需要移动两数中较小的数字，这样若中间出现特别大的数字，则有可能提高盛水体积。然后每次移动完更新此时的最大盛水体积，直到两指针相遇。</p><p>代码：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxArea</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> f = <span class="number">0</span>,l = height.size() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> max = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">while</span>(f &lt; l)&#123;</span><br><span class="line">            <span class="keyword">int</span> area = min(height[f],height[l])*(l-f);</span><br><span class="line">            <span class="keyword">if</span>(area &gt; max)</span><br><span class="line">                max = area;</span><br><span class="line">            <span class="keyword">if</span>(height[f]&lt;height[l])</span><br><span class="line">                f++;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                l--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;11-Container-With-Most-Water-盛最多水的容器&quot;&gt;&lt;a href=&quot;#11-Container-With-Most-Water-盛最多水的容器&quot; class=&quot;headerlink&quot; title=&quot;11. Container With M
+      
+    
+    </summary>
+    
+      <category term="leetcode" scheme="https://xhjiang.tech/categories/leetcode/"/>
+    
+      <category term="数组" scheme="https://xhjiang.tech/categories/leetcode/%E6%95%B0%E7%BB%84/"/>
+    
+    
+      <category term="leetcode" scheme="https://xhjiang.tech/tags/leetcode/"/>
+    
+      <category term="数组" scheme="https://xhjiang.tech/tags/%E6%95%B0%E7%BB%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>leetcode刷题-62. Unique Paths</title>
+    <link href="https://xhjiang.tech/2018/11/27/leetcode%E5%88%B7%E9%A2%98-62-Unique-Paths/"/>
+    <id>https://xhjiang.tech/2018/11/27/leetcode刷题-62-Unique-Paths/</id>
+    <published>2018-11-27T14:07:31.000Z</published>
+    <updated>2018-11-28T14:37:02.840Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="62-Unique-Paths-不同路径"><a href="#62-Unique-Paths-不同路径" class="headerlink" title="62. Unique Paths-不同路径"></a>62. Unique Paths-不同路径</h1><hr><h2 id="描述："><a href="#描述：" class="headerlink" title="描述："></a>描述：</h2><p>一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。</p><p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为“Finish”）。</p><p>问总共有多少条不同的路径？</p><p>说明：m 和 n 的值均不超过 100。</p><p>示例 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入: m = 3, n = 2</span><br><span class="line">输出: 3</span><br><span class="line">解释:</span><br><span class="line">从左上角开始，总共有 3 条路径可以到达右下角。</span><br><span class="line">1. 向右 -&gt; 向右 -&gt; 向下</span><br><span class="line">2. 向右 -&gt; 向下 -&gt; 向右</span><br><span class="line">3. 向下 -&gt; 向右 -&gt; 向右</span><br></pre></td></tr></table></figure></p><p>示例 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: m = 7, n = 3</span><br><span class="line">输出: 28</span><br></pre></td></tr></table></figure></p><hr><p><strong>思路：</strong></p><p>这道题跟之前那道 Climbing Stairs 很类似，那道题是说可以每次能爬一格或两格，问到达顶部的所有不同爬法的个数。而这道题是每次可以向下走或者向右走，求到达最右下角的所有不同走法的个数。那么跟爬梯子问题一样，我们需要用<strong>动态规划</strong>来解，我们可以维护一个二维数组nums，其中nums[i][j]表示到当前位置不同的走法的个数，然后可以得到<strong>状态转移方程: nums[i][j] = nums[i - 1][j] + nums[i][j - 1]</strong>。</p><p>代码一：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间复杂度O(m*n),空间复杂度O(m*n)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">uniquePaths</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; num(n,<span class="number">1</span>);</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; nums(m,num);</span><br><span class="line">        <span class="comment">//nums[i][j] = nums[i - 1][j] + nums[i][j - 1];</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span> ;i &lt; m;i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(i == <span class="number">0</span> || j == <span class="number">0</span>)</span><br><span class="line">                    nums[i][j] = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    nums[i][j] = nums[i - <span class="number">1</span>][j] + nums[i][j - <span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums[m - <span class="number">1</span>][n - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>为了节省空间，我们使用一维数组nums，一行一行的刷新也可以。</p><p>代码二：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间复杂度O(m*n),空间复杂度O(n)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">uniquePaths</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(n, <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; m; ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; n; ++j) &#123;</span><br><span class="line">                dp[j] += dp[j - <span class="number">1</span>]; </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;62-Unique-Paths-不同路径&quot;&gt;&lt;a href=&quot;#62-Unique-Paths-不同路径&quot; class=&quot;headerlink&quot; title=&quot;62. Unique Paths-不同路径&quot;&gt;&lt;/a&gt;62. Unique Paths-不同路径&lt;/h1
+      
+    
+    </summary>
+    
+      <category term="leetcode" scheme="https://xhjiang.tech/categories/leetcode/"/>
+    
+      <category term="动态规划" scheme="https://xhjiang.tech/categories/leetcode/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+    
+      <category term="leetcode" scheme="https://xhjiang.tech/tags/leetcode/"/>
+    
+      <category term="动态规划" scheme="https://xhjiang.tech/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode刷题-110. Balanced Binary Tree</title>
@@ -94,16 +152,16 @@
     
       <category term="leetcode" scheme="https://xhjiang.tech/categories/leetcode/"/>
     
-      <category term="树" scheme="https://xhjiang.tech/categories/leetcode/%E6%A0%91/"/>
-    
       <category term="动态规划" scheme="https://xhjiang.tech/categories/leetcode/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+      <category term="树" scheme="https://xhjiang.tech/categories/leetcode/%E6%A0%91/"/>
     
     
       <category term="leetcode" scheme="https://xhjiang.tech/tags/leetcode/"/>
     
-      <category term="树" scheme="https://xhjiang.tech/tags/%E6%A0%91/"/>
-    
       <category term="动态规划" scheme="https://xhjiang.tech/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+      <category term="树" scheme="https://xhjiang.tech/tags/%E6%A0%91/"/>
     
   </entry>
   
@@ -541,74 +599,11 @@
       <category term="动态规划" scheme="https://xhjiang.tech/categories/leetcode/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
     
-      <category term="C++" scheme="https://xhjiang.tech/tags/C/"/>
-    
       <category term="leetcode" scheme="https://xhjiang.tech/tags/leetcode/"/>
+    
+      <category term="C++" scheme="https://xhjiang.tech/tags/C/"/>
     
       <category term="动态规划" scheme="https://xhjiang.tech/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode刷题-21.Merge Two Sorted Lists</title>
-    <link href="https://xhjiang.tech/2018/11/15/leetcode%E5%88%B7%E9%A2%98-Merge-Two-Sorted-Lists/"/>
-    <id>https://xhjiang.tech/2018/11/15/leetcode刷题-Merge-Two-Sorted-Lists/</id>
-    <published>2018-11-15T07:25:32.000Z</published>
-    <updated>2018-11-20T07:19:50.680Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="21-Merge-Two-Sorted-Lists-合并两个有序链表"><a href="#21-Merge-Two-Sorted-Lists-合并两个有序链表" class="headerlink" title="21. Merge Two Sorted Lists-合并两个有序链表"></a>21. Merge Two Sorted Lists-合并两个有序链表</h1><hr><h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 </p><p>示例：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4</span><br><span class="line">输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4</span><br></pre></td></tr></table></figure><hr><ul><li>解法一:非递归版</li></ul><blockquote><p>思路：<br>新建一个链表用来存储新的有序链表，可以先让两个链表互相比较，新链表的指针指向更小的那个，依次遍历直到一方遍历结束，最后把剩下的那个链表的剩余部分连接到新链表的表尾</p></blockquote><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> <span class="comment">//时间复杂度O(max(m,n)),空间复杂度O(m+n)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">mergeTwoLists</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        ListNode *t1 = l1;</span><br><span class="line">        ListNode *t2 = l2;</span><br><span class="line">        ListNode *newlist = <span class="keyword">new</span> ListNode(<span class="number">0</span>);    <span class="comment">//新建一个链表用来存储</span></span><br><span class="line">        ListNode *nl = newlist;    <span class="comment">//让指针nl指向新链表，最后返回nl</span></span><br><span class="line">        <span class="comment">//两个链表相互比较大小，新链表指针指向更小的值</span></span><br><span class="line">        <span class="keyword">while</span>(t1 != <span class="literal">nullptr</span> &amp;&amp; t2 != <span class="literal">nullptr</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(t1-&gt;val &gt; t2-&gt;val)&#123;</span><br><span class="line">                newlist-&gt;next = t2;</span><br><span class="line">                newlist = newlist-&gt;next;    <span class="comment">//得到一个更小的值后指针后移</span></span><br><span class="line">                t2 = t2-&gt;next;      <span class="comment">//指针后移</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                newlist-&gt;next = t1;</span><br><span class="line">                newlist = newlist-&gt;next;</span><br><span class="line">                t1 = t1-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//把当只剩下一个链表时，把链表剩余部分连接到新链表表尾</span></span><br><span class="line">        <span class="keyword">if</span>(t1 == <span class="literal">nullptr</span> &amp;&amp; t2 != <span class="literal">nullptr</span>)</span><br><span class="line">            newlist-&gt;next = t2;     </span><br><span class="line">        <span class="keyword">if</span>(t2 == <span class="literal">nullptr</span> &amp;&amp; t1 != <span class="literal">nullptr</span>)</span><br><span class="line">            newlist-&gt;next = t1;</span><br><span class="line">        <span class="keyword">return</span> nl-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;21-Merge-Two-Sorted-Lists-合并两个有序链表&quot;&gt;&lt;a href=&quot;#21-Merge-Two-Sorted-Lists-合并两个有序链表&quot; class=&quot;headerlink&quot; title=&quot;21. Merge Two Sorted Lis
-      
-    
-    </summary>
-    
-      <category term="leetcode" scheme="https://xhjiang.tech/categories/leetcode/"/>
-    
-      <category term="链表" scheme="https://xhjiang.tech/categories/leetcode/%E9%93%BE%E8%A1%A8/"/>
-    
-    
-      <category term="C++" scheme="https://xhjiang.tech/tags/C/"/>
-    
-      <category term="leetcode" scheme="https://xhjiang.tech/tags/leetcode/"/>
-    
-      <category term="链表" scheme="https://xhjiang.tech/tags/%E9%93%BE%E8%A1%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode刷题-66.Plus One</title>
-    <link href="https://xhjiang.tech/2018/11/14/leetcode%E5%88%B7%E9%A2%98-Plus-One/"/>
-    <id>https://xhjiang.tech/2018/11/14/leetcode刷题-Plus-One/</id>
-    <published>2018-11-14T08:52:38.000Z</published>
-    <updated>2018-11-20T08:49:23.226Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="66-Plus-One-加一"><a href="#66-Plus-One-加一" class="headerlink" title="66. Plus One-加一"></a>66. Plus One-加一</h1><hr><h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。</p><p>最高位数字存放在数组的首位， 数组中每个元素只存储一个数字。</p><p>你可以假设除了整数 0 之外，这个整数不会以零开头。</p><p>示例 1:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [1,2,3]</span><br><span class="line">输出: [1,2,4]</span><br><span class="line">解释: 输入数组表示数字 123。</span><br></pre></td></tr></table></figure><p>示例 2:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [4,3,2,1]</span><br><span class="line">输出: [4,3,2,2]</span><br><span class="line">解释: 输入数组表示数字 4321。</span><br></pre></td></tr></table></figure><hr><h2 id="分析"><a href="#分析" class="headerlink" title="分析:"></a>分析:</h2><blockquote><p>高精度加法</p></blockquote><ul><li>解法一：</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间复杂度O(n),空间复杂度O(1)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; plusOne(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;digits) &#123;</span><br><span class="line">        add(digits, <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> digits;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line"><span class="comment">// 0 &lt;= digit &lt;= 9</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;digits, <span class="keyword">int</span> digit)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> c = digit; <span class="comment">// carry, 进位</span></span><br><span class="line">        <span class="comment">// for_each(digits.rbegin(), digits.rend(), [&amp;c](int &amp;d)&#123;</span></span><br><span class="line">        <span class="comment">//     d += c;</span></span><br><span class="line">        <span class="comment">//     c = d / 10;</span></span><br><span class="line">        <span class="comment">//     d %= 10;</span></span><br><span class="line">        <span class="comment">// &#125;);</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it = digits.rbegin(); it != digits.rend(); ++it)&#123;</span><br><span class="line">            *it += c;</span><br><span class="line">            c = *it / <span class="number">10</span>;</span><br><span class="line">            *it %= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (c &gt; <span class="number">0</span>) </span><br><span class="line">            digits.insert(digits.begin(), <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><blockquote><p><em>Tips:</em><br>c.rbegin() 返回一个逆序迭代器，它指向容器c的最后一个元素<br>c.rend() 返回一个逆序迭代器，它指向容器c的第一个元素前面的位置<br>对于反向迭代器，++ 运算将访问前一个元素，而 – 运算则访问下一个元素</p></blockquote><ul><li>解法二：</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间复杂度O(n),空间复杂度O(1)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; plusOne(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;digits) &#123;</span><br><span class="line">        add(digits, <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> digits;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line"><span class="comment">// 0 &lt;= digit &lt;= 9</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;digits, <span class="keyword">int</span> digit)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> c = digit; <span class="comment">// carry, 进位</span></span><br><span class="line">        for_each(digits.rbegin(), digits.rend(), [&amp;c](<span class="keyword">int</span> &amp;d)&#123;</span><br><span class="line">            d += c;</span><br><span class="line">            c = d / <span class="number">10</span>;</span><br><span class="line">            d %= <span class="number">10</span>;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (c &gt; <span class="number">0</span>) </span><br><span class="line">            digits.insert(digits.begin(), <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><blockquote><p><em>Tips:</em><br>这个解法没看明白……</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;66-Plus-One-加一&quot;&gt;&lt;a href=&quot;#66-Plus-One-加一&quot; class=&quot;headerlink&quot; title=&quot;66. Plus One-加一&quot;&gt;&lt;/a&gt;66. Plus One-加一&lt;/h1&gt;&lt;hr&gt;
-&lt;h2 id=&quot;描述&quot;&gt;&lt;a hre
-      
-    
-    </summary>
-    
-      <category term="leetcode" scheme="https://xhjiang.tech/categories/leetcode/"/>
-    
-      <category term="数组" scheme="https://xhjiang.tech/categories/leetcode/%E6%95%B0%E7%BB%84/"/>
-    
-    
-      <category term="C++" scheme="https://xhjiang.tech/tags/C/"/>
-    
-      <category term="leetcode" scheme="https://xhjiang.tech/tags/leetcode/"/>
-    
-      <category term="数组" scheme="https://xhjiang.tech/tags/%E6%95%B0%E7%BB%84/"/>
     
   </entry>
   
