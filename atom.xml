@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xhjiang.tech/"/>
-  <updated>2018-12-01T14:41:50.534Z</updated>
+  <updated>2018-12-01T15:50:53.250Z</updated>
   <id>https://xhjiang.tech/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode刷题-2. Add Two Numbers</title>
+    <link href="https://xhjiang.tech/2018/12/01/leetcode%E5%88%B7%E9%A2%98-2-Add-Two-Numbers/"/>
+    <id>https://xhjiang.tech/2018/12/01/leetcode刷题-2-Add-Two-Numbers/</id>
+    <published>2018-12-01T15:32:12.000Z</published>
+    <updated>2018-12-01T15:50:53.250Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="2-Add-Two-Numbers-两数相加"><a href="#2-Add-Two-Numbers-两数相加" class="headerlink" title="2. Add Two Numbers-两数相加"></a>2. Add Two Numbers-两数相加</h1><hr><p>给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。</p><p>如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。</p><p>您可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p><p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)</span><br><span class="line">输出：7 -&gt; 0 -&gt; 8</span><br><span class="line">原因：342 + 465 = 807</span><br></pre></td></tr></table></figure></p><hr><p><strong>思路：</strong></p><p>创建一个临时的头结点，并将指针cur指向该节点，之后遍历L1 和 L2两个链表，将他们对应位置节点的值相加，同和，如果该位置前的两个节点之和大于等于10，需要进位，则该节点值加1，然后对10取余，并新建节点保存，将cur的next指针指向该节点。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">addTwoNumbers</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        ListNode* head = <span class="keyword">new</span> ListNode(<span class="number">-1</span>);</span><br><span class="line">        ListNode* cur = head;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">bool</span> carry = <span class="literal">false</span>; </span><br><span class="line">        <span class="keyword">while</span>(l1 != <span class="literal">NULL</span> || l2 != <span class="literal">NULL</span>)&#123;</span><br><span class="line">            sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(l1 != <span class="literal">NULL</span>)&#123;</span><br><span class="line">                sum += l1-&gt;val;</span><br><span class="line">                l1 = l1 -&gt; next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(l2 != <span class="literal">NULL</span>)&#123;</span><br><span class="line">                sum += l2-&gt;val;</span><br><span class="line">                l2 = l2 -&gt; next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(carry)</span><br><span class="line">                sum++;</span><br><span class="line">            cur -&gt; next = <span class="keyword">new</span> ListNode(sum % <span class="number">10</span>);</span><br><span class="line">            cur = cur -&gt; next;</span><br><span class="line">            carry = sum &gt;= <span class="number">10</span> ? <span class="literal">true</span>: <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(carry)</span><br><span class="line">            cur -&gt; next = <span class="keyword">new</span> ListNode(<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> head -&gt; next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;2-Add-Two-Numbers-两数相加&quot;&gt;&lt;a href=&quot;#2-Add-Two-Numbers-两数相加&quot; class=&quot;headerlink&quot; title=&quot;2. Add Two Numbers-两数相加&quot;&gt;&lt;/a&gt;2. Add Two Numbers-
+      
+    
+    </summary>
+    
+      <category term="leetcode" scheme="https://xhjiang.tech/categories/leetcode/"/>
+    
+      <category term="链表" scheme="https://xhjiang.tech/categories/leetcode/%E9%93%BE%E8%A1%A8/"/>
+    
+    
+      <category term="leetcode" scheme="https://xhjiang.tech/tags/leetcode/"/>
+    
+      <category term="链表" scheme="https://xhjiang.tech/tags/%E9%93%BE%E8%A1%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode刷题-69. Sqrt(x)</title>
@@ -573,35 +602,6 @@
       <category term="leetcode" scheme="https://xhjiang.tech/tags/leetcode/"/>
     
       <category term="树" scheme="https://xhjiang.tech/tags/%E6%A0%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode刷题-136.Single Number</title>
-    <link href="https://xhjiang.tech/2018/11/19/leetcode%E5%88%B7%E9%A2%98-Single-Number/"/>
-    <id>https://xhjiang.tech/2018/11/19/leetcode刷题-Single-Number/</id>
-    <published>2018-11-19T06:33:55.000Z</published>
-    <updated>2018-11-20T07:21:03.120Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="136-Single-Number-只出现过一次的数字"><a href="#136-Single-Number-只出现过一次的数字" class="headerlink" title="136. Single Number-只出现过一次的数字"></a>136. Single Number-只出现过一次的数字</h1><hr><h2 id="描述："><a href="#描述：" class="headerlink" title="描述："></a>描述：</h2><p>给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。</p><blockquote><p><em>说明：</em><br>你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？</p></blockquote><p>示例 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [2,2,1]</span><br><span class="line">输出: 1</span><br></pre></td></tr></table></figure></p><p>示例 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [4,1,2,1,2]</span><br><span class="line">输出: 4</span><br></pre></td></tr></table></figure></p><hr><p><strong>思路：</strong></p><p>题中要求，线性时间复杂度，而且不使用额外空间，那么就要从数组本身入手，同时只循环扫描一遍数组</p><p>我们可以考虑 异或运算 ，它是满足交换律和结合的，也就是说 a ^ b  ^c = a ^ c ^ b，这样当我们遍历数组，顺次进行异或运算，那么最终的结果就是唯一的不重复数字。</p><p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[4,1,2,1,2]，</span><br><span class="line">4^1^2^1^2 = 1^1^2^2^4 = 0^0^4=4</span><br></pre></td></tr></table></figure></p><p><strong>代码一：</strong></p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间复杂度O(n),空间复杂度O(1)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">singleNumber</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> x = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//顺次异或，每当某个数字重复出现偶次都会被消除为0</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i : nums) &#123;</span><br><span class="line">            x ^= i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// class Solution &#123;</span></span><br><span class="line"><span class="comment">// public:</span></span><br><span class="line"><span class="comment">//     int singleNumber(int A[], int n) &#123;</span></span><br><span class="line"><span class="comment">//         int result = 0;</span></span><br><span class="line"><span class="comment">//         for(int i = 0;i &lt; n;i++)&#123;</span></span><br><span class="line"><span class="comment">//             result = result ^ A[i];</span></span><br><span class="line"><span class="comment">//         &#125;</span></span><br><span class="line"><span class="comment">//         return result;</span></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line"><span class="comment">// &#125;;</span></span><br></pre></td></tr></table></figure><p><strong>代码二：</strong></p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间复杂度O(n),空间复杂度O(1)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">singleNumber</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//accumulate()函数用来求和，初始值为0，范围从begin到end的所有向量以位异或的方式求和</span></span><br><span class="line">        <span class="keyword">return</span> accumulate(nums.begin(), nums.end(), <span class="number">0</span>, bit_xor&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;136-Single-Number-只出现过一次的数字&quot;&gt;&lt;a href=&quot;#136-Single-Number-只出现过一次的数字&quot; class=&quot;headerlink&quot; title=&quot;136. Single Number-只出现过一次的数字&quot;&gt;&lt;/a&gt;136.
-      
-    
-    </summary>
-    
-      <category term="leetcode" scheme="https://xhjiang.tech/categories/leetcode/"/>
-    
-      <category term="数组" scheme="https://xhjiang.tech/categories/leetcode/%E6%95%B0%E7%BB%84/"/>
-    
-    
-      <category term="leetcode" scheme="https://xhjiang.tech/tags/leetcode/"/>
-    
-      <category term="数组" scheme="https://xhjiang.tech/tags/%E6%95%B0%E7%BB%84/"/>
     
   </entry>
   
