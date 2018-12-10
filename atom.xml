@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xhjiang.tech/"/>
-  <updated>2018-12-06T09:46:51.261Z</updated>
+  <updated>2018-12-10T12:44:50.926Z</updated>
   <id>https://xhjiang.tech/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode刷题-215. Kth Largest Element in an Array</title>
+    <link href="https://xhjiang.tech/2018/12/10/leetcode%E5%88%B7%E9%A2%98-215-Kth-Largest-Element-in-an-Array/"/>
+    <id>https://xhjiang.tech/2018/12/10/leetcode刷题-215-Kth-Largest-Element-in-an-Array/</id>
+    <published>2018-12-10T11:57:49.000Z</published>
+    <updated>2018-12-10T12:44:50.926Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="215-Kth-Largest-Element-in-an-Array-数组中的第K个最大元素"><a href="#215-Kth-Largest-Element-in-an-Array-数组中的第K个最大元素" class="headerlink" title="215. Kth Largest Element in an Array-数组中的第K个最大元素"></a>215. Kth Largest Element in an Array-数组中的第K个最大元素</h1><hr><h2 id="描述："><a href="#描述：" class="headerlink" title="描述："></a>描述：</h2><p>在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。</p><p>示例 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [3,2,1,5,6,4] 和 k = 2</span><br><span class="line">输出: 5</span><br></pre></td></tr></table></figure></p><p>示例 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [3,2,3,1,2,4,5,5,6] 和 k = 4</span><br><span class="line">输出: 4</span><br></pre></td></tr></table></figure></p><p>说明:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">你可以假设 k 总是有效的，且 1 ≤ k ≤ 数组的长度。</span><br></pre></td></tr></table></figure></p><hr><p>代码一：<br>使用STL库函数 nth_element()，通过调用nth_element(start, start+n, end) 方法可以使第n大元素处于第n位置（从0开始,其位置是下标为 n的元素），并且比这个元素小的元素都排在这个元素之前，比这个元素大的元素都排在这个元素之后，但不能保证他们是有序的 </p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findKthLargest</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        nth_element(nums.begin(),nums.end()-k,nums.end());</span><br><span class="line">        <span class="keyword">return</span> *(nums.end()-k);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>代码二：<br>直接排序，然后取出第K大即可 </p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findKthLargest</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        sort(nums.begin(),nums.end());</span><br><span class="line">        <span class="keyword">return</span> nums[nums.size()-k];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>代码三：<br>借鉴快速排序的思想。每次选取一个 pivot，将大于 pivot 的数放在 pivot 左边，将小于 pivot 的数放在 pivot 右边。这时候，如果 pivot 正好是第 K 个数据，则 pivot 就是数组中的第 K 个最大元素。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findKthLargest</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n=nums.size(),tleft=<span class="number">0</span>,tright=n<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">while</span>(tleft&lt;tright)&#123;</span><br><span class="line">            <span class="comment">// 从大到小对数组进行快排</span></span><br><span class="line">            <span class="keyword">int</span> left=tleft,right=tright;</span><br><span class="line">            <span class="keyword">int</span> tmp=nums[left];</span><br><span class="line">            <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">                <span class="keyword">while</span>(right&gt;left&amp;&amp;nums[right]&gt;tmp) right--; <span class="comment">// 从左往右找第一个比 pivot 小的数</span></span><br><span class="line">                <span class="keyword">if</span>(right&gt;left)&#123;</span><br><span class="line">                    nums[left++]=nums[right];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">while</span>(left&lt;right&amp;&amp;nums[left]&lt;=tmp) left++; <span class="comment">// 从右往左找第一个比 pivot 大的数</span></span><br><span class="line">                <span class="keyword">if</span>(left&lt;right) nums[right--]=nums[left];</span><br><span class="line">            &#125;</span><br><span class="line">            nums[left]=tmp;</span><br><span class="line">            <span class="comment">// pivot 此时位于索引 left 处，n - k 表示 pivot 是第几大的数</span></span><br><span class="line">            <span class="keyword">if</span>(left==n-k) <span class="keyword">return</span> tmp;</span><br><span class="line">            <span class="comment">// 第 k 大的数在 pivot 右边，问题转化为找右边数组第 (k -left) 大的元素</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(left&lt;n-k)&#123;</span><br><span class="line">                tleft=left+<span class="number">1</span>;</span><br><span class="line">                tright=tright;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 第 k 大的数在 pivot 左边，问题转化为找左边数组第 k 大的元素</span></span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                tleft=tleft;</span><br><span class="line">                tright=left<span class="number">-1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums[tleft];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;215-Kth-Largest-Element-in-an-Array-数组中的第K个最大元素&quot;&gt;&lt;a href=&quot;#215-Kth-Largest-Element-in-an-Array-数组中的第K个最大元素&quot; class=&quot;headerlink&quot; title
+      
+    
+    </summary>
+    
+      <category term="leetcode" scheme="https://xhjiang.tech/categories/leetcode/"/>
+    
+      <category term="排序" scheme="https://xhjiang.tech/categories/leetcode/%E6%8E%92%E5%BA%8F/"/>
+    
+    
+      <category term="leetcode" scheme="https://xhjiang.tech/tags/leetcode/"/>
+    
+      <category term="排序" scheme="https://xhjiang.tech/tags/%E6%8E%92%E5%BA%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode刷题-102. Binary Tree Level Order Traversal</title>
@@ -574,39 +603,6 @@
       <category term="leetcode" scheme="https://xhjiang.tech/tags/leetcode/"/>
     
       <category term="字符串" scheme="https://xhjiang.tech/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode刷题-122.Best Time to Buy and Sell Stock II</title>
-    <link href="https://xhjiang.tech/2018/11/20/leetcode%E5%88%B7%E9%A2%98-Best-Time-to-Buy-and-Sell-Stock-II/"/>
-    <id>https://xhjiang.tech/2018/11/20/leetcode刷题-Best-Time-to-Buy-and-Sell-Stock-II/</id>
-    <published>2018-11-20T06:22:32.000Z</published>
-    <updated>2018-11-20T07:19:16.398Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="122-Best-Time-to-Buy-and-Sell-Stock-II-买卖股票的最佳时机-II"><a href="#122-Best-Time-to-Buy-and-Sell-Stock-II-买卖股票的最佳时机-II" class="headerlink" title="122.Best Time to Buy and Sell Stock II-买卖股票的最佳时机 II"></a>122.Best Time to Buy and Sell Stock II-买卖股票的最佳时机 II</h1><hr><h2 id="描述："><a href="#描述：" class="headerlink" title="描述："></a>描述：</h2><p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。</p><p>设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。</p><p>注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</p><p>示例 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: [7,1,5,3,6,4]</span><br><span class="line">输出: 7</span><br><span class="line">解释: 在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。</span><br><span class="line">     随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6-3 = 3 。</span><br></pre></td></tr></table></figure></p><p>示例 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入: [1,2,3,4,5]</span><br><span class="line">输出: 4</span><br><span class="line">解释: 在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。</span><br><span class="line">     注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。</span><br><span class="line">     因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。</span><br></pre></td></tr></table></figure></p><p>示例 3:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [7,6,4,3,1]</span><br><span class="line">输出: 0</span><br><span class="line">解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。</span><br></pre></td></tr></table></figure></p><hr><h2 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h2><p>贪心算法，总是做出在当前看来是最好的选择，不从整体最优上加以考虑，也就是说，只关心当前最优解</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间复杂度O(n),空间复杂度O(1)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> max = <span class="number">0</span>,tmp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt; prices.size(); ++i)&#123;</span><br><span class="line">            tmp = prices[i] - prices[i<span class="number">-1</span>];</span><br><span class="line">            <span class="keyword">if</span>(tmp &gt; <span class="number">0</span>)</span><br><span class="line">                max += tmp;</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><blockquote><p><em>Tips:</em><br>我们要算的是利润，要有利润，自然要有一次交易。<br>所以我们就说说prices[1]，即是第一天股票价格。按照贪心策略，不关心以后，我们只关心当前利益。第0天买入，花费prices[0]，第一天卖出，得到prices[1]，那么我们的收获就是max = prices[1] - prices[0],那么有两种情况</p><p>1）当max &gt; 0 时，赶紧买入卖出，能赚一笔是一笔，苍蝇再小也是肉嘛 </p><p>2）当max &lt;= 0 时，再买入卖出的话，那就是傻了，白费力气不说，还亏钱。</p><p>以此方式类推下去，即得最大利润。</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;122-Best-Time-to-Buy-and-Sell-Stock-II-买卖股票的最佳时机-II&quot;&gt;&lt;a href=&quot;#122-Best-Time-to-Buy-and-Sell-Stock-II-买卖股票的最佳时机-II&quot; class=&quot;headerlin
-      
-    
-    </summary>
-    
-      <category term="leetcode" scheme="https://xhjiang.tech/categories/leetcode/"/>
-    
-      <category term="数组" scheme="https://xhjiang.tech/categories/leetcode/%E6%95%B0%E7%BB%84/"/>
-    
-      <category term="贪心算法" scheme="https://xhjiang.tech/categories/leetcode/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="leetcode" scheme="https://xhjiang.tech/tags/leetcode/"/>
-    
-      <category term="数组" scheme="https://xhjiang.tech/tags/%E6%95%B0%E7%BB%84/"/>
-    
-      <category term="贪心算法" scheme="https://xhjiang.tech/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
