@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xhjiang.tech/"/>
-  <updated>2018-12-10T12:50:48.050Z</updated>
+  <updated>2019-05-22T03:02:14.663Z</updated>
   <id>https://xhjiang.tech/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>剑指offer20-包含min函数的栈</title>
+    <link href="https://xhjiang.tech/2019/05/22/%E5%89%91%E6%8C%87offer20-%E5%8C%85%E5%90%ABmin%E5%87%BD%E6%95%B0%E7%9A%84%E6%A0%88/"/>
+    <id>https://xhjiang.tech/2019/05/22/剑指offer20-包含min函数的栈/</id>
+    <published>2019-05-22T02:52:44.000Z</published>
+    <updated>2019-05-22T03:02:14.663Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="包含min函数的栈"><a href="#包含min函数的栈" class="headerlink" title="包含min函数的栈"></a>包含min函数的栈</h1><hr><p><strong>题目描述</strong></p><p>定义栈的数据结构，请在该类型中实现一个能够得到栈中所含最小元素的min函数（时间复杂度应为O（1））</p><hr><p><strong>C++解题思路</strong></p><p>我们用一个辅助栈来实现最小值的更新工作。</p><p>这个辅助栈工作原理：</p><ul><li><p>入栈时：</p><ul><li>1）当数据栈为空时，进入栈的元素同时也进入辅助栈；</li><li>2）当它不为空时，就把该入栈元素与辅助栈的栈顶元素进行比较，若入栈元素小，则该元素同时也进入辅助栈；若不是，则对辅助栈不进行操作</li></ul></li><li><p>出栈时：</p><ul><li>1）当时辅助栈的栈顶元素等于处理数据的数据栈栈顶元素时，不经数据栈要弹出元素，辅助栈也要弹出栈顶元素，</li><li>2)当不等时，只对数据栈进行出栈操作。</li></ul></li></ul><p>这样我们思路就很明确了：<strong>min函数只需返回辅助栈的栈顶源。</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> value)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        datastack.push(value);</span><br><span class="line">        <span class="comment">//辅助栈为空或者即将入栈的值小于辅助栈栈顶元素</span></span><br><span class="line">        <span class="keyword">if</span>(minstack.empty() || value &lt; minstack.top())</span><br><span class="line">            minstack.push(value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(datastack.empty())<span class="comment">//数据栈为空</span></span><br><span class="line">            <span class="keyword">return</span> ;</span><br><span class="line">        <span class="keyword">if</span>(datastack.top() == minstack.top()) <span class="comment">//数据栈和辅助栈栈顶元素相同</span></span><br><span class="line">            minstack.pop();</span><br><span class="line">        datastack.pop();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">top</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> datastack.top();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">min</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> minstack.top();</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt;  datastack;     <span class="comment">//  数据栈</span></span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt;  minstack;      <span class="comment">//  存储每次栈中最小值的栈信息</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;包含min函数的栈&quot;&gt;&lt;a href=&quot;#包含min函数的栈&quot; class=&quot;headerlink&quot; title=&quot;包含min函数的栈&quot;&gt;&lt;/a&gt;包含min函数的栈&lt;/h1&gt;&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;题目描述&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;定义栈的数据结构
+      
+    
+    </summary>
+    
+      <category term="剑指offer" scheme="https://xhjiang.tech/categories/%E5%89%91%E6%8C%87offer/"/>
+    
+      <category term="栈" scheme="https://xhjiang.tech/categories/%E5%89%91%E6%8C%87offer/%E6%A0%88/"/>
+    
+    
+      <category term="C++" scheme="https://xhjiang.tech/tags/C/"/>
+    
+      <category term="剑指offer" scheme="https://xhjiang.tech/tags/%E5%89%91%E6%8C%87offer/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode刷题-215. Kth Largest Element in an Array</title>
@@ -574,35 +605,6 @@
       <category term="leetcode" scheme="https://xhjiang.tech/tags/leetcode/"/>
     
       <category term="链表" scheme="https://xhjiang.tech/tags/%E9%93%BE%E8%A1%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode刷题-13.Roman to Integer</title>
-    <link href="https://xhjiang.tech/2018/11/20/leetcode%E5%88%B7%E9%A2%98-Roman-to-Integer/"/>
-    <id>https://xhjiang.tech/2018/11/20/leetcode刷题-Roman-to-Integer/</id>
-    <published>2018-11-20T07:08:44.000Z</published>
-    <updated>2018-11-20T08:03:25.153Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="13-Roman-to-Integer-罗马数字转整数"><a href="#13-Roman-to-Integer-罗马数字转整数" class="headerlink" title="13. Roman to Integer-罗马数字转整数"></a>13. Roman to Integer-罗马数字转整数</h1><hr><h2 id="描述："><a href="#描述：" class="headerlink" title="描述："></a>描述：</h2><p>罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">字符          数值</span><br><span class="line">I             1</span><br><span class="line">V             5</span><br><span class="line">X             10</span><br><span class="line">L             50</span><br><span class="line">C             100</span><br><span class="line">D             500</span><br><span class="line">M             1000</span><br></pre></td></tr></table></figure></p><p>例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做  XXVII, 即为 XX + V + II 。</p><p>通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况：</p><ul><li>I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。</li><li>X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。 </li><li>C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。</li></ul><p>给定一个罗马数字，将其转换成整数。输入确保在 1 到 3999 的范围内。</p><p>示例 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;III&quot;</span><br><span class="line">输出: 3</span><br></pre></td></tr></table></figure></p><p>示例 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;IV&quot;</span><br><span class="line">输出: 4</span><br></pre></td></tr></table></figure></p><p>示例 3:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;IX&quot;</span><br><span class="line">输出: 9</span><br></pre></td></tr></table></figure></p><p>示例 4:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;LVIII&quot;</span><br><span class="line">输出: 58</span><br><span class="line">解释: L = 50, V= 5, III = 3.</span><br></pre></td></tr></table></figure></p><p>示例 5:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;MCMXCIV&quot;</span><br><span class="line">输出: 1994</span><br><span class="line">解释: M = 1000, CM = 900, XC = 90, IV = 4.</span><br></pre></td></tr></table></figure></p><hr><h2 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h2><p>从前往后遍历，用一个临时变量记录分段数字。如果当前数字比上一个数字大，说明这一段的值应该用当前这个值减去上一个值，比如<strong>IV = 5 - 1</strong>；否则，将当前值加入到结果中，开始下一段记录。比如：<strong>VI = 5 + 1,II = 1 + 1</strong>;</p><blockquote><p>代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">map</span><span class="params">(<span class="keyword">char</span> c)</span></span>&#123;</span><br><span class="line">        <span class="keyword">switch</span>(c)&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'I'</span>: <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'V'</span>: <span class="keyword">return</span> <span class="number">5</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'X'</span>: <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'L'</span>: <span class="keyword">return</span> <span class="number">50</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'C'</span>: <span class="keyword">return</span> <span class="number">100</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'D'</span>: <span class="keyword">return</span> <span class="number">500</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'M'</span>: <span class="keyword">return</span> <span class="number">1000</span>;</span><br><span class="line">        <span class="keyword">default</span>: <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">romanToInt</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.size(); ++i)&#123;</span><br><span class="line">            <span class="keyword">if</span>(i &gt; <span class="number">0</span> &amp;&amp; (<span class="built_in">map</span>(s[i]) &gt; <span class="built_in">map</span>(s[i<span class="number">-1</span>])))&#123;</span><br><span class="line">                <span class="comment">//这里减去两倍的上一个值是前一个值在迭代时已经加过了，所以要减两次</span></span><br><span class="line">                result += (<span class="built_in">map</span>(s[i]) - <span class="number">2</span> * <span class="built_in">map</span>(s[i<span class="number">-1</span>]));</span><br><span class="line">            &#125;<span class="keyword">else</span></span><br><span class="line">               result += <span class="built_in">map</span>(s[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;13-Roman-to-Integer-罗马数字转整数&quot;&gt;&lt;a href=&quot;#13-Roman-to-Integer-罗马数字转整数&quot; class=&quot;headerlink&quot; title=&quot;13. Roman to Integer-罗马数字转整数&quot;&gt;&lt;/a&gt;13. 
-      
-    
-    </summary>
-    
-      <category term="leetcode" scheme="https://xhjiang.tech/categories/leetcode/"/>
-    
-      <category term="字符串" scheme="https://xhjiang.tech/categories/leetcode/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
-    
-    
-      <category term="leetcode" scheme="https://xhjiang.tech/tags/leetcode/"/>
-    
-      <category term="字符串" scheme="https://xhjiang.tech/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
     
   </entry>
   
