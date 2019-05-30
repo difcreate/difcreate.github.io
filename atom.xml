@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xhjiang.tech/"/>
-  <updated>2019-05-27T04:02:17.262Z</updated>
+  <updated>2019-05-30T14:41:58.769Z</updated>
   <id>https://xhjiang.tech/</id>
   
   <author>
@@ -15,6 +15,96 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>剑指offer36-两个链表的第一个公共结点</title>
+    <link href="https://xhjiang.tech/2019/05/30/%E5%89%91%E6%8C%87offer36-%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%AC%E5%85%B1%E7%BB%93%E7%82%B9/"/>
+    <id>https://xhjiang.tech/2019/05/30/剑指offer36-两个链表的第一个公共结点/</id>
+    <published>2019-05-30T14:39:10.000Z</published>
+    <updated>2019-05-30T14:41:58.769Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="两个链表的第一个公共结点"><a href="#两个链表的第一个公共结点" class="headerlink" title="两个链表的第一个公共结点"></a>两个链表的第一个公共结点</h1><hr><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>输入两个链表，找出它们的第一个公共结点。</p><hr><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><h3 id="暴力破解法"><a href="#暴力破解法" class="headerlink" title="暴力破解法"></a>暴力破解法</h3><p>最简单直接的方法就是，对于第一个链表的每个节点，我们依次判断其是不是第二条链表的公共结点</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">struct ListNode &#123;</span></span><br><span class="line"><span class="comment">int val;</span></span><br><span class="line"><span class="comment">struct ListNode *next;</span></span><br><span class="line"><span class="comment">ListNode(int x) :</span></span><br><span class="line"><span class="comment">val(x), next(NULL) &#123;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">&#125;;*/</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">FindFirstCommonNode</span><span class="params">( ListNode* pHead1, ListNode* pHead2)</span> </span>&#123;</span><br><span class="line">        ListNode *p1 = <span class="literal">nullptr</span>;</span><br><span class="line">        ListNode *p2 = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="comment">//  循环第一个链表的每个结点</span></span><br><span class="line">        <span class="keyword">for</span>(p1 = pHead1; p1 != <span class="literal">nullptr</span>; p1 = p1-&gt;next)&#123;</span><br><span class="line">             <span class="comment">//  依次判断其在不在第二条链表中</span></span><br><span class="line">            <span class="keyword">for</span>(p2 = pHead2; p2 != <span class="literal">nullptr</span>; p2 = p2-&gt;next)&#123;</span><br><span class="line">                <span class="keyword">if</span>(p1 == p2)</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 判断两个链表没有公共节点的请况就返回nullptr</span></span><br><span class="line">            <span class="keyword">if</span>(p1 == p2)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> p1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><hr><h3 id="右对齐两个链表"><a href="#右对齐两个链表" class="headerlink" title="右对齐两个链表"></a>右对齐两个链表</h3><p>如果两个链表有公共节点，则它们的形状必然是一个Y字形。</p><p><strong>长链表先走，实现右对齐</strong></p><p>先假设这两个链表的长度相等，则我们可以同步遍历这两个链表，找到公共节点。现在有两个链表，我们可以先分别求齐长度得其差n，然后遍历长的那个链表n个节点，然后同步遍历这两个链表即可。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">struct ListNode &#123;</span></span><br><span class="line"><span class="comment">int val;</span></span><br><span class="line"><span class="comment">struct ListNode *next;</span></span><br><span class="line"><span class="comment">ListNode(int x) :</span></span><br><span class="line"><span class="comment">val(x), next(NULL) &#123;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">&#125;;*/</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">FindFirstCommonNode</span><span class="params">( ListNode* pHead1, ListNode* pHead2)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 使得两个链表右对齐</span></span><br><span class="line">        ListNode *p1 = pHead1;</span><br><span class="line">        ListNode *p2 = pHead2;</span><br><span class="line">        <span class="keyword">if</span>(p1 == <span class="literal">NULL</span> || p2 == <span class="literal">NULL</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">int</span> len1 = <span class="number">0</span>, len2 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(p1 != <span class="literal">NULL</span>)&#123;</span><br><span class="line">            p1 = p1-&gt;next;</span><br><span class="line">            len1++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(p2 != <span class="literal">NULL</span>)&#123;</span><br><span class="line">            p2 = p2-&gt;next;</span><br><span class="line">            len2++;</span><br><span class="line">        &#125;</span><br><span class="line">        p1 = pHead1; </span><br><span class="line">        p2 = pHead2;</span><br><span class="line">        <span class="keyword">if</span>(len1 &gt; len2)&#123;</span><br><span class="line">             <span class="keyword">int</span> sublen1 = len1 - len2;</span><br><span class="line">             <span class="keyword">while</span>(sublen1 &gt; <span class="number">0</span>)&#123;</span><br><span class="line">                p1 = p1-&gt;next;</span><br><span class="line">                 sublen1--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">int</span> sublen2 = len2 - len1;</span><br><span class="line">             <span class="keyword">while</span>(sublen2 &gt; <span class="number">0</span>)&#123;</span><br><span class="line">                p2 = p2-&gt;next;</span><br><span class="line">                 sublen2--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(p1 != <span class="literal">NULL</span> &amp;&amp; p2 != <span class="literal">NULL</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(p1 == p2)&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            p1 = p1-&gt;next;</span><br><span class="line">            p2 = p2-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> p1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;两个链表的第一个公共结点&quot;&gt;&lt;a href=&quot;#两个链表的第一个公共结点&quot; class=&quot;headerlink&quot; title=&quot;两个链表的第一个公共结点&quot;&gt;&lt;/a&gt;两个链表的第一个公共结点&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述
+      
+    
+    </summary>
+    
+      <category term="剑指offer" scheme="https://xhjiang.tech/categories/%E5%89%91%E6%8C%87offer/"/>
+    
+      <category term="链表" scheme="https://xhjiang.tech/categories/%E5%89%91%E6%8C%87offer/%E9%93%BE%E8%A1%A8/"/>
+    
+    
+      <category term="C++" scheme="https://xhjiang.tech/tags/C/"/>
+    
+      <category term="剑指offer" scheme="https://xhjiang.tech/tags/%E5%89%91%E6%8C%87offer/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>剑指offer35-数组中的逆序对</title>
+    <link href="https://xhjiang.tech/2019/05/29/%E5%89%91%E6%8C%87offer35-%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%80%86%E5%BA%8F%E5%AF%B9/"/>
+    <id>https://xhjiang.tech/2019/05/29/剑指offer35-数组中的逆序对/</id>
+    <published>2019-05-29T13:12:22.000Z</published>
+    <updated>2019-05-29T13:27:51.064Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="数组中的逆序对"><a href="#数组中的逆序对" class="headerlink" title="数组中的逆序对"></a>数组中的逆序对</h1><hr><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组,求出这个数组中的逆序对的总数P。并将P对1000000007取模的结果输出。 即输出P%1000000007</p><hr><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><h3 id="暴力破解法"><a href="#暴力破解法" class="headerlink" title="暴力破解法"></a>暴力破解法</h3><p>两个 for 循环枚举所有的数对，如果是逆序对，则 count++，最终返回 count 即可。时间复杂度$O(n^2)$，运行超时；</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">InversePairs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(data.empty()) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; data.size() - <span class="number">1</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; data.size(); j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(data[i] &gt; data[j])</span><br><span class="line">                    count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        count %= <span class="number">1000000007</span>;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><hr><h3 id="排序–计算交换次数"><a href="#排序–计算交换次数" class="headerlink" title="排序–计算交换次数"></a>排序–计算交换次数</h3><blockquote><p>考虑一下，逆序是说a[i]&gt;a[j]，i&lt;j。那么在排序的过程中，会把a[i]和a[j]交换过来，这个交换的过程，每交换一次，就是一个逆序对的“正序”过程。</p></blockquote><p><strong>冒泡排序</strong><br>时间复杂度$O(n^2)$，运行超时；</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">InversePairs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(data.empty()) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">bool</span> IsSwap = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; data.size() - <span class="number">1</span>; i++)&#123;</span><br><span class="line">            IsSwap = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; data.size() - i - <span class="number">1</span>; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(data[j] &gt; data[j+<span class="number">1</span>])&#123;</span><br><span class="line">                    swap(data[j], data[j+<span class="number">1</span>]);</span><br><span class="line">                    count++;</span><br><span class="line">                    IsSwap = <span class="literal">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(!IsSwap)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><strong>归并排序</strong></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;数组中的逆序对&quot;&gt;&lt;a href=&quot;#数组中的逆序对&quot; class=&quot;headerlink&quot; title=&quot;数组中的逆序对&quot;&gt;&lt;/a&gt;数组中的逆序对&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot;
+      
+    
+    </summary>
+    
+      <category term="剑指offer" scheme="https://xhjiang.tech/categories/%E5%89%91%E6%8C%87offer/"/>
+    
+      <category term="数组" scheme="https://xhjiang.tech/categories/%E5%89%91%E6%8C%87offer/%E6%95%B0%E7%BB%84/"/>
+    
+    
+      <category term="C++" scheme="https://xhjiang.tech/tags/C/"/>
+    
+      <category term="剑指offer" scheme="https://xhjiang.tech/tags/%E5%89%91%E6%8C%87offer/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>剑指offer34-第一次只出现一次的字符</title>
+    <link href="https://xhjiang.tech/2019/05/29/%E5%89%91%E6%8C%87offer34-%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E5%AD%97%E7%AC%A6/"/>
+    <id>https://xhjiang.tech/2019/05/29/剑指offer34-第一次只出现一次的字符/</id>
+    <published>2019-05-29T12:49:42.000Z</published>
+    <updated>2019-05-29T12:56:56.128Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="第一次只出现一次的字符"><a href="#第一次只出现一次的字符" class="headerlink" title="第一次只出现一次的字符"></a>第一次只出现一次的字符</h1><hr><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>在一个字符串(0&lt;=字符串长度&lt;=10000，全部由字母组成)中找到第一个只出现一次的字符,并返回它的位置, 如果没有则返回 -1（需要区分大小写）.</p><hr><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>使用辅助数组进行计数，统计每个字符串的出现的次数，然后查找第一个只出现一次的字符位置</p><hr><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">FirstNotRepeatingChar</span><span class="params">(<span class="built_in">string</span> str)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(str.length() == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">int</span> count[<span class="number">256</span>];</span><br><span class="line">        <span class="comment">//  将计数器数组清0</span></span><br><span class="line">        <span class="built_in">memset</span>(count, <span class="string">'\0'</span>, <span class="keyword">sizeof</span>(count));</span><br><span class="line">        <span class="comment">//  对字符串中出现的每个字符进行计数</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; str.length(); i++)&#123;</span><br><span class="line">            count[(<span class="keyword">int</span>) str[i]]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//  第一个只出现一次的字符</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; str.length(); j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(count[str[j]] == <span class="number">1</span>)</span><br><span class="line">                <span class="keyword">return</span> j;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;第一次只出现一次的字符&quot;&gt;&lt;a href=&quot;#第一次只出现一次的字符&quot; class=&quot;headerlink&quot; title=&quot;第一次只出现一次的字符&quot;&gt;&lt;/a&gt;第一次只出现一次的字符&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; cl
+      
+    
+    </summary>
+    
+      <category term="剑指offer" scheme="https://xhjiang.tech/categories/%E5%89%91%E6%8C%87offer/"/>
+    
+      <category term="字符串" scheme="https://xhjiang.tech/categories/%E5%89%91%E6%8C%87offer/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+    
+      <category term="C++" scheme="https://xhjiang.tech/tags/C/"/>
+    
+      <category term="剑指offer" scheme="https://xhjiang.tech/tags/%E5%89%91%E6%8C%87offer/"/>
+    
+  </entry>
   
   <entry>
     <title>剑指offer33-丑数</title>
@@ -518,97 +608,6 @@
       <category term="字符串" scheme="https://xhjiang.tech/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
     
       <category term="哈希表" scheme="https://xhjiang.tech/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode刷题-2. Add Two Numbers</title>
-    <link href="https://xhjiang.tech/2018/12/01/leetcode%E5%88%B7%E9%A2%98-2-Add-Two-Numbers/"/>
-    <id>https://xhjiang.tech/2018/12/01/leetcode刷题-2-Add-Two-Numbers/</id>
-    <published>2018-12-01T15:32:12.000Z</published>
-    <updated>2018-12-01T15:50:53.250Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="2-Add-Two-Numbers-两数相加"><a href="#2-Add-Two-Numbers-两数相加" class="headerlink" title="2. Add Two Numbers-两数相加"></a>2. Add Two Numbers-两数相加</h1><hr><p>给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。</p><p>如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。</p><p>您可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p><p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)</span><br><span class="line">输出：7 -&gt; 0 -&gt; 8</span><br><span class="line">原因：342 + 465 = 807</span><br></pre></td></tr></table></figure></p><hr><p><strong>思路：</strong></p><p>创建一个临时的头结点，并将指针cur指向该节点，之后遍历L1 和 L2两个链表，将他们对应位置节点的值相加，同和，如果该位置前的两个节点之和大于等于10，需要进位，则该节点值加1，然后对10取余，并新建节点保存，将cur的next指针指向该节点。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">addTwoNumbers</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        ListNode* head = <span class="keyword">new</span> ListNode(<span class="number">-1</span>);</span><br><span class="line">        ListNode* cur = head;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">bool</span> carry = <span class="literal">false</span>; </span><br><span class="line">        <span class="keyword">while</span>(l1 != <span class="literal">NULL</span> || l2 != <span class="literal">NULL</span>)&#123;</span><br><span class="line">            sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(l1 != <span class="literal">NULL</span>)&#123;</span><br><span class="line">                sum += l1-&gt;val;</span><br><span class="line">                l1 = l1 -&gt; next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(l2 != <span class="literal">NULL</span>)&#123;</span><br><span class="line">                sum += l2-&gt;val;</span><br><span class="line">                l2 = l2 -&gt; next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(carry)</span><br><span class="line">                sum++;</span><br><span class="line">            cur -&gt; next = <span class="keyword">new</span> ListNode(sum % <span class="number">10</span>);</span><br><span class="line">            cur = cur -&gt; next;</span><br><span class="line">            carry = sum &gt;= <span class="number">10</span> ? <span class="literal">true</span>: <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(carry)</span><br><span class="line">            cur -&gt; next = <span class="keyword">new</span> ListNode(<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> head -&gt; next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;2-Add-Two-Numbers-两数相加&quot;&gt;&lt;a href=&quot;#2-Add-Two-Numbers-两数相加&quot; class=&quot;headerlink&quot; title=&quot;2. Add Two Numbers-两数相加&quot;&gt;&lt;/a&gt;2. Add Two Numbers-
-      
-    
-    </summary>
-    
-      <category term="leetcode" scheme="https://xhjiang.tech/categories/leetcode/"/>
-    
-      <category term="链表" scheme="https://xhjiang.tech/categories/leetcode/%E9%93%BE%E8%A1%A8/"/>
-    
-    
-      <category term="leetcode" scheme="https://xhjiang.tech/tags/leetcode/"/>
-    
-      <category term="链表" scheme="https://xhjiang.tech/tags/%E9%93%BE%E8%A1%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode刷题-69. Sqrt(x)</title>
-    <link href="https://xhjiang.tech/2018/12/01/leetcode%E5%88%B7%E9%A2%98-69-Sqrt-x/"/>
-    <id>https://xhjiang.tech/2018/12/01/leetcode刷题-69-Sqrt-x/</id>
-    <published>2018-12-01T14:27:20.000Z</published>
-    <updated>2018-12-01T14:41:50.534Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="69-Sqrt-x-x的平方根"><a href="#69-Sqrt-x-x的平方根" class="headerlink" title="69. Sqrt(x)-x的平方根"></a>69. Sqrt(x)-x的平方根</h1><hr><h2 id="描述："><a href="#描述：" class="headerlink" title="描述："></a>描述：</h2><p>实现 int sqrt(int x) 函数。</p><p>计算并返回 x 的平方根，其中 x 是非负整数。</p><p>由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。</p><p>示例 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: 4</span><br><span class="line">输出: 2</span><br></pre></td></tr></table></figure></p><p>示例 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: 8</span><br><span class="line">输出: 2</span><br><span class="line">说明: 8 的平方根是 2.82842..., </span><br><span class="line">     由于返回类型是整数，小数部分将被舍去。</span><br></pre></td></tr></table></figure></p><hr><p><strong>思路：</strong></p><p>算一个候选值的平方，然后和x比较大小，为了缩短查找时间，我们采用二分搜索法来找平方根</p><p>代码：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">     <span class="function"><span class="keyword">int</span> <span class="title">mySqrt</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">if</span> (x &lt;= <span class="number">1</span>) <span class="keyword">return</span> x;</span><br><span class="line">         <span class="keyword">int</span> left = <span class="number">0</span>, right = x;</span><br><span class="line">         <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">             <span class="keyword">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">             <span class="keyword">if</span> (x / mid &gt;= mid) left = mid + <span class="number">1</span>;</span><br><span class="line">             <span class="keyword">else</span> right = mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> right - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;69-Sqrt-x-x的平方根&quot;&gt;&lt;a href=&quot;#69-Sqrt-x-x的平方根&quot; class=&quot;headerlink&quot; title=&quot;69. Sqrt(x)-x的平方根&quot;&gt;&lt;/a&gt;69. Sqrt(x)-x的平方根&lt;/h1&gt;&lt;hr&gt;
-&lt;h2 id=&quot;描述：&quot;
-      
-    
-    </summary>
-    
-      <category term="leetcode" scheme="https://xhjiang.tech/categories/leetcode/"/>
-    
-      <category term="数学" scheme="https://xhjiang.tech/categories/leetcode/%E6%95%B0%E5%AD%A6/"/>
-    
-    
-      <category term="leetcode" scheme="https://xhjiang.tech/tags/leetcode/"/>
-    
-      <category term="数学" scheme="https://xhjiang.tech/tags/%E6%95%B0%E5%AD%A6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode刷题-55. Jump Game</title>
-    <link href="https://xhjiang.tech/2018/11/30/leetcode%E5%88%B7%E9%A2%98-55-Jump-Game/"/>
-    <id>https://xhjiang.tech/2018/11/30/leetcode刷题-55-Jump-Game/</id>
-    <published>2018-11-30T08:25:41.000Z</published>
-    <updated>2018-11-30T08:26:37.577Z</updated>
-    
-    <content type="html"><![CDATA[<p>#　55. Jump Game-跳跃游戏</p><hr><h2 id="描述："><a href="#描述：" class="headerlink" title="描述："></a>描述：</h2><p>给定一个非负整数数组，你最初位于数组的第一个位置。</p><p>数组中的每个元素代表你在该位置可以跳跃的最大长度。</p><p>判断你是否能够到达最后一个位置。</p><p>示例 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [2,3,1,1,4]</span><br><span class="line">输出: true</span><br><span class="line">解释: 从位置 0 到 1 跳 1 步, 然后跳 3 步到达最后一个位置。</span><br></pre></td></tr></table></figure></p><p>示例 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [3,2,1,0,4]</span><br><span class="line">输出: false</span><br><span class="line">解释: 无论怎样，你总会到达索引为 3 的位置。但该位置的最大跳跃长度是 0 ， 所以你永远不可能到达最后一个位置。</span><br></pre></td></tr></table></figure></p><hr><p><strong>思路：</strong></p><p>这道题可以用<strong>贪婪算法Greedy Algorithm</strong>来解决，因为我们并不是很关心每一个位置上的剩余步数，我们只希望知道能否到达末尾，也就是说我们只对最远能到达的位置感兴趣，所以我们维护一个变量reach，表示最远能到达的位置，初始化为0。遍历数组中每一个数字，如果当前坐标大于reach或者reach已经抵达最后一个位置则跳出循环，否则就更新reach的值为其和i + nums[i]中的较大值，其中i + nums[i]表示当前位置能到达的最大位置，代码如下：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">canJump</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.size(), reach = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="comment">//当前坐标大于reach或者reach已经抵达最后则跳出循环</span></span><br><span class="line">            <span class="keyword">if</span> (i &gt; reach || reach &gt;= n - <span class="number">1</span>) <span class="keyword">break</span>;</span><br><span class="line">            reach = max(reach, i + nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> reach &gt;= n - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;#　55. Jump Game-跳跃游戏&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&quot;描述：&quot;&gt;&lt;a href=&quot;#描述：&quot; class=&quot;headerlink&quot; title=&quot;描述：&quot;&gt;&lt;/a&gt;描述：&lt;/h2&gt;&lt;p&gt;给定一个非负整数数组，你最初位于数组的第一个位置。&lt;/p&gt;
-&lt;p&gt;
-      
-    
-    </summary>
-    
-      <category term="leetcode" scheme="https://xhjiang.tech/categories/leetcode/"/>
-    
-      <category term="贪心算法" scheme="https://xhjiang.tech/categories/leetcode/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="leetcode" scheme="https://xhjiang.tech/tags/leetcode/"/>
-    
-      <category term="贪心算法" scheme="https://xhjiang.tech/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
